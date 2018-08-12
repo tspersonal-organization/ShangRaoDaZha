@@ -98,7 +98,7 @@ public class ChatFace : UIBase<ChatFace>
         {
             fileName = "2@" + Player.Instance.guid + "@" + InputChat.value;
             ClientToServerMsg.Send(Opcodes.Client_PlayerSpeak, GameData.m_TableInfo.id, fileName);
-            UIManager.Instance.HideUIPanel(UIPaths.ChatFace);
+            UIManager.Instance.HideUiPanel(UIPaths.PanelChat);
         }
     }
 
@@ -108,7 +108,7 @@ public class ChatFace : UIBase<ChatFace>
         switch (go.name)
         {
             case "btnClose":
-                UIManager.Instance.HideUIPanel(UIPaths.ChatFace);
+                UIManager.Instance.HideUiPanel(UIPaths.PanelChat);
                 break;
             case "SendSprite":
                 if (InputChat.value == "" || InputChat.value == "请输入聊天内容。。。")
@@ -117,7 +117,7 @@ public class ChatFace : UIBase<ChatFace>
                 {
                     fileName = "2@" + Player.Instance.guid + "@" + InputChat.value;
                     ClientToServerMsg.Send(Opcodes.Client_PlayerSpeak, GameData.m_TableInfo.id, fileName);
-                    UIManager.Instance.HideUIPanel(UIPaths.ChatFace);
+                    UIManager.Instance.HideUiPanel(UIPaths.PanelChat);
                 }
 
                 break;
@@ -137,7 +137,7 @@ public class ChatFace : UIBase<ChatFace>
                 string faceID = go.name.Substring(4);
                 fileName = "3@" + Player.Instance.guid + "@" + faceID;
                 ClientToServerMsg.Send(Opcodes.Client_PlayerSpeak, GameData.m_TableInfo.id, fileName);
-                UIManager.Instance.HideUIPanel(UIPaths.ChatFace);
+                UIManager.Instance.HideUiPanel(UIPaths.PanelChat);
                 break;
             //case "txt0":
             //case "txt1":
@@ -150,7 +150,7 @@ public class ChatFace : UIBase<ChatFace>
             //    string txtIndex = go.name.Substring(3);
             //    fileName = "5@" + Player.Instance.guid + "@" + txtIndex;
             //    ClientToServerMsg.Send(Opcodes.Client_PlayerSpeak, GameData.m_TableInfo.id, fileName);
-            //    UIManager.Instance.HideUIPanel(UIPaths.ChatFace);
+            //    UIManager.Instance.HideUiPanel(UIPaths.PanelChat);
             //    break;
             case "ItemSprite0":
             case "ItemSprite1":
@@ -163,7 +163,7 @@ public class ChatFace : UIBase<ChatFace>
                 string txtIndex = go.name.Substring(10);
                 fileName = "5@" + Player.Instance.guid + "@" + txtIndex;
                 ClientToServerMsg.Send(Opcodes.Client_PlayerSpeak, GameData.m_TableInfo.id, fileName);
-                UIManager.Instance.HideUIPanel(UIPaths.ChatFace);
+                UIManager.Instance.HideUiPanel(UIPaths.PanelChat);
                 break;
             case "MItemSprite0":
             case "MItemSprite1":
@@ -177,7 +177,7 @@ public class ChatFace : UIBase<ChatFace>
                 string txtIndex1 = go.name.Substring(11);
                 fileName = "6@" + Player.Instance.guid + "@" + txtIndex1;
                 ClientToServerMsg.Send(Opcodes.Client_PlayerSpeak, GameData.m_TableInfo.id, fileName);
-                UIManager.Instance.HideUIPanel(UIPaths.ChatFace);
+                UIManager.Instance.HideUiPanel(UIPaths.PanelChat);
                 break;
         }
     }

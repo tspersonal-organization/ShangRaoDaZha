@@ -129,11 +129,11 @@ public class GameOverPanel : UIBase<GameOverPanel>
         }
         else
         {
-          //  UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_TotalScore, OpenPanelType.MinToMax);
+          //  UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_TotalScore, OpenPanelType.MinToMax);
           //  ManagerScene.Instance.LoadScene(SceneType.Main);
         }
       
-        UIManager.Instance.HideUIPanel(UIPaths.GameOverPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelGameOverSmall);
     }
 
     /// <summary>

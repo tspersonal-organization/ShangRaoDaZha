@@ -31,20 +31,20 @@ public class ClubMastorControl : UIBase<ClubMastorControl>
         AutoCreatRoomBtn.onClick.Add(new EventDelegate(()=>
         {
             GameData.IsClubAutoCreatRoom = true;
-            UIManager.Instance.ShowUIPanel(UIPaths.CreatRoomPanel, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelCreatRoom, OpenPanelType.MinToMax);
         }));
         ReNameBtn.onClick.Add(new EventDelegate(()=>
         {
-            UIManager.Instance.ShowUIPanel(UIPaths.ClubRenamePanel, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.ClubRenamePanel, OpenPanelType.MinToMax);
         }));
         CreatRoomTongJi.onClick.Add(new EventDelegate(() =>
         {
-            UIManager.Instance.ShowUIPanel(UIPaths.CreatRoomTongJiPanel, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.CreatRoomTongJiPanel, OpenPanelType.MinToMax);
         }));
         MemControl.onClick.Add(new EventDelegate(() =>
         {
            // ClientToServerMsg.GetClubMemListInfo((uint)GameData.CurrentClubInfo.Id);//
-           // UIManager.Instance.ShowUIPanel(UIPaths.ClubMemControlPanel, OpenPanelType.MinToMax);
+           // UIManager.Instance.ShowUiPanel(UIPaths.ClubMemControlPanel, OpenPanelType.MinToMax);
         }));
     }
 

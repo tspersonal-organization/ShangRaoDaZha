@@ -13,6 +13,6 @@ public class UIGongGao : UIBase<UIGongGao>
     public void Close()
     {
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
-        UIManager.Instance.HideUIPanel(UIPaths.UIPanel_GongGao);
+        UIManager.Instance.HideUiPanel(UIPaths.UIPanel_GongGao);
     }
 }

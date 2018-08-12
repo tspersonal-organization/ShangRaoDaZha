@@ -258,7 +258,7 @@ public class MainPanelHandler
             }
             GameData.m_HuiFangList.Add(hInfo);
         }
-        UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_ZhanJiRoundInfo, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_ZhanJiRoundInfo, OpenPanelType.MinToMax);
     }
 
     /// <summary>

@@ -121,7 +121,7 @@ public class AuthorizeOrShare : UIBase<AuthorizeOrShare>
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
             ssdk.Authorize(PlatformType.WeChat);
-            UIManager.Instance.ShowUIPanel(UIPaths.LoadingObj);
+            UIManager.Instance.ShowUiPanel(UIPaths.LoadingObj);
         }
         else if (Application.platform == RuntimePlatform.WindowsEditor)
         {
@@ -165,7 +165,7 @@ public class AuthorizeOrShare : UIBase<AuthorizeOrShare>
             Player.Instance.otherName = jd["nickname"].ToString();
             Player.Instance.headID = jd["headimgurl"].ToString();
             Player.Instance.sex = byte.Parse(jd["sex"].ToString());
-            UIManager.Instance.HideUIPanel(UIPaths.LoadingObj);
+            UIManager.Instance.HideUiPanel(UIPaths.LoadingObj);
             ClientToServerMsg.Send(Opcodes.Client_Character_Create, Player.Instance.openID, Player.Instance.otherName, Player.Instance.headID, (byte)Player.Instance.sex);
         }
         else
@@ -192,7 +192,7 @@ public class AuthorizeOrShare : UIBase<AuthorizeOrShare>
             Debug.Log("授权失败");
             print("fail! throwable stack = " + data["stack"] + "; error msg = " + data["msg"]);
             //GameData.ResultCodeStr = "fail! throwable stack = " + data["stack"] + "; error msg = " + data["msg"];
-            //UIManager.Instance.ShowUIPanel(UIPaths.ShowStringDialog, OpenPanelType.MinToMax);
+            //UIManager.Instance.ShowUiPanel(UIPaths.ShowStringDialog, OpenPanelType.MinToMax);
         }
 
     }
@@ -229,7 +229,7 @@ public class AuthorizeOrShare : UIBase<AuthorizeOrShare>
            // GameData.ResultCodeStr = "fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"];
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
             #endif
-            //UIManager.Instance.ShowUIPanel(UIPaths.ShowStringDialog, OpenPanelType.MinToMax);
+            //UIManager.Instance.ShowUiPanel(UIPaths.ShowStringDialog, OpenPanelType.MinToMax);
 
             shareFunctionName = "";
         }

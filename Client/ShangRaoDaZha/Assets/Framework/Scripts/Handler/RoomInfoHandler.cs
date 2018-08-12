@@ -224,7 +224,7 @@ public class RoomInfoHandler
         }
 
         GameData.GlobleTipString = "消耗金币" + ReduceGold.ToString();
-        UIManager.Instance.ShowUIPanel(UIPaths.GlobleTipPanel);//打开提示面板
+        UIManager.Instance.ShowUiPanel(UIPaths.GlobleTipPanel);//打开提示面板
 
 
     }
@@ -353,8 +353,8 @@ public class RoomInfoHandler
         bool isAngentCreat = message.readBool();
         if (isAngentCreat)//是代理开房
         {
-            UIManager.Instance.HideUIPanel(UIPaths.CreatRoomPanel);
-            UIManager.Instance.ShowUIPanel(UIPaths.MyRoomPanel, OpenPanelType.MinToMax);
+            UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
+            UIManager.Instance.ShowUiPanel(UIPaths.MyRoomPanel, OpenPanelType.MinToMax);
 
         }
     }
@@ -905,7 +905,7 @@ public class RoomInfoHandler
             }
             else
             {
-                UIManager.Instance.HideUIPanel(UIPaths.UIPanel_AskDismissRoom);
+                UIManager.Instance.HideUiPanel(UIPaths.PanelDestoryRoom);
             }
         }
 
@@ -925,7 +925,7 @@ public class RoomInfoHandler
         //        }
         //        else
         //        {
-        //            UIManager.Instance.HideUIPanel(UIPaths.UIPanel_AskDismissRoom);
+        //            UIManager.Instance.HideUiPanel(UIPaths.PanelDestoryRoom);
         //        }
         //    }
         //}
@@ -945,7 +945,7 @@ public class RoomInfoHandler
         //        }
         //        else
         //        {
-        //            UIManager.Instance.HideUIPanel(UIPaths.UIPanel_AskDismissRoom);
+        //            UIManager.Instance.HideUiPanel(UIPaths.PanelDestoryRoom);
         //        }
         //    }
         //}
@@ -968,8 +968,8 @@ public class RoomInfoHandler
             GameData.m_TableInfo.queryLeaveRoomWaitTime =180;
             GameData.m_TableInfo.operateLeaveRoomList.Clear();
             GameData.m_TableInfo.operateLeaveRoomList.Add(pos);
-            UIManager.Instance.HideUIPanel(UIPaths.UIPanel_Setting);
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_AskDismissRoom, OpenPanelType.MinToMax);
+            UIManager.Instance.HideUiPanel(UIPaths.UIPanel_Setting);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDestoryRoom, OpenPanelType.MinToMax);
         }
       
 
@@ -1098,7 +1098,7 @@ public class RoomInfoHandler
                     if (addGold != 0)
                     {
                         GameData.GlobleTipString = "赠送金币" + addGold;
-                        UIManager.Instance.ShowUIPanel(UIPaths.GlobleTipPanel);
+                        UIManager.Instance.ShowUiPanel(UIPaths.GlobleTipPanel);
                     }
                    
                 }
@@ -1116,19 +1116,19 @@ public class RoomInfoHandler
                 GameData.m_IsNormalOver = true;
                 if (GameData.GlobleRoomType == RoomType.PK)
                 {
-                    UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_NNTotalScore, OpenPanelType.MinToMax);
+                    UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverBig, OpenPanelType.MinToMax);
                 }
                 break;
             case RoomDisposeType.PlayerQueryDispose:
                
-                UIManager.Instance.HideUIPanel(UIPaths.UIPanel_AskDismissRoom);
+                UIManager.Instance.HideUiPanel(UIPaths.PanelDestoryRoom);
                 if (GameData.GlobleRoomType != RoomType.PK)
                 {
-                    UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_TotalScore, OpenPanelType.MinToMax);
+                    UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_TotalScore, OpenPanelType.MinToMax);
                 }
                 else
                 {
-                   UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_NNTotalScore, OpenPanelType.MinToMax);
+                   UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverBig, OpenPanelType.MinToMax);
                 }
               
 
@@ -1731,13 +1731,13 @@ public class RoomInfoHandler
                 if (DDZMainGame.Instance != null) DDZMainGame.Instance.onZhuangPosition();
                 if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnShowFriendCard(FriendPos, 0);
                 if (DDZMainGame.Instance != null) DDZMainGame.Instance.onRoomActive();
-                UIManager.Instance.HideUIPanel(UIPaths.GameOverPanel);
+                UIManager.Instance.HideUiPanel(UIPaths.PanelGameOverSmall);
             }
             else
             {
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerHoldCards();
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.onRoomActive();
-                UIManager.Instance.HideUIPanel(UIPaths.GameOverPanel);
+                UIManager.Instance.HideUiPanel(UIPaths.PanelGameOverSmall);
 
 
             }
@@ -2475,7 +2475,7 @@ public class RoomInfoHandler
 
         GameData.Dice1 = GameData.GenerateDice(1);
         GameData.Dice2 = GameData.GenerateDice(2);
-        UIManager.Instance.HideUIPanel(UIPaths.CreatRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
 
         if (!IsPiPei)
         {
@@ -2806,7 +2806,7 @@ public class RoomInfoHandler
 
         GameData.Dice1 = GameData.GenerateDice(1);
         GameData.Dice2 = GameData.GenerateDice(2);
-        UIManager.Instance.HideUIPanel(UIPaths.CreatRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
 
         ManagerScene.Instance.LoadScene(SceneType.NiuNiu);
 
@@ -3052,7 +3052,7 @@ public class RoomInfoHandler
       
         GameData.Dice1 = GameData.GenerateDice(1);
         GameData.Dice2 = GameData.GenerateDice(2);
-        UIManager.Instance.HideUIPanel(UIPaths.CreatRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
 
         if (!IsPiPei)
         {
@@ -3497,7 +3497,7 @@ public class RoomInfoHandler
         GameData.m_TableInfo.makerPos = info.ZhuangPos;
         GameData.Dice1 = GameData.GenerateDice(1);
         GameData.Dice2 = GameData.GenerateDice(2);
-        UIManager.Instance.HideUIPanel(UIPaths.CreatRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
 
 
       
@@ -3876,7 +3876,7 @@ public class RoomInfoHandler
         GameData.m_TableInfo.makerPos = info.ZhuangPos;
       //  GameData.Dice1 = GameData.GenerateDice(1);
       //  GameData.Dice2 = GameData.GenerateDice(2);
-        UIManager.Instance.HideUIPanel(UIPaths.CreatRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
 
 
         #region  吧玩家打出的面牌剔除 加入面牌列表里

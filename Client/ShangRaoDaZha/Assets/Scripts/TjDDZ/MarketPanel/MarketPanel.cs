@@ -96,7 +96,7 @@ public class MarketPanel : UIBase<MarketPanel>
         if (Player.Instance.money < 30)
         {
             GameData.ResultCodeStr = "钻石不足";
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
         }
         else
         {
@@ -111,7 +111,7 @@ public class MarketPanel : UIBase<MarketPanel>
         if (Player.Instance.money < 6)
         {
             GameData.ResultCodeStr = "钻石不足";
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
         }
         else
         {
@@ -128,7 +128,7 @@ public class MarketPanel : UIBase<MarketPanel>
         if (Player.Instance.money < DiamIndex)
         {
             GameData.ResultCodeStr = "钻石不足";
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
         }
         else
         {
@@ -142,14 +142,14 @@ public class MarketPanel : UIBase<MarketPanel>
 
     private void Close()
     {
-        UIManager.Instance.HideUIPanel(UIPaths.MarketPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.MarketPanel);
     }
 
     private void ClickObj(GameObject go)
     {
         if (go == MaskObj)
         {
-            UIManager.Instance.HideUIPanel(UIPaths.MarketPanel);
+            UIManager.Instance.HideUiPanel(UIPaths.MarketPanel);
         }
     }
 

@@ -254,7 +254,7 @@ public class DDZJinBi : UIBase<DDZJinBi>
     /// </summary>
     private void OpenChatPanel()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.ChatFace, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelChat, OpenPanelType.MinToMax);
         SetButtonClickSound();
     }
 
@@ -378,7 +378,7 @@ public class DDZJinBi : UIBase<DDZJinBi>
     /// </summary>
     private void OpenSettingPanel()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.SettingPanel2, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelSetting, OpenPanelType.MinToMax);
         SetButtonClickSound();
     }
 
@@ -537,7 +537,7 @@ public class DDZJinBi : UIBase<DDZJinBi>
             //重置是否有解散房间信息
             if (GameData.m_TableInfo.isQueryLeaveRoom)
             {
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_AskDismissRoom, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDestoryRoom, OpenPanelType.MinToMax);
             }
 
 
@@ -553,7 +553,7 @@ public class DDZJinBi : UIBase<DDZJinBi>
             //重置是否有解散房间信息
             if (GameData.m_TableInfo.isQueryLeaveRoom)
             {
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_AskDismissRoom, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDestoryRoom, OpenPanelType.MinToMax);
             }
         }
         else if (GameData.m_TableInfo.roomState == RoomStatusType.Dispose)
@@ -665,7 +665,7 @@ public class DDZJinBi : UIBase<DDZJinBi>
 
         FriendCard.SetActive(false);
         ResetFinishPlayerIndex();
-        UIManager.Instance.ShowUIPanel(UIPaths.GameOverPanel);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverSmall);
 
 
         ResetCardSortType();//重置排序
@@ -687,8 +687,8 @@ public class DDZJinBi : UIBase<DDZJinBi>
             HideOperatePanle(i);
             ClearPlayedCard(i);
         }
-      //  UIManager.Instance.ShowUIPanel(UIPaths.GameOverPanel);
-        UIManager.Instance.ShowUIPanel(UIPaths.PKTanPaiPanel);
+      //  UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverSmall);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelShowCard);
     }
 
     /// <summary>

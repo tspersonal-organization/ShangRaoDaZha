@@ -316,13 +316,13 @@ public class PKCreat : MonoBehaviour {
         {
             GameData.ResultCodeStr = "请先申请加入俱乐部";
 
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
         }
         else if (MainPanel.Instance.ChosedClubId == 0)
         {
             GameData.ResultCodeStr = "请先选择俱乐部";
 
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
         }
         else
         {

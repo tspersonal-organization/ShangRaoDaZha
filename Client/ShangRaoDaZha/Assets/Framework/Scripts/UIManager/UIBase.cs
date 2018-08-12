@@ -22,7 +22,7 @@ public class UIBase<T> : MonoBehaviour where T : MonoBehaviour
     protected virtual void OnDestroy()
     {
         if (instance == null) return;
-        UIManager.instance.HideUIPanel(instance.gameObject);
+        UIManager.instance.HideUiPanel(instance.gameObject);
         instance = null;
     }
 }

@@ -89,6 +89,6 @@ public class RulePanel : UIBase<RulePanel>
     }
     private void Close()
     {
-        UIManager.Instance.HideUIPanel(UIPaths.RulePanel);
+        UIManager.Instance.HideUiPanel(UIPaths.RulePanel);
     }
 }

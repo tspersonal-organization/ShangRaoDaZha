@@ -1017,7 +1017,7 @@ public class NiuNiuGame : UIBase<NiuNiuGame>
     /// </summary>
     private void OpenChatPanel()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.ChatFace, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelChat, OpenPanelType.MinToMax);
         SetButtonClickSound();
     }
 
@@ -1126,7 +1126,7 @@ public class NiuNiuGame : UIBase<NiuNiuGame>
     /// </summary>
     private void OpenSettingPanel()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.SettingPanel2, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelSetting, OpenPanelType.MinToMax);
         SetButtonClickSound();
     }
 
@@ -1389,7 +1389,7 @@ public class NiuNiuGame : UIBase<NiuNiuGame>
 
         //FriendCard.SetActive(false);
         //ResetFinishPlayerIndex();
-        //UIManager.Instance.ShowUIPanel(UIPaths.GameOverPanel);
+        //UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverSmall);
 
 
         //ResetCardSortType();//重置排序
@@ -1409,7 +1409,7 @@ public class NiuNiuGame : UIBase<NiuNiuGame>
             HideOperatePanle(i);
             ClearPlayedCard(i);
         }
-        UIManager.Instance.ShowUIPanel(UIPaths.GameOverPanel);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverSmall);
     }
 
     /// <summary>

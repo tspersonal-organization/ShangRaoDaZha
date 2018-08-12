@@ -20,7 +20,7 @@ public class UIShop : UIBase<UIShop>
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
         if (go == btnClose)
         {
-            UIManager.Instance.HideUIPanel(UIPaths.UIPanel_Shop);
+            UIManager.Instance.HideUiPanel(UIPaths.UIPanel_Shop);
         }
         else
         {

@@ -19,7 +19,7 @@ public class PKTanPaiPanel : MonoBehaviour {
         if (gameObject.activeSelf)
         {
             this.gameObject.SetActive(false);
-            UIManager.Instance.ShowUIPanel(UIPaths.GameOverPanel);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverSmall);
         }
        
     }

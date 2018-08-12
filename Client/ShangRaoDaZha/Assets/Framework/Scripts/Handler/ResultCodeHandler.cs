@@ -32,7 +32,7 @@ public class ResultCodeHandler
     void Loser(ResultCode code)
     {
         GameData.ResultCodeStr = ResultCodeString.GetResultString((ushort)code);
-        UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
         Log.Debug(GameData.ResultCodeStr);
         switch (code)
         {
@@ -53,14 +53,14 @@ public class ResultCodeHandler
             case Opcodes.Client_Apply_For_Club:
                 GameData.ResultCodeStr = "申请发送成功";
 
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
                 ApplyJoinClubPanelControl.Instance.gameObject.SetActive(false);
 
                 break;
             case Opcodes.Client_Club_Invite_Player:
                 GameData.ResultCodeStr = "邀请成功";
              
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
                 InvitePlayerControl.Instance.gameObject.SetActive(false);
 
                 break;
@@ -70,7 +70,7 @@ public class ResultCodeHandler
                 ClientToServerMsg.GetClubInfo((uint)GameData.CurrentClubInfo.Id);//再次申请当前选的俱乐部的信息
                 ClubReNamePanelControl.Instance.gameObject.SetActive(false);
                 ClubMastorControl.Instance.gameObject.SetActive(false);
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
 
                 break;
 
@@ -79,34 +79,34 @@ public class ResultCodeHandler
                 ClientToServerMsg.GetClubInfo((uint)GameData.CurrentClubInfo.Id);//再次申请当前选的俱乐部的信息
                 CreatRoomPanel.Instance.gameObject.SetActive(false);
                 ClubMastorControl.Instance.gameObject.SetActive(false);
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
 
                 break;
             case Opcodes.Client_SetInviteGuid:
                 GameData.ResultCodeStr = "绑定邀请人成功";
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
-                UIManager.Instance.HideUIPanel(UIPaths.InvitePanel);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
+                UIManager.Instance.HideUiPanel(UIPaths.InvitePanel);
                 // SoundManager.Instance.PlaySound(UIPaths.SOUND_CHARGE);
                 break;
             case Opcodes.Client_ExchangDiamondToCard:
                 GameData.ResultCodeStr = "兑换成功";
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
              
                 // SoundManager.Instance.PlaySound(UIPaths.SOUND_CHARGE);
                 break;
 
                 //case Opcodes.Client_SendMoney:
                 //    GameData.ResultCodeStr = "转增成功！";
-                //    UIManager.Instance.ShowUIPanel(UIPaths.ShowStringDialog, OpenPanelType.MinToMax);
+                //    UIManager.Instance.ShowUiPanel(UIPaths.ShowStringDialog, OpenPanelType.MinToMax);
                 //    SoundManager.Instance.PlaySound(UIPaths.SOUND_CHARGE);
                 //    break;
                 //case Opcodes.Client_PlayerChooseWantPartnerResult:
-                //    UIManager.Instance.HideUIPanel(UIPaths.AskHuoZhuang);
+                //    UIManager.Instance.HideUiPanel(UIPaths.AskHuoZhuang);
                 //    break;
                 //case Opcodes.Client_SetInviteGuid:
                 //    GameData.ResultCodeStr = "绑定代理人成功！";
-                //    UIManager.Instance.ShowUIPanel(UIPaths.ShowStringDialog, OpenPanelType.MinToMax);
-                //    UIManager.Instance.HideUIPanel(UIPaths.AddRoom);
+                //    UIManager.Instance.ShowUiPanel(UIPaths.ShowStringDialog, OpenPanelType.MinToMax);
+                //    UIManager.Instance.HideUiPanel(UIPaths.AddRoom);
                 //    break;
                 //case Opcodes.Client_ParentWantBackMoneyResult:
                 //    if (AskRecycleMoney.Instance != null) AskRecycleMoney.Instance.OnOperateSucceed();

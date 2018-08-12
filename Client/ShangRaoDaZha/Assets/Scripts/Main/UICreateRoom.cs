@@ -41,7 +41,7 @@ public class UICreateRoom : UIBase<UICreateRoom>
                         Input.location.lastData.latitude, Input.location.lastData.longitude);
                 break;
             case "btnClose":
-                UIManager.Instance.HideUIPanel(UIPaths.UIPanel_CreateRoom);
+                UIManager.Instance.HideUiPanel(UIPaths.UIPanel_CreateRoom);
                 break;
             case "btnRound0":
             case "btnRound1":

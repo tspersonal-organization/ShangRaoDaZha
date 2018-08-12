@@ -106,7 +106,7 @@ public class ClubInfoPanel : UIBase<ClubInfoPanel>
    //邀请玩家店家
     private void ClubMastorBtnClick()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.InviteJoinClubPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.InviteJoinClubPanel, OpenPanelType.MinToMax);
     }
 
     //关闭点击

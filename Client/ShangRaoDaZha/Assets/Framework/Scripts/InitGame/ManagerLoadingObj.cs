@@ -19,7 +19,7 @@ public class ManagerLoadingObj : MonoBehaviour
                 if (LoadingObj.Instance == null)
                 {
                     WaitTime = MaxTime;
-                    UIManager.Instance.ShowUIPanel(UIPaths.LoadingObj);
+                    UIManager.Instance.ShowUiPanel(UIPaths.LoadingObj);
                 }
             }
         }
@@ -28,7 +28,7 @@ public class ManagerLoadingObj : MonoBehaviour
             WaitTime = MaxTime;
             if (LoadingObj.Instance != null)
             {
-                UIManager.Instance.HideUIPanel(UIPaths.LoadingObj);
+                UIManager.Instance.HideUiPanel(UIPaths.LoadingObj);
             }
         }
     }

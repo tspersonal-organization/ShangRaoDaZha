@@ -13,6 +13,7 @@ public class Reconnection : MonoBehaviour
     DateTime endTime;
     void OnApplicationFocus(bool isClose)
     {
+#if !UNITY_EDITOR
         if (isClose)//获得焦点
         {
             if (ConnServer.m_IsConnectServer)
@@ -32,5 +33,6 @@ public class Reconnection : MonoBehaviour
              Player.Instance.lastEnterRoomID = GameData.m_TableInfo.id;
             ClientToServerMsg.Send(Opcodes.Client_PlayerOnForce, GameData.m_TableInfo.id,false);
         }
+#endif
     }
 }

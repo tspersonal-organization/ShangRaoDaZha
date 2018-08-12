@@ -57,7 +57,7 @@ public class UIZhanJiRoundInfo : UIBase<UIZhanJiRoundInfo>
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
         if (btnClose == go)
         {
-            UIManager.Instance.HideUIPanel(UIPaths.UIPanel_ZhanJiRoundInfo);
+            UIManager.Instance.HideUiPanel(UIPaths.UIPanel_ZhanJiRoundInfo);
         }
         else
         {
@@ -79,7 +79,7 @@ public class UIZhanJiRoundInfo : UIBase<UIZhanJiRoundInfo>
             GameData.MagicCard= GameData.m_HuiFangList[(int)index].MagicCard;
 
 
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_HuiFang);
+            UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_HuiFang);
         }
     }
 

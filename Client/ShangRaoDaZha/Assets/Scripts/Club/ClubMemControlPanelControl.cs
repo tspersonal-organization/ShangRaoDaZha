@@ -43,7 +43,7 @@ public class ClubMemControlPanelControl : UIBase<ClubMemControlPanelControl>
     /// </summary>
     private void InviteFriendClick()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.InvitePlayerPanel);
+        UIManager.Instance.ShowUiPanel(UIPaths.InvitePlayerPanel);
     }
 
     List<GameObject> CreatedObj = new List<GameObject>();

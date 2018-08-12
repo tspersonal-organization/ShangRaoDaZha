@@ -364,15 +364,15 @@ public class UIRoundOver : UIBase<UIRoundOver>
         {
             if(GameData.m_IsNormalOver)
             {
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_TotalScore, OpenPanelType.MinToMax);
-                UIManager.Instance.HideUIPanel(UIPaths.UIPanel_RoundOver);
+                UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_TotalScore, OpenPanelType.MinToMax);
+                UIManager.Instance.HideUiPanel(UIPaths.UIPanel_RoundOver);
             }
             else
             {
                 ClientToServerMsg.Send(Opcodes.Client_PlayerReady, GameData.m_TableInfo.id);
             }
 
-            UIManager.Instance.HideUIPanel(UIPaths.UIPanel_RoundOver);
+            UIManager.Instance.HideUiPanel(UIPaths.UIPanel_RoundOver);
         }
         else if (go == ChangeTable.gameObject)
         {

@@ -270,11 +270,11 @@ public class WuDangHuGame : UIBase<WuDangHuGame>
 
                 break;
             case "btnChat":
-                UIManager.Instance.ShowUIPanel(UIPaths.ChatFace, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelChat, OpenPanelType.MinToMax);
                 break;
             case "btnSetting":
-                UIManager.Instance.ShowUIPanel(UIPaths.SettingPanel2, OpenPanelType.MinToMax);
-              //  UIManager.Instance.ShowUIPanel(UIPaths.SettingPanel, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelSetting, OpenPanelType.MinToMax);
+              //  UIManager.Instance.ShowUiPanel(UIPaths.PanelSetting, OpenPanelType.MinToMax);
                 break;
             case "btnReady":
                 ClientToServerMsg.Send(Opcodes.Client_PlayerReadyStart, GameData.m_TableInfo.id);
@@ -779,7 +779,7 @@ public class WuDangHuGame : UIBase<WuDangHuGame>
     void OnClickPlayer(GameObject go)
     {
         if (!ServerInfo.Data.login_with_device)
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Distance, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_Distance, OpenPanelType.MinToMax);
     }
 
     #region 牌的操作
@@ -955,7 +955,7 @@ public class WuDangHuGame : UIBase<WuDangHuGame>
         ShowFangPaoScore();
         IsDealCardOver = true;
         ShowMakerImg();
-        if (GameData.m_TableInfo.isQueryLeaveRoom) UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_AskDismissRoom);
+        if (GameData.m_TableInfo.isQueryLeaveRoom) UIManager.Instance.ShowUiPanel(UIPaths.PanelDestoryRoom);
 
         DestroyAllOutCards();//清理所有桌面上的出牌
         SetActiveChildPaiCount(SelfChu, 0);
@@ -1203,7 +1203,7 @@ public class WuDangHuGame : UIBase<WuDangHuGame>
         ViewHu();
         StartCoroutine(AsynCreateOtherCards());
         PlayerInfo info = GameDataFunc.GetPlayerInfo(LocalPos);
-        if (!info.isNextReady) UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_RoundOver);
+        if (!info.isNextReady) UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_RoundOver);
     }
     #endregion
 
@@ -1301,7 +1301,7 @@ public class WuDangHuGame : UIBase<WuDangHuGame>
    /// <param name="pos"></param>
     public void onPlayerReadyForNext(byte pos)
     {
-        if (pos == LocalPos) UIManager.Instance.HideUIPanel(UIPaths.UIPanel_RoundOver);
+        if (pos == LocalPos) UIManager.Instance.HideUiPanel(UIPaths.UIPanel_RoundOver);
         PlayerObjList[(int)GetLVD(pos)].transform.Find("ready").gameObject.SetActive(true);
        // SoundManager.Instance.PlaySound(UIPaths.SOUND_READY);
     }
@@ -3205,7 +3205,7 @@ void ClearTable()
     }
     effectObjList.Clear();
      JiangMaParent.gameObject.SetActive(false);//自动发牌隐藏
-    UIManager.Instance.HideUIPanel(UIPaths.UIPanel_RoundOver);
+    UIManager.Instance.HideUiPanel(UIPaths.UIPanel_RoundOver);
 
     ObjOutSign.SetActive(false);
 
@@ -3754,7 +3754,7 @@ IEnumerator AsynRoundOver()
 {
     yield return new WaitForSeconds(2);
     // GameData.m_TableInfo.nextReadyTime = 20;
-    UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_RoundOver);
+    UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_RoundOver);
     ResetJiangMaObj();//重置奖码信息
     }
 

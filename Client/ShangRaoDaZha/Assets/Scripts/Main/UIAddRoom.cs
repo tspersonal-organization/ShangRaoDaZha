@@ -21,7 +21,7 @@ public class UIAddRoom : UIBase<UIAddRoom>
         switch (go.name)
         {
             case "btnClose":
-                UIManager.Instance.HideUIPanel(UIPaths.UIPanel_AddRoom);
+                UIManager.Instance.HideUiPanel(UIPaths.UIPanel_AddRoom);
                 break;
             case "btn0":
             case "btn1":

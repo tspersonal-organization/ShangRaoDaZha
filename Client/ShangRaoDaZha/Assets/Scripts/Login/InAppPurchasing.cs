@@ -55,27 +55,27 @@ public class InAppPurchasing : MonoBehaviour,IStoreListener
         {
             Debug.Log("手机设置了禁止APP内购");
             GameData.ResultCodeStr = "手机设置了禁止APP内购";
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
         }
         Debug.Log("IAP初始化失败");
     }
 
     public void OnPurchaseFailed(Product i, PurchaseFailureReason p)
     {
-        UIManager.Instance.HideUIPanel(UIPaths.LoadingInApp);
+        UIManager.Instance.HideUiPanel(UIPaths.LoadingInApp);
         Debug.Log("购买失败");
         GameData.ResultCodeStr = "购买失败!!!";
-        UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e)
     {
-        UIManager.Instance.HideUIPanel(UIPaths.LoadingInApp);
+        UIManager.Instance.HideUiPanel(UIPaths.LoadingInApp);
         Debug.Log("transactionID:" + e.purchasedProduct.transactionID);
         Debug.Log("receipt:" + e.purchasedProduct.receipt);
 
         GameData.ResultCodeStr = "购买成功!!!";
-        UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
         switch(e.purchasedProduct.definition.id)
         {
             case "com.YouthGamer.XianYuGou.001":
@@ -101,10 +101,10 @@ public class InAppPurchasing : MonoBehaviour,IStoreListener
         if (productIndex >= ProductIDs.Length)
         {
             GameData.ResultCodeStr = "不存在该物品！！";
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
             return;
         }
-        UIManager.Instance.ShowUIPanel(UIPaths.LoadingInApp);
+        UIManager.Instance.ShowUiPanel(UIPaths.LoadingInApp);
         m_Controller.InitiatePurchase(ProductIDs[productIndex]);
     }
 }

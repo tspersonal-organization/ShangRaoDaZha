@@ -22,12 +22,11 @@ public class MainPanel : UIBase<MainPanel>
 
     public UIButton ZhanJiBtn;//战绩
     public UIButton MessageBtn;//消息
-
     public UIButton EmailBtn;//邮件按钮
-
     public UIButton SettingBtn;//设置
     public UIButton ShareBtn;//分享
 
+    public GameObject UserInfo;//用户信息
     public UILabel PlayerName;
     public UILabel PlayerId;
     public GameObject PlayerHeadSprite;
@@ -48,6 +47,37 @@ public class MainPanel : UIBase<MainPanel>
         //发送定位信息
         //ClientToServerMsg.SetAdrress(location);
     }
+    
+    float speed = 30f;
+    int index = 0;
+
+    void Update()
+    {
+
+        if (GameData.m_PaoMaDengList.Count > 0)
+        {
+            GongGaoLable.text = GameData.m_PaoMaDengList[index];
+            GongGaoLable.transform.localPosition = new Vector3(GongGaoLable.transform.localPosition.x - speed * Time.deltaTime, GongGaoLable.transform.localPosition.y, GongGaoLable.transform.localPosition.z);
+
+            if (GongGaoLable.transform.localPosition.x < -550)
+            {
+                index++;
+                if (index == GameData.m_PaoMaDengList.Count)
+                {
+                    index = 0;
+                }
+                GongGaoLable.transform.localPosition = new Vector3(410f, GongGaoLable.transform.localPosition.y, GongGaoLable.transform.localPosition.z);
+            }
+        }
+        // GongGaoLable.transform.Translate();
+
+    }
+
+    protected override void OnDestroy()
+    {
+        GameEventDispatcher.Instance.removeEventListener(EventIndex.PlayerLivingDataChange, this.SetPlayerInfo);
+        base.OnDestroy();
+    }
 
     /// <summary>
     /// 是否有信息
@@ -64,6 +94,7 @@ public class MainPanel : UIBase<MainPanel>
             HaveEmailNotice.gameObject.SetActive(false);
         }
     }
+
     /// <summary>
     /// 返回
     /// </summary>
@@ -113,10 +144,11 @@ public class MainPanel : UIBase<MainPanel>
             GameObject obj = Instantiate(PKClubRoomItem, PKClubRoomItemParent);
             obj.SetActive(true);
             obj.transform.GetComponent<PKClubRoomItemControl>().SetValue(GameData.PKClubRoomList[i]);
-            obj.transform.localPosition = new Vector3(-5, 60 - 80 * PKClubRoomItemObjList.Count, 0);
             PKClubRoomItemObjList.Add(obj);
         }
+        PKClubRoomItemParent.GetComponent<UITable>().repositionNow = true;
     }
+
     /// <summary>
     /// 生成加入的俱乐部个数
     /// </summary>
@@ -135,9 +167,9 @@ public class MainPanel : UIBase<MainPanel>
             GameObject obj = Instantiate(PKClubItem, PKClubItemParent);
             obj.SetActive(true);
             obj.transform.GetComponent<PKClubItemControl>().SetValue(GameData.PKClubInfoList[i]);
-            obj.transform.localPosition = new Vector3(-5, 150 - 80 * PKClubItemObjList.Count, 0);
             PKClubItemObjList.Add(obj);
         }
+        PKClubItemParent.GetComponent<UITable>().repositionNow = true;
     }
 
     /// <summary>
@@ -149,12 +181,6 @@ public class MainPanel : UIBase<MainPanel>
         {
             PKClubItemObjList[i].transform.Find("IsChosed").GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
         }
-    }
-
-    protected override void OnDestroy()
-    {
-        GameEventDispatcher.Instance.removeEventListener(EventIndex.PlayerLivingDataChange, this.SetPlayerInfo);
-        base.OnDestroy();
     }
 
 
@@ -174,120 +200,107 @@ public class MainPanel : UIBase<MainPanel>
         }
     }
     #region  btn 点击事件
+
     /// <summary>
     /// 设置btn点击事件
     /// </summary>
     public void SetButClickEvent()
     {
-        ClubBackBtn.onClick.Add(new EventDelegate(ClubInfoBack));
 
         EmailBtn.onClick.Add(new EventDelegate(OpenEmailPanel));
         CreatRoomBtn.onClick.Add(new EventDelegate(CreatRoomClick));
         JoinRoomBtn.onClick.Add(new EventDelegate(JoinRoomClick));
-
-        ZhanJiBtn.onClick.Add(new EventDelegate(ZhanjiClick));
+        ZhanJiBtn.onClick.Add(new EventDelegate(HistoryClick));
         MessageBtn.onClick.Add(new EventDelegate(MessageClick));
         SettingBtn.onClick.Add(new EventDelegate(SettingBtnClick));
-        
-        ShareBtn.onClick.Add(new EventDelegate(this.SharePicture));
-        
+        ShareBtn.onClick.Add(new EventDelegate(ShareClick));
+
+        ClubBackBtn.onClick.Add(new EventDelegate(ClubInfoBack));
         JoinClubBtn.onClick.Add(new EventDelegate(() =>
         {
-            UIManager.Instance.ShowUIPanel(UIPaths.ApplyJoinClubPanel, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelJoinMoment, OpenPanelType.MinToMax);
         }));
         CreatClubBtn.onClick.Add(new EventDelegate(() =>
         {
             GameData.ResultCodeStr = "请联系客服";
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
-            //UIManager.Instance.ShowUIPanel(UIPaths.ApplyJoinClubPanel, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
+            //UIManager.Instance.ShowUiPanel(UIPaths.PanelJoinMoment, OpenPanelType.MinToMax);
         }));
-    }
 
-    /// <summary>
-    /// 打开邮件面板
-    /// </summary>
-    private void OpenEmailPanel()
-    {
-        UIManager.Instance.ShowUIPanel(UIPaths.ContentPanel, OpenPanelType.MinToMax);
-        SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
-    }
-    
-    /// <summary>
-    /// 打开邀请列表
-    /// </summary>
-    private void OpenInviteMessagePanel()
-    {
-        Debug.LogError("打开邀请列表");
-        UIManager.Instance.ShowUIPanel(UIPaths.ClubInvitePlayerPanel);
-    }
-
-    //俱乐部点击
-    private void ClubBtnClick()
-    {
-        ClientToServerMsg.GetClubList();//获取俱乐部了列表
-    }
-
-
-    /// <summary>
-    ///增加邀请人
-    /// </summary>
-    private void OpenInvitePanel()
-    {
-        UIManager.Instance.ShowUIPanel(UIPaths.InvitePanel, OpenPanelType.MinToMax);
+        UIEventListener.Get(UserInfo).onClick = delegate
+        {
+            UIManager.Instance.ShowUiPanel(UIPaths.PanelUserInfo, OpenPanelType.MinToMax);
+            SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
+        };
     }
 
     /// <summary>
     /// 分享图片
     /// </summary>
-    private void SharePicture()
+    private void ShareClick()
     {
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            AuthorizeOrShare.Instance.ShareImageURL("欢迎来玩上吉打炸！", GameData.ShareImageURL);
+        //if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        //{
+        //    AuthorizeOrShare.Instance.ShareImageURL("欢迎来玩上吉打炸！", GameData.ShareImageURL);
 
-        }
+        //}
+
+        GameData.Tips = "该功能暂未开放！";
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelTips, OpenPanelType.MinToMax);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
     }
 
-    private void OpenMarketPanel()
+    /// <summary>
+    /// 打开公告面板
+    /// </summary>
+    private void OpenEmailPanel()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.MarketPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelNotice, OpenPanelType.MinToMax);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
     }
 
+    /// <summary>
+    /// 设置界面
+    /// </summary>
     private void SettingBtnClick()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.SettingPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelSetting, OpenPanelType.MinToMax);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
     }
 
-    private void RuleBtnClick()
-    {
-        UIManager.Instance.ShowUIPanel(UIPaths.RulePanel, OpenPanelType.MinToMax);
-        SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
-    }
-
+    /// <summary>
+    /// 消息界面
+    /// </summary>
     private void MessageClick()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.EmailPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelMessage, OpenPanelType.MinToMax);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
     }
 
-    private void ZhanjiClick()
+    /// <summary>
+    /// 战绩
+    /// </summary>
+    private void HistoryClick()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_ZhanJiList, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelHistory, OpenPanelType.MinToMax);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
     }
 
+    /// <summary>
+    /// 加入房间
+    /// </summary>
     private void JoinRoomClick()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.JoinRoomPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelJoinRoom, OpenPanelType.MinToMax);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
     }
 
+    /// <summary>
+    /// 创建房间
+    /// </summary>
     private void CreatRoomClick()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.CreatRoomPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelCreatRoom, OpenPanelType.MinToMax);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
     }
 
@@ -296,14 +309,13 @@ public class MainPanel : UIBase<MainPanel>
     /// </summary>
     public void ShowAngentRoomListPanel()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.MyRoomPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.MyRoomPanel, OpenPanelType.MinToMax);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
     }
 
     #endregion
 
 
-    #region  初始化玩家信息
 
     /// <summary>
     /// 设置玩家信息
@@ -316,30 +328,5 @@ public class MainPanel : UIBase<MainPanel>
         DownloadImage.Instance.Download(PlayerHeadSprite.transform.GetComponent<UITexture>(), Player.Instance.headID);
         GongGaoLable.text = Player.Instance.content;
     }
-    #endregion
 
-    float speed = 30f;
-    int index = 0;
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (GameData.m_PaoMaDengList.Count > 0)
-        {
-            GongGaoLable.text = GameData.m_PaoMaDengList[index];
-            GongGaoLable.transform.localPosition = new Vector3(GongGaoLable.transform.localPosition.x - speed * Time.deltaTime, GongGaoLable.transform.localPosition.y, GongGaoLable.transform.localPosition.z);
-
-            if (GongGaoLable.transform.localPosition.x < -550)
-            {
-                index++;
-                if (index == GameData.m_PaoMaDengList.Count)
-                {
-                    index = 0;
-                }
-                GongGaoLable.transform.localPosition = new Vector3(410f, GongGaoLable.transform.localPosition.y, GongGaoLable.transform.localPosition.z);
-            }
-        }
-        // GongGaoLable.transform.Translate();
-
-    }
 }

@@ -19,7 +19,7 @@ public class InvitePanel : UIBase<InvitePanel>
 
     private void ClosePanel()
     {
-        UIManager.Instance.HideUIPanel(UIPaths.InvitePanel);
+        UIManager.Instance.HideUiPanel(UIPaths.InvitePanel);
     }
 
     /// <summary>

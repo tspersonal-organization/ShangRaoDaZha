@@ -33,7 +33,7 @@ public class UIPanel_NNTotalScore : UIBase<UIPanel_NNTotalScore>
     {
         ManagerScene.Instance.LoadScene(SceneType.Main);
 
-        UIManager.Instance.HideUIPanel(UIPaths.GameOverPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelGameOverSmall);
     }
 
     /// <summary>

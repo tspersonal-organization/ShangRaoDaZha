@@ -51,7 +51,7 @@ public class JoinRoomPanle : UIBase<UICreateRoom>
     private void CloseClick()
     {
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
-        UIManager.Instance.HideUIPanel(UIPaths.JoinRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelJoinRoom);
     }
 
     private void Close(GameObject go)
@@ -154,7 +154,7 @@ public class JoinRoomPanle : UIBase<UICreateRoom>
         if (num.Length == 6)
         {
             ClientToServerMsg.Send(Opcodes.Client_PlayerEnterRoom, uint.Parse(_num), Input.location.lastData.latitude, Input.location.lastData.longitude);
-            UIManager.Instance.HideUIPanel(UIPaths.JoinRoomPanel);
+            UIManager.Instance.HideUiPanel(UIPaths.PanelJoinRoom);
         }
     }
 }

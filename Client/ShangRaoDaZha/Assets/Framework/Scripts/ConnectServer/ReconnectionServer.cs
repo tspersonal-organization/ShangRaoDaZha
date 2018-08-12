@@ -22,12 +22,12 @@ public class ReconnectionServer : MonoBehaviour
         {
             if (CurNetworkType != NetworkReachability.NotReachable)
             {
-              //  UIManager.Instance.ShowUIPanel(UIPaths.ReconectTipPanel);
+              //  UIManager.Instance.ShowUiPanel(UIPaths.ReconectTipPanel);
             }
           
                 CurNetworkType = NetworkReachability.NotReachable;
           
-           // UIManager.Instance.ShowUIPanel(UIPaths.ReconectTipPanel);
+           // UIManager.Instance.ShowUiPanel(UIPaths.ReconectTipPanel);
         }
         else if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork)
         {
@@ -57,7 +57,7 @@ public class ReconnectionServer : MonoBehaviour
                 }
             }
 
-          //  UIManager.Instance.HideUIPanel(UIPaths.ReconectTipPanel);
+          //  UIManager.Instance.HideUiPanel(UIPaths.ReconectTipPanel);
         }
         else if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork)
         {
@@ -87,7 +87,7 @@ public class ReconnectionServer : MonoBehaviour
                 }
             }
 
-        //    UIManager.Instance.HideUIPanel(UIPaths.ReconectTipPanel);
+        //    UIManager.Instance.HideUiPanel(UIPaths.ReconectTipPanel);
         }
     }
 

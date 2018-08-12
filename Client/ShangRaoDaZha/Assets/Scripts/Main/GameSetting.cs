@@ -98,7 +98,7 @@ public class GameSetting : UIBase<GameSetting>
 
     private void Close()
     {
-        UIManager.Instance.HideUIPanel(UIPaths.SettingPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelSetting);
     }
 
    
@@ -118,7 +118,7 @@ public class GameSetting : UIBase<GameSetting>
         //}
          if(go == btnClose)
         {
-            UIManager.Instance.HideUIPanel(UIPaths.SettingPanel);
+            UIManager.Instance.HideUiPanel(UIPaths.PanelSetting);
         }
         else if(go == btnOperate)
         {

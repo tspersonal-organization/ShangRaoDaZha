@@ -1,7 +1,5 @@
 ﻿using FrameworkForCSharp.NetWorks;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIZhanJiList : UIBase<UIZhanJiList>
@@ -23,11 +21,11 @@ public class UIZhanJiList : UIBase<UIZhanJiList>
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
         if (btnClose == go)
         {
-            UIManager.Instance.HideUIPanel(UIPaths.UIPanel_ZhanJiList);
+            UIManager.Instance.HideUiPanel(UIPaths.PanelHistory);
         }
         else
         {
-           // UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_ZhanJiRoundInfo, OpenPanelType.MinToMax);
+           // UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_ZhanJiRoundInfo, OpenPanelType.MinToMax);
             ulong guid = ulong.Parse(go.name);
             for (int i = 0; i < GameData.m_RecordList.Count; i++)
             {
@@ -39,12 +37,12 @@ public class UIZhanJiList : UIBase<UIZhanJiList>
                     //if (GameData.m_RecordList[i].roomType == FrameworkForCSharp.Utils.RoomType.XYGQP)
                     //{
                     //    GameData.ResultCodeStr = "此条战绩没有录像！！！";
-                    //    UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+                    //    UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
                     //}
                     //else if (GameData.m_RecordList[i].roomType == FrameworkForCSharp.Utils.RoomType.NN)
                     //{
                     //    GameData.ResultCodeStr = "此条战绩没有录像！！！";
-                    //    UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+                    //    UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
                     //}
                     //else
                     //{

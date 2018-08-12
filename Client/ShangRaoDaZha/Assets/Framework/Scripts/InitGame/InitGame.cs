@@ -30,7 +30,7 @@ public class InitGame : UIBase<InitGame>
     {
         //if (Application.platform == RuntimePlatform.Android && (Input.GetKeyDown(KeyCode.Escape)))
         //{
-        //    // if (QuitGame.Instance == null) UIManager.Instance.ShowUIPanel(UIPaths.QuitGame);
+        //    // if (QuitGame.Instance == null) UIManager.Instance.ShowUiPanel(UIPaths.QuitGame);
         //    Application.Quit();
         //}
     }

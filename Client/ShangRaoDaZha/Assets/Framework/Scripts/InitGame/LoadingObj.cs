@@ -8,14 +8,14 @@ public class LoadingObj : UIBase<LoadingObj>
     {
         Invoke("ShowDisconnectServer", 5);
 
-        UIManager.Instance.HideUIPanel(UIPaths.CreatRoomPanel);
-        UIManager.Instance.HideUIPanel(UIPaths.JoinRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelJoinRoom);
     }
 
     void ShowDisconnectServer()
     {
-      //  UIManager.Instance.ShowUIPanel(UIPaths.DisconnectServer);
+      //  UIManager.Instance.ShowUiPanel(UIPaths.DisconnectServer);
         ConnServer.m_WaitServerMsgCount = 0;
-        UIManager.Instance.HideUIPanel(UIPaths.LoadingObj);
+        UIManager.Instance.HideUiPanel(UIPaths.LoadingObj);
     }
 }

@@ -60,7 +60,7 @@ public class ConnServer : UIBase<ConnServer>
                 }
                 else
                 {
-                    UIManager.Instance.ShowUIPanel(UIPaths.GameUpdate, OpenPanelType.MinToMax);
+                    UIManager.Instance.ShowUiPanel(UIPaths.GameUpdate, OpenPanelType.MinToMax);
                 }
             }
         }

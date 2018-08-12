@@ -7,6 +7,6 @@ public class UIHelp : UIBase<UIHelp>
     public void Close()
     {
         SoundManager.Instance.PlaySound(UIPaths.SOUND_BUTTON);
-        UIManager.Instance.HideUIPanel(gameObject);
+        UIManager.Instance.HideUiPanel(gameObject);
     }
 }

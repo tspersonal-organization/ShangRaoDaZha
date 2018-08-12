@@ -253,11 +253,11 @@ public class ZaiBaiGame : UIBase<ZaiBaiGame>
                 }
                 break;
             case "btnChat":
-                UIManager.Instance.ShowUIPanel(UIPaths.ChatFace, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelChat, OpenPanelType.MinToMax);
                 break;
             case "btnSetting":
-                UIManager.Instance.ShowUIPanel(UIPaths.SettingPanel2, OpenPanelType.MinToMax);
-                // UIManager.Instance.ShowUIPanel(UIPaths.SettingPanel, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelSetting, OpenPanelType.MinToMax);
+                // UIManager.Instance.ShowUiPanel(UIPaths.PanelSetting, OpenPanelType.MinToMax);
                 break;
             case "btnReady":
                 ClientToServerMsg.Send(Opcodes.Client_PlayerReadyStart, GameData.m_TableInfo.id);
@@ -763,7 +763,7 @@ public class ZaiBaiGame : UIBase<ZaiBaiGame>
     void OnClickPlayer(GameObject go)
     {
         if (!ServerInfo.Data.login_with_device)
-            UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Distance, OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_Distance, OpenPanelType.MinToMax);
     }
 
     #region 牌的操作
@@ -925,7 +925,7 @@ public class ZaiBaiGame : UIBase<ZaiBaiGame>
         ShowFangPaoScore();
         IsDealCardOver = true;
         ShowMakerImg();
-        if (GameData.m_TableInfo.isQueryLeaveRoom) UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_AskDismissRoom);
+        if (GameData.m_TableInfo.isQueryLeaveRoom) UIManager.Instance.ShowUiPanel(UIPaths.PanelDestoryRoom);
 
         DestroyAllOutCards();//清理所有桌面上的出牌
         SetActiveChildPaiCount(SelfChu, 0);
@@ -1212,7 +1212,7 @@ public class ZaiBaiGame : UIBase<ZaiBaiGame>
         ViewHu();
         StartCoroutine(AsynCreateOtherCards());
         PlayerInfo info = GameDataFunc.GetPlayerInfo(LocalPos);
-        if (!info.isNextReady) UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_RoundOver);
+        if (!info.isNextReady) UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_RoundOver);
     }
     #endregion
 
@@ -1266,7 +1266,7 @@ public class ZaiBaiGame : UIBase<ZaiBaiGame>
     /// <param name="pos"></param>
     public void onPlayerReadyForNext(byte pos)
     {
-        if (pos == LocalPos) UIManager.Instance.HideUIPanel(UIPaths.UIPanel_RoundOver);
+        if (pos == LocalPos) UIManager.Instance.HideUiPanel(UIPaths.UIPanel_RoundOver);
         PlayerObjList[(int)GetLVD(pos)].transform.Find("ready").gameObject.SetActive(true);
         SoundManager.Instance.PlaySound(UIPaths.SOUND_READY);
     }
@@ -4078,7 +4078,7 @@ public class ZaiBaiGame : UIBase<ZaiBaiGame>
         }
         effectObjList.Clear();
 
-        UIManager.Instance.HideUIPanel(UIPaths.UIPanel_RoundOver);
+        UIManager.Instance.HideUiPanel(UIPaths.UIPanel_RoundOver);
         ObjOutSign.SetActive(false);
 
         foreach (TableCardInfo tmpInfo in GameData.AllCardsInfo)
@@ -4664,7 +4664,7 @@ public class ZaiBaiGame : UIBase<ZaiBaiGame>
     {
         yield return new WaitForSeconds(2);
         // GameData.m_TableInfo.nextReadyTime = 20;
-        UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_RoundOver);
+        UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_RoundOver);
      
     }
 

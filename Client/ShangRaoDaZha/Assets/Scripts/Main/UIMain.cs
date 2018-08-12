@@ -30,26 +30,26 @@ public class UIMain : UIBase<UIMain>
         switch (go.name)
         {
             case "btnCreate":
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_CreateRoom, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_CreateRoom, OpenPanelType.MinToMax);
                 break;
             case "btnAddRoom":
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_AddRoom, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_AddRoom, OpenPanelType.MinToMax);
                 break;
             case "btnSetting":
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Setting, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_Setting, OpenPanelType.MinToMax);
                 break;
             case "btnWanFa":
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Help, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_Help, OpenPanelType.MinToMax);
                 break;
             case "btnGongGao":
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_GongGao, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_GongGao, OpenPanelType.MinToMax);
                 break;
             case "btnZhanJi":
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_ZhanJiList, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelHistory, OpenPanelType.MinToMax);
                 break;
             case "btnStore":
             case "btnAddMoney":
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Shop, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.UIPanel_Shop, OpenPanelType.MinToMax);
                 break;
         }
     }

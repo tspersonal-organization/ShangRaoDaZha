@@ -299,7 +299,7 @@ public class UIHuiFang : UIBase<UIHuiFang>
         switch (go.name)
         {
             case "btnQuit":
-                UIManager.Instance.HideUIPanel(UIPaths.UIPanel_HuiFang);
+                UIManager.Instance.HideUiPanel(UIPaths.UIPanel_HuiFang);
                 break;
             case "btnPlayOrPause":
                 isPlay = !isPlay;

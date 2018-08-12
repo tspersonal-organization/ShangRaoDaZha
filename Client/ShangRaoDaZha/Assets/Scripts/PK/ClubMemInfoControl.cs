@@ -36,7 +36,7 @@ public class ClubMemInfoControl : MonoBehaviour {
     private void ClickItemClick()
     {
         GameData.ChoseMem = DataInfo;
-        UIManager.Instance.ShowUIPanel(UIPaths.PkPlayerInfoPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PkPlayerInfoPanel, OpenPanelType.MinToMax);
     }
 
     // Update is called once per frame

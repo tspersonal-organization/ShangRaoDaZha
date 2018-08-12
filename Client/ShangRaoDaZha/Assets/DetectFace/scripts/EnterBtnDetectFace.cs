@@ -8,7 +8,7 @@ public class EnterBtnDetectFace : MonoBehaviour {
     {
         GetComponent<UIButton>().onClick.Add(new EventDelegate(delegate {
             Debug.Log("颜值按钮 被点击了！！");
-            UIManager.Instance.ShowUIPanel(ConstDetectFace.FacePanel,OpenPanelType.MinToMax);
+            UIManager.Instance.ShowUiPanel(ConstDetectFace.FacePanel,OpenPanelType.MinToMax);
         }));
     }
 

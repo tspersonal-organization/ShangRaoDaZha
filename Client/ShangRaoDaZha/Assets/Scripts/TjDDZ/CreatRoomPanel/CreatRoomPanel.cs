@@ -112,7 +112,7 @@ public class CreatRoomPanel : UIBase<CreatRoomPanel>
 
     private void Close()
     {
-        UIManager.Instance.HideUIPanel(UIPaths.CreatRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
     }
 
     /// <summary>

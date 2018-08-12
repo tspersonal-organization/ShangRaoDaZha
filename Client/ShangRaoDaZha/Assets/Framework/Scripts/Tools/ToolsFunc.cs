@@ -261,8 +261,8 @@ public class ToolsFunc
     /// </summary>
     public static void SetShareIcon()
     {
-        Texture2D texture = Resources.Load<Texture2D>("ICON");
-        File.WriteAllBytes(Application.persistentDataPath + "/icon.png", texture.EncodeToPNG());
+        Texture2D texture = Resources.Load<Texture2D>("Ui/Icon");
+        File.WriteAllBytes(Application.persistentDataPath + "/Icon.png", texture.EncodeToPNG());
     }
 
     #region 文件读取

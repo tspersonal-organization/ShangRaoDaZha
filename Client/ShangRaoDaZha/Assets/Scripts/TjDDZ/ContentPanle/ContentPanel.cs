@@ -17,7 +17,7 @@ public class ContentPanel : UIBase<ContentPanel>
 
     private void Close()
     {
-        UIManager.Instance.HideUIPanel(UIPaths.ContentPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelNotice);
     }
 
     // Update is called once per frame

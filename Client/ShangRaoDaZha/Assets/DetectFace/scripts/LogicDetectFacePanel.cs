@@ -112,7 +112,7 @@ public class LogicDetectFacePanel : UIBase<LogicDetectFacePanel> {
             btnCloseStep2.GetComponent<UISprite>().enabled = true;
 
         GameData.ResultCodeStr = "分享失败!";
-        UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
     }
 
     //分享成功的回调
@@ -123,7 +123,7 @@ public class LogicDetectFacePanel : UIBase<LogicDetectFacePanel> {
         RewardUserRequest();
 
         GameData.ResultCodeStr = "分享成功!";
-        UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_Dialog,OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog,OpenPanelType.MinToMax);
     }
 
     // Update is called once per frame
@@ -132,7 +132,7 @@ public class LogicDetectFacePanel : UIBase<LogicDetectFacePanel> {
 	}
 
     void close(){
-        UIManager.Instance.HideUIPanel(ConstDetectFace.FacePanel);
+        UIManager.Instance.HideUiPanel(ConstDetectFace.FacePanel);
     }
 
 

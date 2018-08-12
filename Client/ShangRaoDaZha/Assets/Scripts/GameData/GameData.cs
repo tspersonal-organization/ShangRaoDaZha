@@ -135,6 +135,7 @@ public class GameData
     public static string RechargeURL = "";
     public static bool m_IsNormalOver;
     public static string ResultCodeStr;
+    public static string Tips;
 
     public static TableInfo m_TableInfo = new TableInfo();//桌子信息
     public static RoundOverInfo m_RoundOverInfo = new RoundOverInfo();

@@ -26,7 +26,7 @@ public class MyRoomPanel : UIBase<MyRoomPanel>
 
     private void ClosePanel()
     {
-        UIManager.Instance.HideUIPanel(UIPaths.MyRoomPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.MyRoomPanel);
     }
 
     // Update is called once per frame

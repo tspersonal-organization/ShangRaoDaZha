@@ -40,7 +40,7 @@ public class ClubListPanelControl : UIBase<ClubListPanelControl>
     /// </summary>
     private void JoinClub()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.ApplyJoinClubPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelJoinMoment, OpenPanelType.MinToMax);
     }
 
     // Update is called once per frame

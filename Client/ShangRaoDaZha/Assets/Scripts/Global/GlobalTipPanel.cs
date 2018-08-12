@@ -21,7 +21,7 @@ public class GlobalTipPanel : UIBase<GlobalTipPanel>
         yield return new WaitForSeconds(1f);
         TipLable.transform.GetComponent<TweenPosition>().ResetToBeginning();
         TipLable.transform.GetComponent<TweenColor>().ResetToBeginning();
-        UIManager.Instance.HideUIPanel(UIPaths.GlobleTipPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.GlobleTipPanel);
        // this.gameObject.SetActive(false);
 
     }

@@ -16,13 +16,13 @@ public class NetWorkConnnectControl : UIBase<NetWorkConnnectControl>
     {
         //  if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork)
         //{
-        //    UIManager.Instance.HideUIPanel(UIPaths.ReconectTipPanel);
+        //    UIManager.Instance.HideUiPanel(UIPaths.ReconectTipPanel);
            
         //}
         //else if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork)
         //{
 
-        //    UIManager.Instance.HideUIPanel(UIPaths.ReconectTipPanel);
+        //    UIManager.Instance.HideUiPanel(UIPaths.ReconectTipPanel);
            
         //}
 

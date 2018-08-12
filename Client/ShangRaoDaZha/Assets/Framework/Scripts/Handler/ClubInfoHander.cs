@@ -13,7 +13,8 @@ using FrameworkForCSharp.NetWorks;
 using FrameworkForCSharp.Utils;
 using UnityEngine;
 
-public class ClubInfoHander : MonoBehaviour {
+public class ClubInfoHander : MonoBehaviour
+{
 
     public ClubInfoHander()
     {
@@ -95,11 +96,11 @@ public class ClubInfoHander : MonoBehaviour {
             }
 
             GameData.PKClubRoomList.Add(info);
-           
+
         }
       ;
         MainPanel.Instance.CreatClubRoomList();
-       // MainPanel.Instance.CreatClubRoomList();
+        // MainPanel.Instance.CreatClubRoomList();
     }
 
     /// <summary>
@@ -108,7 +109,7 @@ public class ClubInfoHander : MonoBehaviour {
     /// <param name="message"></param>
     private void onClubMemInfoBack(NetworkMessage message)
     {
-       
+
         GameData.CurrentClubInfo.ApplyMemList = new List<MemInfo>();
         if (message.readBool())//有申请信息
         {
@@ -118,7 +119,7 @@ public class ClubInfoHander : MonoBehaviour {
                 uint clubid = message.readUInt32();
                 string ClubName = message.readString();
                 int count = message.readInt32();//申请的人数
-              
+
                 for (int i = 0; i < count; i++)
                 {
                     MemInfo info = new MemInfo();
@@ -135,11 +136,11 @@ public class ClubInfoHander : MonoBehaviour {
             for (int i = 0; i < count1; i++)
             {
                 MemInfo inviteM = new MemInfo();
-               
-                inviteM.guid= message.readUInt64();//邀请人guid
-                inviteM.name= message.readString();//邀请人名字
-                inviteM.ClubId= message.readUInt32();//俱乐部id
-                inviteM.ClubName= message.readString();//俱乐部名字
+
+                inviteM.guid = message.readUInt64();//邀请人guid
+                inviteM.name = message.readString();//邀请人名字
+                inviteM.ClubId = message.readUInt32();//俱乐部id
+                inviteM.ClubName = message.readString();//俱乐部名字
 
                 GameData.CurrentClubInfo.InviteList.Add(inviteM);
             }
@@ -161,22 +162,22 @@ public class ClubInfoHander : MonoBehaviour {
 
 
         EmailPanel.Instance.CreatData();//打开成员列表panel
-        //if (EmailPanel.Instance == null)
-        //{
-        //    EmailPanel.Instance.CreatData();//打开成员列表panel
-        //}
-        //else
-        //{
-        //    if (ClubMemControlPanelControl.Instance.gameObject.activeSelf)
-        //    {
-        //        ClubMemControlPanelControl.Instance.InitData();
-        //    }
-        //    else
-        //    {
-        //        UIManager.Instance.ShowUIPanel(UIPaths.ClubMemControlPanel, OpenPanelType.MinToMax);//打开成员列表panel
-        //    }
-        //}
-      
+                                        //if (PanelMessage.Instance == null)
+                                        //{
+                                        //    PanelMessage.Instance.CreatData();//打开成员列表panel
+                                        //}
+                                        //else
+                                        //{
+                                        //    if (ClubMemControlPanelControl.Instance.gameObject.activeSelf)
+                                        //    {
+                                        //        ClubMemControlPanelControl.Instance.InitData();
+                                        //    }
+                                        //    else
+                                        //    {
+                                        //        UIManager.Instance.ShowUiPanel(UIPaths.ClubMemControlPanel, OpenPanelType.MinToMax);//打开成员列表panel
+                                        //    }
+                                        //}
+
 
     }
 
@@ -198,7 +199,7 @@ public class ClubInfoHander : MonoBehaviour {
         info.CreatorGUID = message.readUInt64();
         info.CreatorPhoneNum = message.readString();
         info.Gold = message.readInt64();
-        info.creatPower =  (ClubCreatePower)message.readUInt8();//开房权限
+        info.creatPower = (ClubCreatePower)message.readUInt8();//开房权限
         info.PlayerCount = message.readInt32();//俱乐部人数
 
         info.MemList = new List<MemInfo>();
@@ -239,108 +240,15 @@ public class ClubInfoHander : MonoBehaviour {
 
         }
 
-            #region
-            /*
-            int count1 = message.readInt32();
-            for (int i = 0; i < count1; i++)
-            {
-                RoomConfig config = new RoomConfig();
-                config.clubRoomType = (ClubRoomType)message.readUInt8();
-                config.roomType=(RoomType) message.readUInt8();
-                config.GameCount=(int) message.readInt32();
-                if (config.roomType == RoomType.WDH)
-                {
-                    config.IsJiangMa = (JiangMaType)message.readUInt8();
-                }
-                else if (config.roomType == RoomType.NN)
-                {
-                    config.YongPaiType = (NNYongPai)message.readUInt8();
-                    int count6 = message.readInt32();
-                    for (int k = 0; k < count6; k++)
-                    {
-                        config.NiuNiuChips.Add(message.readUInt32());
-                    }
-                    config.ShunZhiNiu = message.readBool();
-                    config.ZhaDanNiu = message.readBool();
-                    config.wuXiaoNiu = message.readBool();
-                    config.WuHuaNiu = message.readBool();
-                    config.XianJiaMaiMa = message.readBool();
-                }
-
-                info.RoomConfigList.Add(config);
-            }
-
-            int count2 = message.readInt32();
-            for (int i = 0; i < count2; i++)
-            {
-                ActiveRoomInfo Activeinfo = new ActiveRoomInfo();
-                Activeinfo.RoomStatus = (RoomStatusType)message.readUInt8();
-                Activeinfo.RoomId = message.readUInt32();
-
-                Activeinfo.clubRoomType = (ClubRoomType)message.readUInt8();
-                Activeinfo.roomtype = (RoomType)message.readUInt8();
-                Activeinfo.RoomCount = message.readUInt32();
-                Activeinfo.PlayerCountHeadList = new List<string>();
-
-                int count3 = message.readInt32();
-                for (int j = 0; j < count3; j++)
-                {
-                    Activeinfo.PlayerCountHeadList.Add(message.readString());
-                }
-                if (Activeinfo.roomtype == RoomType.WDH)
-                {
-                    Activeinfo.IsJiangMa =(JiangMaType) message.readUInt8();
-                }
-                else if (Activeinfo.roomtype == RoomType.NN)
-                {
-                    Activeinfo.YongPaiType =(NNYongPai) message.readUInt8();
-
-                    int count6 = message.readInt32();
-                    for (int k = 0; k < count6; k++)
-                    {
-                        Activeinfo.NiuNiuChips.Add(message.readUInt32());
-                    }
-                    Activeinfo.ShunZhiNiu = message.readBool();
-                    Activeinfo.ZhaDanNiu = message.readBool();
-                    Activeinfo.wuXiaoNiu = message.readBool();
-                    Activeinfo.WuHuaNiu = message.readBool();
-                    Activeinfo.XianJiaMaiMa = message.readBool();
-
-                }
-
-                info.ActiveRoomInfoList.Add(Activeinfo);
-            }
-
-
-            int count4 = message.readInt32();//昨日今日
-            for (int i = 0; i < count4; i++)
-            {
-                HistoryData data = new HistoryData();
-                data.Time = message.readString();//
-
-              //  DateTime.Now.ToShortDateString()
-
-                int count5 = message.readInt32();
-                for (int j = 0; j < count5; j++)
-                {
-                    ClubRoomType type =(ClubRoomType) message.readUInt8();
-                    uint Num = message.readUInt32();
-                    data.RoomTypeAndDownCount[type] = Num;
-                }
-
-                info.HistoryDataList.Add(data);
-            }
-            */
-            #endregion
-            GameData.CurrentClubInfo = info;//当前申请的俱乐部
+        GameData.CurrentClubInfo = info;//当前申请的俱乐部
         if (ClubInfoPanel.Instance != null && ClubInfoPanel.Instance.gameObject.activeSelf)
         {
             ClubInfoPanel.Instance.InitData();
         }
-        UIManager.Instance.ShowUIPanel(UIPaths.ClubInfoPanel, OpenPanelType.MinToMax);
-      //  ClubInfoPanel.Instance.InitData();
-        //  if (ClubInfoPanel.Instance!=null)
-        //  ClubInfoPanel.Instance.InitData();
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelMomentInfo, OpenPanelType.MinToMax);
+        //  PanelMomentInfo.Instance.InitData();
+        //  if (PanelMomentInfo.Instance!=null)
+        //  PanelMomentInfo.Instance.InitData();
     }
 
 
@@ -355,14 +263,14 @@ public class ClubInfoHander : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             ClubInfo info = new ClubInfo();
-            info.Id= (int )message.readUInt32();//俱乐部id
+            info.Id = (int)message.readUInt32();//俱乐部id
             info.ClubName = message.readString();//俱乐部名称
             info.CreatorName = message.readString();//俱乐部管理人
             info.PlayerCount = message.readInt32();//俱乐部人数
 
             GameData.ClubInfoList.Add(info);
         }
-        UIManager.Instance.ShowUIPanel(UIPaths.ClubListPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.ClubListPanel, OpenPanelType.MinToMax);
         if (ClubListPanelControl.Instance != null)
             ClubListPanelControl.Instance.InitData();
     }
@@ -377,7 +285,7 @@ public class ClubInfo
     public string CreatorPhoneNum;
     public long Gold;//俱乐部资金
 
-   public  ClubCreatePower creatPower;//开房权限
+    public ClubCreatePower creatPower;//开房权限
     public int PlayerCount;
     public int Id;
 
@@ -402,7 +310,7 @@ public class RoomConfig
     public JiangMaType IsJiangMa;//是否奖码
     public NNYongPai YongPaiType;//牛牛用牌类型 
 
-    public List<uint>  NiuNiuChips=new List<uint>();//底分
+    public List<uint> NiuNiuChips = new List<uint>();//底分
     public bool ShunZhiNiu = false;
     public bool ZhaDanNiu = false;
     public bool wuXiaoNiu = false;
@@ -423,12 +331,12 @@ public class ActiveRoomInfo
     public NNYongPai YongPaiType;//牛牛用牌类型 
     public List<string> PlayerCountHeadList = new List<string>();//玩家头像列表
 
-    public List<uint> NiuNiuChips=new List<uint>();//底分
-    public bool ShunZhiNiu=false;
-    public bool ZhaDanNiu=false;
-    public bool wuXiaoNiu=false;
-    public bool WuHuaNiu=false;
-    public bool XianJiaMaiMa=false;
+    public List<uint> NiuNiuChips = new List<uint>();//底分
+    public bool ShunZhiNiu = false;
+    public bool ZhaDanNiu = false;
+    public bool wuXiaoNiu = false;
+    public bool WuHuaNiu = false;
+    public bool XianJiaMaiMa = false;
 
 }
 

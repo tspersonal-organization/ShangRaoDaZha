@@ -29,6 +29,6 @@ public class UIDistance : UIBase<UIDistance>
 	}
     void OnClick(GameObject go)
     {
-        UIManager.Instance.HideUIPanel(UIPaths.UIPanel_Distance);
+        UIManager.Instance.HideUiPanel(UIPaths.UIPanel_Distance);
     }
 }

@@ -9,6 +9,7 @@ public class PKClubRoomListControl : MonoBehaviour {
     public static PKClubRoomListControl Instance;
 
     public UIButton ClubInfoBtn;
+
     private void Awake()
     {
         Instance = this;
@@ -25,7 +26,9 @@ public class PKClubRoomListControl : MonoBehaviour {
     /// </summary>
     private void OpenClubInfoPanel()
     {
-        ClientToServerMsg.GetClubInfo(GameData.CurrentClickClubInfo.ClubId);
+        GameData.Tips = "该功能暂未开放！";
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelTips, OpenPanelType.MinToMax);
+        //ClientToServerMsg.GetClubInfo(GameData.CurrentClickClubInfo.ClubId);
     }
 
     // Use this for initialization

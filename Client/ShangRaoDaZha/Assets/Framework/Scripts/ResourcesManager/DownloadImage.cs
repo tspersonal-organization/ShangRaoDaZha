@@ -16,61 +16,59 @@ public class DownloadImage : MonoBehaviour
 
     public void Download(UITexture tex,string imgurl,bool isKongWei = false)
     {
-        //if(isKongWei)
-        //{
-        //    tex.mainTexture = Resources.Load<Texture2D>("SitDownHead");
-        //    return;
-        //}
-        if (imgurl == "headid" || imgurl == null)
-        {
-            tex.mainTexture = Resources.Load<Texture2D>("Ui/Texture/DefaultHead");
-            return;
-        }
-      
-        else if (imgurl != null)
-        {
-            StartCoroutine(SaveDownloadImage(tex, imgurl));
-        }
-        Log.Debug(imgurl);
-
+        StartCoroutine(DownloadHead(tex, imgurl));
     }
 
-    IEnumerator SaveDownloadImage(UITexture tex,string imgurl)
+    public IEnumerator DownloadHead(UITexture texHead, string sUrl)
     {
-        if (dictHeadImg.ContainsKey(imgurl))
+        if (!string.IsNullOrEmpty(sUrl) && sUrl != "0" && sUrl != "headid")
         {
-            tex.mainTexture = dictHeadImg[imgurl];
+            if (dictHeadImg.ContainsKey(sUrl))
+            {
+                if (texHead == null)
+                {
+
+                }
+                else
+                {
+                    texHead.mainTexture = dictHeadImg[sUrl];
+                }
+            }
+            else
+            {
+                WWW ww = new WWW(sUrl);
+                yield return ww;
+                try
+                {
+                    if (ww.error == null)
+                    {
+                        ww.texture.Compress(true);
+                        if (texHead == null)
+                        {
+
+                        }
+                        else
+                        {
+                            texHead.mainTexture = ww.texture;
+                        }
+                        if (!dictHeadImg.ContainsKey(sUrl))
+                            dictHeadImg.Add(sUrl, ww.texture);
+                    }
+                    else
+                    {
+                        texHead.mainTexture = Resources.Load<Texture2D>("Ui/Texture/DefaultHead");
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("DownloadHead_Exception_" + e.Message);
+                    texHead.mainTexture = Resources.Load<Texture2D>("Ui/Texture/DefaultHead");
+                }
+            }
         }
         else
         {
-            WWW www = new WWW(imgurl);
-            while (!www.isDone)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-            if (www.error == null)
-            {
-                if (dictHeadImg.ContainsKey(imgurl))
-                    dictHeadImg[imgurl] = www.texture;
-                else
-                    dictHeadImg.Add(imgurl, www.texture);
-                tex.mainTexture = www.texture;
-            }
+            texHead.mainTexture = Resources.Load<Texture2D>("Ui/Texture/DefaultHead");
         }
-        yield break;
-    }
-
-    IEnumerator DownloadImg(UITexture tex, string imgurl)
-    {
-        WWW www = new WWW(imgurl);
-        while (!www.isDone)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        if (www.error == null)
-        {
-            tex.mainTexture = www.texture;
-        }   
-        yield break;
     }
 }

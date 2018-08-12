@@ -38,7 +38,7 @@ public class LoginHandler
                     }
                     if (ClubInvitePanelControl.Instance == null)
                     {
-                        UIManager.Instance.ShowUIPanel(UIPaths.ClubInvitePlayerPanel);
+                        UIManager.Instance.ShowUiPanel(UIPaths.ClubInvitePlayerPanel);
                     }
                     else
                     {
@@ -48,7 +48,7 @@ public class LoginHandler
                         }
                         else
                         {
-                            UIManager.Instance.ShowUIPanel(UIPaths.ClubInvitePlayerPanel);
+                            UIManager.Instance.ShowUiPanel(UIPaths.ClubInvitePlayerPanel);
                         }
                        
                     }
@@ -177,7 +177,7 @@ public class LoginHandler
 
         if (Player.Instance.lastEnterRoomID != 0)
         {
-            Debug.LogError("duanlian的房间"+ Player.Instance.lastEnterRoomID);
+            Debug.Log("duanlian的房间"+ Player.Instance.lastEnterRoomID);
             ClientToServerMsg.Send(Opcodes.Client_PlayerEnterRoom, Player.Instance.lastEnterRoomID, Input.location.lastData.latitude, Input.location.lastData.longitude);
         }
         else

@@ -181,7 +181,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
     public void onShowSoundAnimation(ulong guid, float length)
     {
         byte pos = GameDataFunc.GetPlayerInfo(guid).pos;
-        Vector3 vecPos = IdAndPlayerDic[(int)pos].transform.Find("HeadPanel").Find("HeadSprite").position;
+        Vector3 vecPos = IdAndPlayerDic[(int)pos].transform.Find("HeadSprite").position;
         StartCoroutine(AsynSoundAnimation((int)pos, length));
     }
 
@@ -286,7 +286,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
     /// </summary>
     private void OpenChatPanel()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.ChatFace, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelChat, OpenPanelType.MinToMax);
         SetButtonClickSound();
     }
 
@@ -304,7 +304,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
         PlayerInfo info = GameDataFunc.GetPlayerInfo(ulong.Parse(strs[1]));
         GameObject preObj = Resources.Load<GameObject>("Face/Face" + strs[2]);
         GameObject face = Instantiate<GameObject>(preObj);
-        face.transform.parent = IdAndPlayerDic[info.pos].transform.Find("HeadPanel");
+        face.transform.parent = IdAndPlayerDic[info.pos].transform.Find("HeadSprite");
         face.transform.localScale = Vector3.one;
         face.transform.localPosition = Vector3.zero;
         //  SoundManager.Instance.PlaySound(UIPaths.SOUND_CHAT_FACE + strs[2], info.sex);
@@ -395,7 +395,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
     /// </summary>
     private void OpenSettingPanel()
     {
-        UIManager.Instance.ShowUIPanel(UIPaths.SettingPanel2, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelSetting2, OpenPanelType.MinToMax);
         SetButtonClickSound();
     }
 
@@ -704,7 +704,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
             //重置是否有解散房间信息
             if (GameData.m_TableInfo.isQueryLeaveRoom)
             {
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_AskDismissRoom, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDestoryRoom, OpenPanelType.MinToMax);
             }
 
 
@@ -766,7 +766,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
             //重置是否有解散房间信息
             if (GameData.m_TableInfo.isQueryLeaveRoom)
             {
-                UIManager.Instance.ShowUIPanel(UIPaths.UIPanel_AskDismissRoom, OpenPanelType.MinToMax);
+                UIManager.Instance.ShowUiPanel(UIPaths.PanelDestoryRoom, OpenPanelType.MinToMax);
             }
         }
         else if (GameData.m_TableInfo.roomState == RoomStatusType.Dispose)
@@ -899,8 +899,8 @@ public class DDZMainGame : UIBase<DDZMainGame>
         FriendCard.SetActive(false);
         ResetFinishPlayerIndex();
 
-        UIManager.Instance.HideUIPanel(UIPaths.UIPanel_AskDismissRoom);
-        UIManager.Instance.ShowUIPanel(UIPaths.PKTanPaiPanel);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelDestoryRoom);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelShowCard);
 
 
         ResetCardSortType();//重置排序
@@ -920,7 +920,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
             HideOperatePanle(i);
             ClearPlayedCard(i);
         }
-        UIManager.Instance.ShowUIPanel(UIPaths.GameOverPanel);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverSmall);
     }
 
     /// <summary>
@@ -1386,7 +1386,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
             IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.Find("NameLabel").GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo(GameData.m_PlayerInfoList[i].pos).name.ToString();
             IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.Find("TaoShangSprite/NameLable").GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo(GameData.m_PlayerInfoList[i].pos).name.ToString();
             // IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.FindChild("JiFenLabel").GetComponent<UILabel>().text = "讨赏分：" + 0.ToString();// GameDataFunc.GetPlayerInfo(GameData.m_PlayerInfoList[i].pos).name.ToString();
-            DownloadImage.Instance.Download(IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.Find("HeadPanel").Find("HeadSprite").GetComponent<UITexture>(), GameData.m_PlayerInfoList[i].headID);
+            DownloadImage.Instance.Download(IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.Find("HeadSprite").GetComponent<UITexture>(), GameData.m_PlayerInfoList[i].headID);
 
             SetTotalJifen(GameData.m_PlayerInfoList[i].pos, 0);//设置积分
             SetTaoShangFen(GameData.m_PlayerInfoList[i].pos, 0);//设置讨赏分
@@ -1477,7 +1477,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
         IdAndPlayerDic[info.pos].transform.Find("NameLabel").GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo(info.pos).name.ToString();
         IdAndPlayerDic[info.pos].transform.Find("TaoShangSprite/NameLable").GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo(info.pos).name.ToString();
 
-        DownloadImage.Instance.Download(IdAndPlayerDic[info.pos].transform.Find("HeadPanel").Find("HeadSprite").GetComponent<UITexture>(), info.headID);
+        DownloadImage.Instance.Download(IdAndPlayerDic[info.pos].transform.Find("HeadSprite").GetComponent<UITexture>(), info.headID);
         SetTotalJifen(info.pos, 0);//设置积分
         SetTaoShangFen(info.pos, 0);//设置讨赏分
     }
@@ -2916,7 +2916,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
         {
             if (SelfPos - pos == -1 || SelfPos - pos == 3)//右边玩家
             {
-                IdAndPlayerDic[pos].transform.Find("PlayedCardPoint").localPosition = new Vector3(-240 - cardlist.Count * 12, 25, 0);
+                IdAndPlayerDic[pos].transform.Find("PlayedCardPoint").localPosition = new Vector3(-240 - cardlist.Count * 12, 0, 0);
             }
         }
        
@@ -2930,7 +2930,7 @@ public class DDZMainGame : UIBase<DDZMainGame>
         }
         else if (SelfPos == pos)//自己
         {
-            IdAndPlayerDic[pos].transform.Find("PlayedCardPoint").localPosition = new Vector3(557 - cardlist.Count * 12, 80, 0);
+            IdAndPlayerDic[pos].transform.Find("PlayedCardPoint").localPosition = new Vector3(557 - cardlist.Count * 12, 34, 0);
         }
 
         PosAndPlayedCard[pos] = new List<GameObject>();

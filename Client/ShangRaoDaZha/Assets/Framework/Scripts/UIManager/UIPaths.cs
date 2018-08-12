@@ -23,9 +23,7 @@ public class UIPaths
     public const string ClubMemControlPanel = "Panel/ClubMemControlPanel";
     public const string ClubRenamePanel = "Panel/ClubRenamePanel";//俱乐部管理panel
     public const string ClubMastorPanel = "Panel/ClubMastorPanel";//俱乐部管理panel
-    public const string ClubInfoPanel = "Panel/ClubInfoPanel";//俱乐部信息panel
     public const string ClubListPanel = "Panel/ClubListPanel";//俱乐部列表panelClubInfoPanel
-    public const string ApplyJoinClubPanel = "Panel/ApplyJoinClubPanel";//申请加入俱乐部PkPlayerInfoPanel
 
     public const string PkPlayerInfoPanel = "Panel/PkPlayerInfoPanel";//申请加入俱乐部PkPlayerInfoPanel InviteJoinClubPanel
     public const string InviteJoinClubPanel = "Panel/InviteJoinClubPanel";//申请加入俱乐部PkPlayerInfoPanel 
@@ -34,22 +32,19 @@ public class UIPaths
 
     public const string GameUpdate = "Panel/GameUpdate";
     public const string LoadingObj = "Panel/LoadingObj";
+    public const string LoadingInApp = "Panel/LoadingInApp";
     public const string DisconnectServer = "Panel/DisconnectServer";
+
     public const string UIPanel_CreateRoom = "Panel/UIPanel_CreateRoom";
     public const string UIPanel_AddRoom = "Panel/UIPanel_AddRoom";
     public const string UIPanel_Setting = "Panel/UIPanel_Setting";
     public const string UIPanel_RoundOver = "Panel/UIPanel_RoundOver";
-    public const string UIPanel_AskDismissRoom = "Panel/UIPanel_AskDismissRoom";
   //  public const string UIPanel_TotalScore = "Panel/UIPanel_TotalScore";
     public const string UIPanel_Help = "Panel/UIPanel_Help";
     public const string UIPanel_GongGao = "Panel/UIPanel_GongGao";
-    public const string UIPanel_ZhanJiList = "Panel/UIPanel_ZhanJiList";
     public const string UIPanel_ZhanJiRoundInfo = "Panel/UIPanel_ZhanJiRoundInfo";
     public const string UIPanel_Shop = "Panel/UIPanel_Shop";
-    public const string ChatFace = "Panel/ChatFace";
     public const string UIPanel_HuiFang = "Panel/UIPanel_HuiFang";
-    public const string UIPanel_Dialog = "Panel/UIPanel_Dialog";
-    public const string LoadingInApp = "Panel/LoadingInApp";
     public const string UIPanel_Distance = "Panel/UIPanel_Distance";
 
 
@@ -59,22 +54,41 @@ public class UIPaths
     public const string InvitePanel = "DDZPanel/InvitePanel";
     public const string MyRoomPanel = "DDZPanel/MyRoomPanel";
     public const string UIPanel_TotalScore = "DDZPanel/TotalGameOverPanel";
-    public const string UIPanel_NNTotalScore = "DDZPanel/NNTotalGameOverPanel";
-    // public const string CreatRoomPanel = "DDZPanel/CreatRoomPanel";
-    public const string CreatRoomPanel = "DDZPanel/NewCreatRoomPanel";
-    public const string JoinRoomPanel = "DDZPanel/NewJoinRoomPanel";
+    // public const string PanelCreatRoom = "DDZPanel/PanelCreatRoom";
     public const string MarketPanel = "DDZPanel/MarketPanel";
-    public const string SettingPanel = "DDZPanel/SettingPanel";
-    public const string SettingPanel2 = "DDZPanel/SettingPanel2";
     public const string TipModlePanel = "DDZPanel/TipModlePanel";
     public const string DDZGamePanel = "DDZPanel/DDZGamePanel";
 
     public const string RulePanel = "DDZPanel/RulePanel";
-    public const string ContentPanel = "DDZPanel/ContentPanel";
-    public const string GameOverPanel = "DDZPanel/GameOverPanel";//PKTanPaiPanel
-    public const string PKTanPaiPanel = "DDZPanel/TanPaiPanel";//
 
-    public const string EmailPanel = "DDZPanel/EmailPanel";
+
+
+    //------------------------------------------------------------
+    public const string PanelDialog = "Common/Panel/PanelDialog";//服务器返回的提示
+    public const string PanelTips = "Common/Panel/PanelTips";//主动操作的提示
+
+    public const string PanelJoinMoment = "Dz/Panel/PanelJoinMoment";//申请加入俱乐部
+    public const string PanelMomentInfo = "Dz/Panel/PanelMomentInfo";//俱乐部信息
+
+    public const string PanelUserInfo = "Dz/Panel/PanelUserInfo";//用户信息
+    public const string PanelCreatRoom = "Dz/Panel/PanelCreatRoom";//创建房间
+    public const string PanelJoinRoom = "Dz/Panel/PanelJoinRoom";//加入房间
+    public const string PanelNotice = "Dz/Panel/PanelNotice";//公告
+    public const string PanelHistory = "Dz/Panel/PanelHistory";//战绩
+    public const string PanelMessage = "Dz/Panel/PanelMessage";//消息
+    public const string PanelSetting = "Dz/Panel/PanelSetting";//设置
+    public const string PanelSetting2 = "Dz/Panel/PanelSetting2";//游戏设置
+
+    public const string PanelChat = "Dz/Panel/PanelChat";//聊天
+    public const string PanelDestoryRoom = "Dz/Panel/PanelDestoryRoom";//解散房间
+    public const string PanelShowCard = "Dz/Panel/PanelShowCard";//摊牌
+    public const string PanelGameOverBig = "Dz/Panel/PanelGameOverBig";//总结算
+    public const string PanelGameOverSmall = "Dz/Panel/PanelGameOverSmall";//单局结算
+
+
+    //------------------------------------------------------------
+
+
     #endregion
 
     #region 声音路径
