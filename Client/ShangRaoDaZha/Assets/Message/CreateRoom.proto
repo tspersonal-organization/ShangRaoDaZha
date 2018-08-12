@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+package CreateRoomEntity;
+
+message  CreateRoom{
+	uint32 club_id = 1;//俱乐部id，只能俱乐部开房，个人不能开房
+	uint32 player_count_index = 2;//房间人数下标（new int[] { 2, 4 };//人數）
+	uint32 play_count_index = 3;//局数下标（new int[] { 5, 10 };//圈数)
+	uint32 play_type_index = 4;//玩法下标（枚举类:PlayType)
+	repeated uint32 jiang_ma = 5;//开奖（牌数，{7,11,13,14}）
+	bool fa_wang_tp = 6;//罚王摊牌
+	bool wu_zha_tp = 7;//无炸摊牌
+	double pox = 8;//经纬度
+	double poy = 9;//经纬度
+	string address = 10;//地址
+	bool is_ba_wang = 11;//是否是八王
+}

@@ -1,0 +1,70 @@
+﻿syntax = "proto3";
+
+package ClubEntity; 
+
+message CreateClub{
+	string name = 1;//俱乐部名称
+	string admin_name = 2;//管理员名称
+	uint64 admin_id = 3;//管理员id
+	string admin_tel = 4;//管理员电话
+	int64 club_gold = 5;//俱乐部资金
+	bool create_power = 6;//是否有开放权限
+	uint32 club_id = 7;//俱乐部id
+}
+
+message DayInfo{
+	uint32 club_room_type = 1;//俱乐部房间类型
+	uint32 count = 2;//该类型房间开房数
+}
+
+//message HistoryInfo{
+//	string date = 1;//俱乐部房间类型
+//	repeated DayInfo day_info = 2;//当天信息
+//}
+
+message ApplicatePlayer{
+	string name = 1;//玩家名称
+    uint64 guid = 2;//玩家id
+    string head_ip = 3;//玩家头像
+}
+
+//message ClubRoomConfigInfo{
+//	uint32 club_room_type = 1;//俱乐部房间类型
+//	ClubRoomConfig club_room_config = 2;//自动开房房间配置
+//}
+
+//message ClubRoomConfig{
+//	  uint32 room_type = 1;//房间类型
+//    int32 game_count = 2;//房间局数
+//    uint32 pay_type = 3;//支付方式
+//    uint32 jiangma_type = 4;//奖码
+//    uint32 yong_pai = 5;//用牌
+//    repeated uint32 chip = 6;//下注下标
+//    uint32 cost_money = 7;//开房间需要的房卡
+//	  bool shunZiNiu = 8;//是否开启顺子牛
+//    bool zhaDanNiu = 9;//是否开启炸弹牛
+//    bool wuXiaoNiu = 10;//是否开启五小牛
+//    bool wuHuaNiu = 11;//是否开启五花牛
+//    bool xianJiaMaiMa = 12;//是否开启闲家买码
+//}
+
+message SaveClubInfo{
+	uint32 code_id = 1;//俱乐部Id
+	string name = 2;//俱乐部名称
+	string admin_name = 3;//管理员名称
+	uint64 admin_id = 4;//管理员id
+	string admin_tel = 5;//管理员电话
+	int64 club_gold = 6;//俱乐部资金
+	repeated uint64 player_guid = 7;//玩家guid
+	//repeated HistoryInfo history_info = 8;//历史记录统计
+	repeated ApplicatePlayer player_list = 8;//俱乐部玩家列表
+	repeated ApplicatePlayer application_list = 9;//申请人列表
+	//repeated ClubRoomConfigInfo club_room_config_info = 11;//自动开房房间配置
+	uint32 create_power = 10;//开房权限
+	repeated ApplicatePlayer admin_list = 11;//管理人列表
+	bool has_create_power = 12;//是否有开房权限
+}
+
+message SaveAllClub{
+	repeated SaveClubInfo save_club_info = 1;
+}

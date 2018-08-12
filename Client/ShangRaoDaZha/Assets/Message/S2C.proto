@@ -1,0 +1,123 @@
+﻿syntax = "proto3";
+import "C2S.proto";
+
+package S2CEntity; 
+
+message PlayerOutCardFailed{
+	uint32 room_code_id = 1;//房间号
+	repeated C2SEntity.OperateCard operateCard = 2;//牌的信息
+	bool can_out_card = 3;//是否能出牌
+}
+
+message BroadcastPlayerOperate{
+	uint32 room_code_id = 1;//房间号
+	uint32 position = 2;//位置
+	uint32 type = 3;//操作类型
+	repeated C2SEntity.OperateCard operateCard = 4;//牌的信息
+}
+
+message SitPlayerInfo{
+	uint32 position = 1;//玩家位置
+	float positionx = 2;//x坐标
+	float positiony = 3;//y坐标
+	uint64 guid = 4;//玩家guid
+	uint32 sex = 5;//玩家性别
+	bool is_ready_for_room = 6;//是否准备
+	bool is_ready_for_next_game = 7;//是否准备开始下一局
+	bool on_force = 8;//是否聚焦
+	string client_ip = 9;//ip
+	string client_mask = 10;//mask
+	string other_name = 11;//昵称
+	string head_ip = 12;//头像
+	int32 change_score = 13;//改变的积分
+	int32 tao_shang_score = 14;//讨赏分
+	int32 score = 15;//分数
+	uint32 total_win_count = 16;//赢得次数
+	uint32 total_zhuang_count = 17;//当庄次数
+	uint32 last_operate_type = 18;//最后的操作
+	int32 card_count = 19;//玩家手牌数量（位置非当前玩家位置，只有手牌数，没有具体手牌）
+	repeated uint32 hold_cards = 20;//手牌(如果位置不同，这处手牌为空，其他人看不到别人手牌)
+	repeated uint32 drop_cards = 21;//丢弃的牌
+	
+}
+
+message FinishInfo{
+	uint32 finish_position = 1;//完成玩家的位置
+	uint32 finish_order = 2;//完成的次序（1,2,两人完成就结束）
+}
+
+message PlayStatusInfo{
+	uint32 friend_position = 1;//朋友位置
+	uint32 last_drop_card_position = 2;//最后出牌的位置
+	uint32 wait_drop_position = 3;//等待弃牌的位置
+	bool has_drop_card = 4;//是否有人出牌(有出牌，才有出的牌)
+	repeated uint32 drop_cards = 5;//出的牌
+	int32 finish_count = 6;//完成人数
+	repeated FinishInfo finish_info = 7;//完成玩家的信息
+	uint32 bao_pai_position = 8;//包牌人位置
+	uint32 ask_bao_pai_position = 9;//正在询问包牌人的位置，如果不询问，这个值为PositionType.None
+	uint32 another_friend_position = 10;//另一个朋友位置
+}
+
+message CatchedCard{
+	repeated uint32 card = 1;//出的牌
+}
+
+message GameOverPlayerInfo{
+	bool is_winner = 1;//是否是赢的人
+	uint32 position = 2;//玩家位置
+	int32 score = 3;//玩家分数
+	int32 change_score = 4;//改变的分数
+	int32 base_score = 5;//回合分
+	int32 zhan_dan_score = 6;//炸弹分
+	int32 fa_wang_score = 7;//罚王分
+	repeated uint32 cards = 8;//剩余的手牌
+	//一下在游戏结束时才有数据
+	repeated CatchedCard catched_card = 9;//打出的牌
+}
+
+message GameOverInfo{
+	uint32 zhuang_position = 1;//庄的位置
+	uint32 friend_position = 2;//朋友的位置
+	repeated GameOverPlayerInfo game_over_player_info = 3;//游戏结束，玩家结算信息
+	repeated FinishInfo finish_info = 4;//完成玩家的信息
+	uint32 bao_pai_position = 5;//包牌人位置
+	bool is_tp = 6;//是否摊牌
+}
+
+message SendRoomInfo{
+	uint32 room_code_id = 1;//房间号
+	uint64 creator_guid = 2;//房主guid
+	uint32 game_count = 3;//总局数
+	uint32 create_room_type = 4;//开房类型（现在全是俱乐部开房:ClubCreate)
+	uint32 zhuang_position = 5;//庄家位置
+	uint32 zhuang_count = 6;//连庄次数
+	uint32 room_status = 7;//房间状态
+	uint32 cur_game_count = 8;//当前局数
+	bool query_dispose_room = 9;//是否有申请离开房间
+	uint32 timer_rest = 10;//申请离开房间倒计时剩余时间
+	repeated uint32 agress_position = 11;//同意离开玩家位置
+	repeated SitPlayerInfo sit_player_info = 12;//在座玩家信息
+	//PlayStatusInfo和GameOverInfo 是两个状态，两者只有一个有值，PlayStatusInfo是游戏进行中的数据，即RoomStatusType.Play
+	PlayStatusInfo play_status_info = 13;//游戏进行中的数据
+	//GameOverInfo为RoomStatusType.Over
+	GameOverInfo game_over_info = 14;//游戏结束的数据
+	uint32 player_count = 15;//玩家人数
+	uint32 play_count = 16;//局数
+	uint32 play_type = 17;//玩法下标（枚举类:PlayType)
+	repeated uint32 jiang_ma = 18;//开奖（牌数，{7,11,13,14}）
+	bool fa_wang_tp = 19;//罚王摊牌
+	bool wu_zha_tp = 20;//无炸摊牌
+	bool is_ba_wang = 21;//是否是八王
+	
+}
+
+message GameOver{
+	uint32 room_code_id = 1;//房间号
+	uint32 zhuang_position = 2;//庄的位置
+	uint32 friend_position = 3;//朋友的位置
+	repeated GameOverPlayerInfo game_over_info = 4;//游戏结束的数据
+	repeated FinishInfo finish_info = 5;//完成玩家的信息
+	uint32 bao_pai_position = 6;//包牌人位置
+	bool is_tp = 7;//是否摊牌
+}

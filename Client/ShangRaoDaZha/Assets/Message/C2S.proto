@@ -1,0 +1,21 @@
+﻿syntax = "proto3";
+package C2SEntity; 
+
+message RoomCreate{
+	int32 room_playcount_index = 1;//房间局数
+	int32 pay_method_index = 2;//支付方式
+	double posX = 3;//X坐标
+	double posY = 4;//X坐标
+}
+
+message OperateCard{
+	repeated uint32 card = 1;//牌
+}
+
+message OperateInfo{
+	uint32 code_id = 1;//房间编号
+	uint32 type = 2;//操作类型
+	repeated OperateCard operateCard = 3;//牌的信息
+	
+}
+

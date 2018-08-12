@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 16ba5dac4d3415c48b0a1eb76a152d9c
+timeCreated: 1508738521
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: FZZhunYuan-M02S
+  fontNames:
+  - FZZhunYuan-M02S
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

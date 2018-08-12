@@ -1,0 +1,159 @@
+﻿syntax = "proto3";
+
+package S2DBEntity; 
+
+message DaiLiDayMission{
+	string dateTime = 1;//日期
+	uint32 compeleteCount = 2;//完成数
+}
+
+message InviteClub {
+	uint64 player_uid = 1;//邀请人id
+        string player_name = 2;//邀请人名称
+        uint32 club_id = 3;//俱乐部id
+        string club_name = 4;//俱乐部名称
+}
+
+message BaseData{
+	uint32 cur_version = 1;
+	string name = 2;
+	int64 gold = 3;
+	int64 card = 4;
+	int64 diamond = 5;
+	string headIp = 6;
+	uint32 sex = 7;
+	bool is_dai_li = 8;
+	uint32 daiLiLevel = 9;
+	repeated DaiLiDayMission daiLiDayMission = 10;//每日完成任务数据
+	bool complete = 11;//是否完成每日任务
+	repeated uint32 club_ids = 12;//俱乐部id
+	uint32 play_count = 13;//游玩总局数
+	repeated InviteClub invite_club = 14;//邀请的俱乐部
+}
+
+message EnterRoomTypeInfo{
+	uint32 room_type = 1;
+	uint32 code_id = 2;
+}
+
+message SitPlayerScore{
+	uint64 guid = 1;
+	int32 change_score = 2;
+	int32 base_score = 3;
+	int32 tao_shang_score = 4;
+	int32 score = 5;
+	repeated uint32 card = 6;
+}
+
+message PlayerRoomRecords{
+	uint32 cur_version = 1;
+	uint64 room_guid = 2;
+	uint32 room_type = 3;
+	uint32 start_time = 4;
+	uint32 end_time = 5;
+	uint64 room_creator_guid = 6;
+	repeated SitPlayerScore sit_player_score = 7;
+	uint32 code_id = 8;
+}
+
+message ComponentData{
+	uint32 cur_version = 1;
+	EnterRoomTypeInfo enter_room_type_code_info = 2;
+	repeated uint32 create_room_codes = 3;
+	uint32 last_lottery_time = 4;
+	repeated PlayerRoomRecords player_room_records = 5;
+	uint32 last_active_time = 6;
+	uint32 last_cost_money_time = 7;
+	uint32 day_share_reward_count = 8;
+}
+
+message RecordData{
+	uint32 cur_version = 1;
+}
+
+message Characters{
+	uint64 guid = 1;
+	string name = 2;
+	string other_name = 3;
+	string head_ip = 4;
+	uint32 sex = 5;
+	string password = 6;
+	uint32 create_time = 7;
+	BaseData base_data = 8;
+	ComponentData component_data = 9;
+	RecordData record_data = 10;
+	uint64 unique = 11;
+	uint32 code = 12;
+	bool save_in_db = 13;
+}
+
+message RoomRecordPlayerInfo{
+	uint32 cur_version = 1;
+	uint32 position = 2;
+	uint64 guid = 3;
+	int32 score = 4;
+	uint32 total_zhuang_count = 5;
+	uint32 total_win_count = 6;
+}
+
+message RoundRecord{
+	uint32 cur_version = 1;
+	uint32 start_time = 2;
+	uint32 over_time = 3;
+	uint64 zhuang_guid = 4;
+	repeated SitPlayerScore sit_player_score = 5;
+}
+
+message RoundVideo{
+	uint32 cur_version = 1;
+	bytes init_data = 2;
+	repeated bytes video_message = 3;
+}
+
+message RoomRecordData{
+	uint32 cur_version = 1;
+	uint64 guid = 2;
+	uint64 create_guid = 3;
+	uint32 code_id = 4;
+	uint32 room_type = 5;
+	uint32 cur_game_count = 6;
+	uint32 create_time = 7;
+	uint32 dispose_time = 8;
+	uint32 room_dispose_type = 9;
+	uint32 cost_money = 10;//房间价格
+	uint32 game_cout = 11;//房间局数
+	uint32 create_pay_type = 12;//支付方式
+	repeated RoomRecordPlayerInfo room_record_player_info = 13;
+	repeated RoundRecord round_record = 14;
+	repeated RoundVideo round_video = 15;
+	uint32 play_type = 16;//玩法类型
+	bool fa_wang_tp = 17;//罚王摊牌
+	bool wu_zha_tp = 18;//无炸摊牌
+	uint32 play_count = 19;//玩的人数
+	repeated uint32 jiang_ma = 20;//奖码
+	bool is_ba_wang = 21;//是否是八王
+}
+
+message RoomRecordInfo{
+	uint64 guid = 1;
+	uint32 room_code_id = 2;
+	uint32 room_type = 3;
+	uint64 creator_guid = 4;
+	uint32 create_time = 5;
+	uint32 dispose_time = 6;
+	RoomRecordData room_record_data = 7;
+}
+
+message QueryRoomRecordInfo{
+	uint64 guid = 1;
+	RoomRecordInfo room_record_info = 2;
+}
+
+message LoadCharacter{
+	uint32 type = 1;
+	uint64 guid = 2;
+	string name = 3;
+	uint32 code = 4;
+	Characters character = 5;
+	int32 change_gold = 6;
+}
