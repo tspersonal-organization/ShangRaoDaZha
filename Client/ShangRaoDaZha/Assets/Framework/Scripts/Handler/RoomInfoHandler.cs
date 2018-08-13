@@ -77,7 +77,7 @@ public class RoomInfoHandler
         message.readUInt32();
        byte pos= message.readUInt8();//包牌人信息
         PartGameOverControl.instance.HelperPos = (int)pos;
-        if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnShowBaoPaiInfo( pos);
+        if (DzViewGame.Instance != null) DzViewGame.Instance.OnShowBaoPaiInfo( pos);
 
 
     }
@@ -95,9 +95,9 @@ public class RoomInfoHandler
         message.readUInt32();
       byte pos=  message.readUInt8();
         Debug.Log("广播包牌---"+ pos);
-        if (pos == DDZMainGame.Instance.LocalPos|| pos == DDZMainGame.Instance.SelfPos)
+        if (pos == DzViewGame.Instance.LocalPos|| pos == DzViewGame.Instance.SelfPos)
         {
-            DDZMainGame.Instance.BaoPaiTipPanel.SetActive(true);
+            DzViewGame.Instance.BaoPaiTipPanel.SetActive(true);
         }
 
     }
@@ -326,7 +326,7 @@ public class RoomInfoHandler
 
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnSetFinishPlayerIndex();
+                if (DzViewGame.Instance != null) DzViewGame.Instance.OnSetFinishPlayerIndex();
             }
             else
             {
@@ -374,7 +374,7 @@ public class RoomInfoHandler
 
             if (!IsPiPei)
             {
-                //  if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnPlayerAi(roomNum, pos, isAi);
+                //  if (DzViewGame.Instance != null) DzViewGame.Instance.OnPlayerAi(roomNum, pos, isAi);
             }
             else
             {
@@ -391,7 +391,7 @@ public class RoomInfoHandler
 
             if (!IsPiPei)
             {
-                //  if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnPlayerAi(roomNum, pos, isAi);
+                //  if (DzViewGame.Instance != null) DzViewGame.Instance.OnPlayerAi(roomNum, pos, isAi);
             }
             else
             {
@@ -407,7 +407,7 @@ public class RoomInfoHandler
 
             if (!IsPiPei)
             {
-                //  if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnPlayerAi(roomNum, pos, isAi);
+                //  if (DzViewGame.Instance != null) DzViewGame.Instance.OnPlayerAi(roomNum, pos, isAi);
             }
             else
             {
@@ -436,7 +436,7 @@ public class RoomInfoHandler
         {
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.ShowOperatePanle(NextPlayerPos, type);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.ShowOperatePanle(NextPlayerPos, type);
             }
             else
             {
@@ -477,7 +477,7 @@ public class RoomInfoHandler
             if (!IsPiPei)
             {
                 PartGameOverControl.instance.HelperPos = (int)pos;
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnShowFriendCard(pos, card);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.OnShowFriendCard(pos, card);
             }
             else
             {
@@ -502,7 +502,7 @@ public class RoomInfoHandler
             GameData.m_TableInfo.FriendCard = card;
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnFriendCard(pos, GameData.m_TableInfo.FriendCard);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.OnFriendCard(pos, GameData.m_TableInfo.FriendCard);
             }
             else
             {
@@ -528,7 +528,7 @@ public class RoomInfoHandler
         {
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPlayerLeave((int)pos);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerLeave((int)pos);
             }
             else
             {
@@ -608,8 +608,8 @@ public class RoomInfoHandler
                 //   Game.Instance.onPlayerChatTxt(connect);
                 if (!IsPiPei)
                 {
-                    if (DDZMainGame.Instance != null)
-                        DDZMainGame.Instance.onPlayerSendChatFace(roomID, connect);
+                    if (DzViewGame.Instance != null)
+                        DzViewGame.Instance.onPlayerSendChatFace(roomID, connect);
                 }
                 else
                 {
@@ -624,8 +624,8 @@ public class RoomInfoHandler
             {
                 if (!IsPiPei)
                 {
-                    if (DDZMainGame.Instance != null)// "3@" + Player.Instance.guid + "@" + faceID;
-                        DDZMainGame.Instance.onPlayerSendFaceChatFace(roomID, connect);
+                    if (DzViewGame.Instance != null)// "3@" + Player.Instance.guid + "@" + faceID;
+                        DzViewGame.Instance.onPlayerSendFaceChatFace(roomID, connect);
                 }
                 else
                 {
@@ -643,8 +643,8 @@ public class RoomInfoHandler
 
                 if (!IsPiPei)
                 {
-                    if (DDZMainGame.Instance != null)
-                        DDZMainGame.Instance.onPlayerSendChatFace(roomID, connect);
+                    if (DzViewGame.Instance != null)
+                        DzViewGame.Instance.onPlayerSendChatFace(roomID, connect);
                 }
                 else
                 {
@@ -803,8 +803,8 @@ public class RoomInfoHandler
 
                 if (!IsPiPei)
                 {
-                    if (DDZMainGame.Instance != null)
-                        DDZMainGame.Instance.onPlayerOnForce(pos, isForce);
+                    if (DzViewGame.Instance != null)
+                        DzViewGame.Instance.onPlayerOnForce(pos, isForce);
                 }
                 else
                 {
@@ -900,8 +900,8 @@ public class RoomInfoHandler
             if (isAgree)
             {
                 GameData.m_TableInfo.operateLeaveRoomList.Add(pos);
-                if (AskDismissRoom.Instance != null)
-                    AskDismissRoom.Instance.Init();
+                if (DzPanelDestoryRoom.Instance != null)
+                    DzPanelDestoryRoom.Instance.Init();
             }
             else
             {
@@ -920,8 +920,8 @@ public class RoomInfoHandler
         //        if (isAgree)
         //        {
         //            GameData.m_TableInfo.operateLeaveRoomList.Add(pos);
-        //            if (AskDismissRoom.Instance != null)
-        //                AskDismissRoom.Instance.Init();
+        //            if (DzPanelDestoryRoom.Instance != null)
+        //                DzPanelDestoryRoom.Instance.Init();
         //        }
         //        else
         //        {
@@ -940,8 +940,8 @@ public class RoomInfoHandler
         //        if (isAgree)
         //        {
         //            GameData.m_TableInfo.operateLeaveRoomList.Add(pos);
-        //            if (AskDismissRoom.Instance != null)
-        //                AskDismissRoom.Instance.Init();
+        //            if (DzPanelDestoryRoom.Instance != null)
+        //                DzPanelDestoryRoom.Instance.Init();
         //        }
         //        else
         //        {
@@ -1134,7 +1134,7 @@ public class RoomInfoHandler
 
                 if (!IsPiPei)
                 {
-                    if (DDZMainGame.Instance != null) DDZMainGame.Instance.GameReset();
+                    if (DzViewGame.Instance != null) DzViewGame.Instance.GameReset();
                 }
                 else
                 {
@@ -1273,19 +1273,19 @@ public class RoomInfoHandler
                 }
             }
 
-            if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPartGameOver();
+            if (DzViewGame.Instance != null) DzViewGame.Instance.onPartGameOver();
 
             //if (!IsPiPei)
             //{
-            //    if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPartGameOver();
+            //    if (DzViewGame.Instance != null) DzViewGame.Instance.onPartGameOver();
             //}
             //else
             //{
 
-             //  if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPartGameOver();
+            //  if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPartGameOver();
 
             //}
-
+            PartGameOverControl.instance.ListGameOverSmall.Add(PartGameOverControl.instance.SettleInfoList);
 
             #endregion
         }
@@ -1600,10 +1600,10 @@ public class RoomInfoHandler
              // int  ChangeScore=  message.readInt32();//改变的分数
               int TotalScore= message.readInt32();//当前分(头像下面显示的)
 
-                if (DDZMainGame.Instance != null)
+                if (DzViewGame.Instance != null)
                 {
-                   // DDZMainGame.Instance.SetTotalJifen(Changepos, TotalScore);//设置积分
-                    DDZMainGame.Instance.SetTaoShangFen(Changepos, TotalScore);
+                   // DzViewGame.Instance.SetTotalJifen(Changepos, TotalScore);//设置积分
+                    DzViewGame.Instance.SetTaoShangFen(Changepos, TotalScore);
 
                     Debug.Log("----------TotalScore");
                 }
@@ -1622,7 +1622,7 @@ public class RoomInfoHandler
 
                 if (!IsPiPei)
                 {
-                    if (DDZMainGame.Instance != null) DDZMainGame.Instance.ShowLeftCardNum(pos, PlayerLeftCard);
+                    if (DzViewGame.Instance != null) DzViewGame.Instance.ShowLeftCardNum(pos, PlayerLeftCard);
                 }
                 else
                 {
@@ -1638,10 +1638,10 @@ public class RoomInfoHandler
             {
                 if (GameData.m_PlayerInfoList[i].pos == pos)
                 {
-                  //  if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPlayerOperate(pos, type, OutCardList, PlayerLeftCard, GameData.m_PlayerInfoList[i].score, (int)GameData.m_PlayerInfoList[i].sex);
+                  //  if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerOperate(pos, type, OutCardList, PlayerLeftCard, GameData.m_PlayerInfoList[i].score, (int)GameData.m_PlayerInfoList[i].sex);
                     if (!IsPiPei)
                     {
-                        if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPlayerOperate(pos, type, OutCardList, PlayerLeftCard, GameData.m_PlayerInfoList[i].score, (int)GameData.m_PlayerInfoList[i].sex);
+                        if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerOperate(pos, type, OutCardList, PlayerLeftCard, GameData.m_PlayerInfoList[i].score, (int)GameData.m_PlayerInfoList[i].sex);
                     }
                     else
                     {
@@ -1727,10 +1727,10 @@ public class RoomInfoHandler
 
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPlayerHoldCards();
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onZhuangPosition();
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.OnShowFriendCard(FriendPos, 0);
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onRoomActive();
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerHoldCards();
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onZhuangPosition();
+                if (DzViewGame.Instance != null) DzViewGame.Instance.OnShowFriendCard(FriendPos, 0);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onRoomActive();
                 UIManager.Instance.HideUiPanel(UIPaths.PanelGameOverSmall);
             }
             else
@@ -1824,7 +1824,7 @@ public class RoomInfoHandler
 
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onZhuangPosition();
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onZhuangPosition();
             }
             else
             {
@@ -1832,7 +1832,7 @@ public class RoomInfoHandler
                 
 
             }
-            // if (Game.Instance != null) Game.Instance.onZhuangPosition();//DDZMainGame
+            // if (Game.Instance != null) Game.Instance.onZhuangPosition();//DzViewGame
 
          
         }
@@ -1888,7 +1888,7 @@ public class RoomInfoHandler
 
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onRoomActive();
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onRoomActive();
             }
             else
             {
@@ -1953,7 +1953,7 @@ public class RoomInfoHandler
         {
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPlayerReadyForRoom(pos);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerReadyForRoom(pos);
             }
             else
             {
@@ -2016,7 +2016,7 @@ public class RoomInfoHandler
 
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPlayerReadyForRoom(pos);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerReadyForRoom(pos);
             }
             else
             {
@@ -2089,7 +2089,7 @@ public class RoomInfoHandler
             //  if (Game.Instance != null) Game.Instance.onPlayerEnter(info);
             if (!IsPiPei)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onPlayerEnter(info);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerEnter(info);
             }
             else
             {
@@ -2189,7 +2189,7 @@ public class RoomInfoHandler
       
         //if (info.roomState == RoomStatusType.Play)
         //{
-        //    if (DDZMainGame.Instance != null) DDZMainGame.Instance.ReconnectServer();//重连
+        //    if (DzViewGame.Instance != null) DzViewGame.Instance.ReconnectServer();//重连
         //}
 
         #endregion
@@ -2226,7 +2226,7 @@ public class RoomInfoHandler
         */
         //if (info.roomState == RoomStatusType.Play)
         //{
-        //    if (DDZMainGame.Instance != null) DDZMainGame.Instance.ReconnectServer();//重连
+        //    if (DzViewGame.Instance != null) DzViewGame.Instance.ReconnectServer();//重连
         //}
 
         #endregion

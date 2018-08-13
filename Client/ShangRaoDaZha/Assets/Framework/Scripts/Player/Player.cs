@@ -1,9 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using FrameworkForCSharp.NetWorks;
-using FrameworkForCSharp.Utils;
-using System;
-using UnityEngine.SceneManagement;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Player
 {
@@ -21,12 +17,9 @@ public class Player
 
     public bool HaveEmail = false;
     public ulong guid;
-    public long RoomCard;//房卡
-
-    public long money;//钻石
-
-    public long Gold;//金币
     public string account;
+    public string Ip;//ip地址
+    public string Address;//定位地址
     public uint lastEnterRoomID;
     public string gongGao;
     public uint shareRoomID = 0;
@@ -38,6 +31,10 @@ public class Player
     public uint everydayShareCount;
 
     public ulong InviteGuid;//邀请人guid
+
+    public long RoomCard;//房卡
+    public long money;//钻石
+    public long Gold;//金币
 
     public string otherName
     {
@@ -95,6 +92,6 @@ public class Player
         isLogin = false;
         ConnServer.Instance.DisconnectServer();
         ConnServer.ConnectionServer(ToolsFunc.GetServerIP(ServerInfo.Data.ip), ServerInfo.Data.port);
-        //ManagerScene.Instance.LoadScene(SceneType.Login);
+        //ManagerScene.Instance.LoadScene(SceneType.DzViewLogin);
     }
 }

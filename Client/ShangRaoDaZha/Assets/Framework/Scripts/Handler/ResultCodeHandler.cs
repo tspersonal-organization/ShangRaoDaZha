@@ -31,9 +31,11 @@ public class ResultCodeHandler
     /// <param name="code"></param>
     void Loser(ResultCode code)
     {
-        GameData.ResultCodeStr = ResultCodeString.GetResultString((ushort)code);
-        UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
-        Log.Debug(GameData.ResultCodeStr);
+        string sError = ResultCodeString.GetResultString((ushort)code);
+        GameData.ResultCodeStr = sError;
+        //UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
+        GlobalModule.Instance.OnOpenBubblingHint(sError);
+        Log.Debug("错误返回：" + sError);
         switch (code)
         {
             case ResultCode.RoomNotExist:
@@ -54,7 +56,7 @@ public class ResultCodeHandler
                 GameData.ResultCodeStr = "申请发送成功";
 
                 UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
-                ApplyJoinClubPanelControl.Instance.gameObject.SetActive(false);
+                DzPanelJoinMoment.Instance.gameObject.SetActive(false);
 
                 break;
             case Opcodes.Client_Club_Invite_Player:

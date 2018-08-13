@@ -62,7 +62,7 @@ public class VoiceUtility : MonoBehaviour
             AudioClip ac = PlayVoice(ww.bytes, true);
             if (GameData.GlobleRoomType == RoomType.PK)
             {
-                if (DDZMainGame.Instance != null) DDZMainGame.Instance.onShowSoundAnimation(ulong.Parse(strs[3]), ac.length);
+                if (DzViewGame.Instance != null) DzViewGame.Instance.onShowSoundAnimation(ulong.Parse(strs[3]), ac.length);
             }
             else if (GameData.GlobleRoomType == RoomType.WDH)
             {

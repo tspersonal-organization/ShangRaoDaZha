@@ -13,7 +13,7 @@ public class DeviceInfo : MonoBehaviour
     [Header("信号更新间隔")]
     public float wifiUpdateTime = 5;
     [Header("电量更新间隔")]
-    public float batteryUpdateTime = 600;
+    public float batteryUpdateTime = 60;
 
 	void Start ()
     {

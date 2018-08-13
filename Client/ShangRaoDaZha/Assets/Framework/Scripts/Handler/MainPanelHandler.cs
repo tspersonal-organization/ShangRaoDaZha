@@ -33,7 +33,7 @@ public class MainPanelHandler
         JinBiDataControl.Instance.ZBLimitGold = message.readUInt32();
         JinBiDataControl.Instance.ZBRate = message.readUInt32();
 
-       // MainPanel.Instance.OpenPiPeiPanel();
+       // DzViewMain.Instance.OpenPiPeiPanel();
         GameEventDispatcher.Instance.dispatchEvent(EventIndex.GetPiPeiInfo);
 
     }
@@ -300,7 +300,7 @@ public class MainPanelHandler
             GameData.m_RecordList.Add(info);
         }
 
-        if (UIZhanJiList.Instance != null) UIZhanJiList.Instance.ShowItems();
+        if (DzPanelHistory.Instance != null) DzPanelHistory.Instance.ShowItems();
     }
 
 

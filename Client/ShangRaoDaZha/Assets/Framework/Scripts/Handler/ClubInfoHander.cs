@@ -99,8 +99,8 @@ public class ClubInfoHander : MonoBehaviour
 
         }
       ;
-        MainPanel.Instance.CreatClubRoomList();
-        // MainPanel.Instance.CreatClubRoomList();
+        DzViewMain.Instance.CreatClubRoomList();
+        // DzViewMain.Instance.CreatClubRoomList();
     }
 
     /// <summary>
@@ -161,7 +161,7 @@ public class ClubInfoHander : MonoBehaviour
 
 
 
-        EmailPanel.Instance.CreatData();//打开成员列表panel
+        DzPanelMessage.Instance.CreatData();//打开成员列表panel
                                         //if (PanelMessage.Instance == null)
                                         //{
                                         //    PanelMessage.Instance.CreatData();//打开成员列表panel
@@ -241,9 +241,9 @@ public class ClubInfoHander : MonoBehaviour
         }
 
         GameData.CurrentClubInfo = info;//当前申请的俱乐部
-        if (ClubInfoPanel.Instance != null && ClubInfoPanel.Instance.gameObject.activeSelf)
+        if (DzPanelMomentInfo.Instance != null && DzPanelMomentInfo.Instance.gameObject.activeSelf)
         {
-            ClubInfoPanel.Instance.InitData();
+            DzPanelMomentInfo.Instance.InitData();
         }
         UIManager.Instance.ShowUiPanel(UIPaths.PanelMomentInfo, OpenPanelType.MinToMax);
         //  PanelMomentInfo.Instance.InitData();

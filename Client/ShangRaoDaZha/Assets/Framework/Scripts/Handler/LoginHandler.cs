@@ -23,7 +23,7 @@ public class LoginHandler
 
                 case LivingType.has_email://x有信息
                     Player.Instance.HaveEmail = message.readBool();
-                    MainPanel.Instance.InitInviteClubMessage();
+                    DzViewMain.Instance.InitInviteClubMessage();
                   
                     break;
                 case LivingType.clubInviteChange://邀请列表变化
@@ -81,7 +81,7 @@ public class LoginHandler
                         GameData.PKClubInfoList.Add(info);
                     }
 
-                    MainPanel.Instance.CreatPkClubList();
+                    DzViewMain.Instance.CreatPkClubList();
                     break;
             }
         }

@@ -21,6 +21,7 @@ public class PartGameOverControl  {
 
     public List<SettleDownInfo> SettleInfoList = new List<SettleDownInfo>();
     public List<PlayerInfo> TotalGameOverInfoList = new List<PlayerInfo>();
+    public List<List<SettleDownInfo>> ListGameOverSmall = new List<List<SettleDownInfo>>();
 
     public int ZhuangPos;
     public int HelperPos;

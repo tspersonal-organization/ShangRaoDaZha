@@ -93,10 +93,10 @@
 	<string name="ssdk_sina_web_net_error">A network error occurs, please tap the button to reload</string>
 	<string name="ssdk_sina_web_refresh">channel_data_error</string>
 	<string name="ssdk_sina_web_title">Weibo Share</string>
-	<string name="ssdk_sina_web_login_title">Weibo Login</string>
+	<string name="ssdk_sina_web_login_title">Weibo DzViewLogin</string>
 
 	<!--sms login-->
-	<string name="ssdk_sms_login">Message Login</string>
+	<string name="ssdk_sms_login">Message DzViewLogin</string>
 	<string name="ssdk_sms_top_text">Please input your phone number</string>
 	<string name="ssdk_sms_top_identify_text">Please input the verification code</string>
 	<string name="ssdk_sms_btn_next">Next</string>
@@ -124,7 +124,7 @@
 	<string name="ssdk_sms_dialog_error_code">Verification code Incorrect，Please re-enter</string>
 	<string name="ssdk_sms_dialog_voice_text">We will inform you of the verification code by telephone，\nPlease attention to answer</string>
 	<string name="ssdk_sms_dialog_send_success">Send success</string>
-	<string name="ssdk_sms_dialog_login_success">Login success</string>
+	<string name="ssdk_sms_dialog_login_success">DzViewLogin success</string>
 	<string name="ssdk_sms_dialog_smart_title">Congratulations!The phone number has been checked by cloud detection</string>
 	<string name="ssdk_sms_dialog_smart_dec">Your equipment is a safety device，The number has passed the intelligent\ncloud detection，sms authentication is not required\n(This verification process does not have any security risks)</string>
 
@@ -148,12 +148,12 @@
 	<string name="ssdk_cmcc_auth">Provided by China Mobile</string>
 	<string name="ssdk_cmcc_owner_number">Number</string>
 	<string name="ssdk_cmcc_exchange_account">Switch</string>
-	<string name="ssdk_cmcc_login_one_key">PhoneNum Login</string>
+	<string name="ssdk_cmcc_login_one_key">PhoneNum DzViewLogin</string>
 	<string name="ssdk_cmcc_title_logon">Sign in</string>
 	<string name="ssdk_cmcc_login_argree">Sign in and agree</string>
 	<string name="ssdk_cmcc_terms_of_service">《China Mobile Number Service Terms》</string>
 	<string name="ssdk_cmcc_login_grant">And authorize the unified authentication fusion version to get the local number</string>
-	<string name="ssdk_cmcc_login_again">Login failure, please use SMS verification code</string>
+	<string name="ssdk_cmcc_login_again">DzViewLogin failure, please use SMS verification code</string>
 	<string name="ssdk_cmcc_send_sms_bar">Automatically send SMS verification,please allow</string>
 	<string name="ssdk_cmcc_phone_number">Number</string>
 	<string name="ssdk_cmcc_ver_code">Code</string>

@@ -64,26 +64,27 @@ public class UIPaths
 
 
     //------------------------------------------------------------
-    public const string PanelDialog = "Common/Panel/PanelDialog";//服务器返回的提示
-    public const string PanelTips = "Common/Panel/PanelTips";//主动操作的提示
+    public const string PanelDialog = "Prefabs/Common/Panel/PanelDialog";//服务器返回的提示
+    public const string PanelTips = "Prefabs/Common/Panel/PanelTips";//主动操作的提示
 
-    public const string PanelJoinMoment = "Dz/Panel/PanelJoinMoment";//申请加入俱乐部
-    public const string PanelMomentInfo = "Dz/Panel/PanelMomentInfo";//俱乐部信息
+    public const string PanelJoinMoment = "Prefabs/Dz/Panel/PanelJoinMoment";//申请加入俱乐部
+    public const string PanelMomentInfo = "Prefabs/Dz/Panel/PanelMomentInfo";//俱乐部信息
 
-    public const string PanelUserInfo = "Dz/Panel/PanelUserInfo";//用户信息
-    public const string PanelCreatRoom = "Dz/Panel/PanelCreatRoom";//创建房间
-    public const string PanelJoinRoom = "Dz/Panel/PanelJoinRoom";//加入房间
-    public const string PanelNotice = "Dz/Panel/PanelNotice";//公告
-    public const string PanelHistory = "Dz/Panel/PanelHistory";//战绩
-    public const string PanelMessage = "Dz/Panel/PanelMessage";//消息
-    public const string PanelSetting = "Dz/Panel/PanelSetting";//设置
-    public const string PanelSetting2 = "Dz/Panel/PanelSetting2";//游戏设置
+    public const string PanelUserInfo = "Prefabs/Dz/Panel/PanelUserInfo";//用户信息
+    public const string PanelCreatRoom = "Prefabs/Dz/Panel/PanelCreatRoom";//创建房间
+    public const string PanelJoinRoom = "Prefabs/Dz/Panel/PanelJoinRoom";//加入房间
+    public const string PanelNotice = "Prefabs/Dz/Panel/PanelNotice";//公告
+    public const string PanelHistory = "Prefabs/Dz/Panel/PanelHistory";//战绩
+    public const string PanelMessage = "Prefabs/Dz/Panel/PanelMessage";//消息
+    public const string PanelShare = "Prefabs/Dz/Panel/PanelShare";//分享
+    public const string PanelSetting = "Prefabs/Dz/Panel/PanelSetting";//设置
+    public const string PanelSetting2 = "Prefabs/Dz/Panel/PanelSetting2";//游戏设置
 
-    public const string PanelChat = "Dz/Panel/PanelChat";//聊天
-    public const string PanelDestoryRoom = "Dz/Panel/PanelDestoryRoom";//解散房间
-    public const string PanelShowCard = "Dz/Panel/PanelShowCard";//摊牌
-    public const string PanelGameOverBig = "Dz/Panel/PanelGameOverBig";//总结算
-    public const string PanelGameOverSmall = "Dz/Panel/PanelGameOverSmall";//单局结算
+    public const string PanelChat = "Prefabs/Dz/Panel/PanelChat";//聊天
+    public const string PanelDestoryRoom = "Prefabs/Dz/Panel/PanelDestoryRoom";//解散房间
+    public const string PanelShowCard = "Prefabs/Dz/Panel/PanelShowCard";//摊牌
+    public const string PanelGameOverBig = "Prefabs/Dz/Panel/PanelGameOverBig";//总结算
+    public const string PanelGameOverSmall = "Prefabs/Dz/Panel/PanelGameOverSmall";//单局结算
 
 
     //------------------------------------------------------------
