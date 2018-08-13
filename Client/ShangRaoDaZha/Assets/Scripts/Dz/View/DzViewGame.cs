@@ -750,10 +750,14 @@ public class DzViewGame : UIBase<DzViewGame>
                 {
                     for (int i = 1; i < IdAndPlayerDic.Count+1; i++)
                     {
-                        if (GameData.m_TableInfo.ZhuangPos == i || GameData.m_TableInfo.FriendPos == i) continue;
+                        if (GameData.m_TableInfo.configPlayerIndex == 4)
+                        {
+                            if (GameData.m_TableInfo.ZhuangPos == i || GameData.m_TableInfo.FriendPos == i) continue;
                             //LandSprite
-                            IdAndPlayerDic[i].transform.Find("OtherPanel").Find("HelperSprite").gameObject.SetActive(true);
-                       // IdAndPlayerDic[i].transform.FindChild("OtherPanel").FindChild("LandSprite").gameObject.SetActive(false);
+                            IdAndPlayerDic[i].transform.Find("OtherPanel").Find("HelperSprite").gameObject
+                                .SetActive(true);
+                        }
+                        // IdAndPlayerDic[i].transform.FindChild("OtherPanel").FindChild("LandSprite").gameObject.SetActive(false);
 
                         //  IdAndPlayerDic[i + 1].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(true);
                     }

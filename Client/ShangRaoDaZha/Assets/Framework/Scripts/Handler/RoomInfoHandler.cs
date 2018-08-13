@@ -1103,7 +1103,6 @@ public class RoomInfoHandler
                    
                 }
             }
-          
             PartGameOverControl.instance.TotalGameOverInfoList.Add(info);
         }
         GameData.m_IsNormalOver = false;
@@ -1275,17 +1274,36 @@ public class RoomInfoHandler
 
             if (DzViewGame.Instance != null) DzViewGame.Instance.onPartGameOver();
 
-            //if (!IsPiPei)
-            //{
-            //    if (DzViewGame.Instance != null) DzViewGame.Instance.onPartGameOver();
-            //}
-            //else
-            //{
+            //当前局以及之前所有的记录
+            List<List<SettleDownInfo>> list = new List<List<SettleDownInfo>>();
+            for (var i = 0; i < overinfo.GameRecord.Count; i++)
+            {
+                List<SettleDownInfo> list1 = new List<SettleDownInfo>();
+                for (var j = 0; j < overinfo.GameRecord[i].PlayerSocreInfo.Count; j++)
+                {
+                    bool IsWin = overinfo.GameOverInfo[j].IsWinner;
+                    byte pos = (byte)overinfo.GameOverInfo[j].Position;
+                    int Score = overinfo.GameOverInfo[j].Score;
+                    int ChangeScore = overinfo.GameOverInfo[j].ChangeScore;
+                    int HuiHeFen = overinfo.GameOverInfo[j].BaseScore;
+                    int zadanScore = (int)overinfo.GameOverInfo[j].ZhanDanScore;
+                    int FaWangScore = (int)overinfo.GameOverInfo[j].FaWangScore;
 
-            //  if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPartGameOver();
+                    SettleDownInfo info = new SettleDownInfo();
+                    info.IsWin = IsWin;
+                    info.pos = (int)pos;
+                    info.Score = overinfo.GameRecord[i].PlayerSocreInfo[j].Score; ;//人物总积分
+                    info.HuiHeFen = overinfo.GameRecord[i].PlayerSocreInfo[j].BaseScore; ;
+                    info.ChangeScore = overinfo.GameRecord[i].PlayerSocreInfo[j].ChangeScore; ;//总改变分数
+                    info.ZhaDanScore = overinfo.GameRecord[i].PlayerSocreInfo[j].BombScore; ;
+                    info.FaWangScore = overinfo.GameRecord[i].PlayerSocreInfo[j].FaWangScore; ;
 
-            //}
-            PartGameOverControl.instance.ListGameOverSmall.Add(PartGameOverControl.instance.SettleInfoList);
+                    list1.Add(info);
+                }
+                list.Add(list1);
+            }
+
+            PartGameOverControl.instance.ListGameOverSmall = list;
 
             #endregion
         }

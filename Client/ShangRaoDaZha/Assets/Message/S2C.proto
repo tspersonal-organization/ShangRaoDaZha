@@ -112,6 +112,21 @@ message SendRoomInfo{
 	
 }
 
+message PlayerScoreInfo {
+ 	uint64 guid = 1;//玩家uid
+        string otherName = 2;//玩家昵称
+        string headId = 3;//玩家头像
+        int32 change_score = 4;//改变的分数
+        int32 base_score = 5;//基础分
+        int32 bomb_score = 6;//炸弹分
+        int32 fa_wang_score = 7;//罚王分
+        int32 score = 8;//总分
+}
+
+message GameRecord{
+	repeated PlayerScoreInfo player_socre_info = 1;//玩家记录
+}
+
 message GameOver{
 	uint32 room_code_id = 1;//房间号
 	uint32 zhuang_position = 2;//庄的位置
@@ -120,4 +135,5 @@ message GameOver{
 	repeated FinishInfo finish_info = 5;//完成玩家的信息
 	uint32 bao_pai_position = 6;//包牌人位置
 	bool is_tp = 7;//是否摊牌
+	repeated GameRecord game_record = 8;//历史记录
 }

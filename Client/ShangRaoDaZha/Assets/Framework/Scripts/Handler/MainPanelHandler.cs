@@ -125,7 +125,8 @@ public class MainPanelHandler
                 string HeadId = message.readString();
                 int ChangeScore = message.readInt32();
                 int BaseScore = message.readInt32();
-                int JiangMaScore = message.readInt32();
+                int BombScore = message.readInt32();
+                int FaWangScore = message.readInt32();
                 int TotalScore = message.readInt32();
 
                 string str = playerguid.ToString() + "@" + otherName.ToString() + "@" + ChangeScore.ToString();

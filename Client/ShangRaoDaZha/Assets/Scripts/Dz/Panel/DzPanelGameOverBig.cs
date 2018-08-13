@@ -101,13 +101,13 @@ public class DzPanelGameOverBig : UIBase<DzPanelGameOverBig>
             Transform tPlayer = go.transform.Find("Player");
             for (var j = 0; j < tPlayer.childCount; j++)
             {
-                if (i < PartGameOverControl.instance.ListGameOverSmall[i].Count)
+                if (j < PartGameOverControl.instance.ListGameOverSmall[i].Count)
                 {
-                    tPlayer.GetChild(i).gameObject.SetActive(true);
-                    tPlayer.GetChild(i).Find("LabName").GetComponent<UILabel>().text = GameDataFunc
+                    tPlayer.GetChild(j).gameObject.SetActive(true);
+                    tPlayer.GetChild(j).Find("LabName").GetComponent<UILabel>().text = GameDataFunc
                         .GetPlayerInfo((byte) PartGameOverControl.instance.ListGameOverSmall[i][j].pos).name;
                     int score = PartGameOverControl.instance.ListGameOverSmall[i][j].HuiHeFen;
-                    UILabel labScore = tPlayer.GetChild(i).Find("LabScore").GetComponent<UILabel>();
+                    UILabel labScore = tPlayer.GetChild(j).Find("LabScore").GetComponent<UILabel>();
                     if (score > 0)
                     {
                         labScore.text = "+" + score;
@@ -119,7 +119,7 @@ public class DzPanelGameOverBig : UIBase<DzPanelGameOverBig>
                 }
                 else
                 {
-                    tPlayer.GetChild(i).gameObject.SetActive(false);
+                    tPlayer.GetChild(j).gameObject.SetActive(false);
                 }
             }
             var data = PartGameOverControl.instance.ListGameOverSmall[i];

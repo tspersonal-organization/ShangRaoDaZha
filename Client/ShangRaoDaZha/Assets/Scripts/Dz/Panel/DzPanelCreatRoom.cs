@@ -26,7 +26,8 @@ public class DzPanelCreatRoom : MonoBehaviour
     public UIButton WuZhaTanPai;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         CreatBtn.onClick.Add(new EventDelegate(this.CreatRoom));
         TwoPlayer.onClick.Add(new EventDelegate(this.TwoPlayerClick));
         FourPlayer.onClick.Add(new EventDelegate(this.FourPlayerClick));
@@ -44,7 +45,7 @@ public class DzPanelCreatRoom : MonoBehaviour
         WuZhaTanPai.onClick.Add(new EventDelegate(this.WuZhaTanPaiClick));
 
         BaWangBtn.onClick.Add(new EventDelegate(this.BaWangClick));
-        CloseBtn.onClick.Add(new EventDelegate(()=>
+        CloseBtn.onClick.Add(new EventDelegate(() =>
         {
             gameObject.SetActive(false);
         }));
@@ -54,19 +55,19 @@ public class DzPanelCreatRoom : MonoBehaviour
     {
         roominfo = new CreateRoom();
         roominfo.IsBaWang = false;
-        roominfo.ClubId =0;
+        roominfo.ClubId = 0;
         reset = true;
         FiveRoundClick();
         FourPlayerClick();
         JinDianClick();
         KaiJiang7Click();
         KaiJiang11Click();
-       KaiJiang13Click();
-       KaiJiang14Click();
-       // BaWangClick();
-       // FaWangTanPaiClick();
+        KaiJiang13Click();
+        KaiJiang14Click();
+        // BaWangClick();
+        // FaWangTanPaiClick();
         WuZhaTanPaiClick();
-        
+
         reset = false;
     }
 
@@ -75,21 +76,37 @@ public class DzPanelCreatRoom : MonoBehaviour
     {
         if (roominfo.PlayTypeIndex == 1)
         {
-           
+
             return;
-        } 
-        if (WuZhaTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName == "UI_create_btn_check_1")//勾选上的
+        }
+        if (WuZhaTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName ==
+            "UI_create_btn_check_1") //勾选上的
         {
-            if (reset) return;
-            WuZhaTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
-            roominfo.WuZhaTp = false;
+            if (!reset)
+            {
+                WuZhaTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                    "UI_create_btn_check_2";
+                roominfo.WuZhaTp = false;
+            }
+            else
+            {
+                FaWangTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                    "UI_create_btn_check_2";
+                roominfo.FaWangTp = false;
+
+                WuZhaTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                    "UI_create_btn_check_1";
+                roominfo.WuZhaTp = true;
+            }
         }
         else
         {
-            FaWangTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
+            FaWangTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                "UI_create_btn_check_2";
             roominfo.FaWangTp = false;
 
-            WuZhaTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+            WuZhaTanPai.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                "UI_create_btn_check_1";
             roominfo.WuZhaTp = true;
         }
     }
@@ -120,9 +137,21 @@ public class DzPanelCreatRoom : MonoBehaviour
     {
         if (KaiJiang14.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName == "UI_create_btn_check_1")//勾选上的
         {
-            if (reset) return;
-            KaiJiang14.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
-            roominfo.JiangMa.Remove(3);
+            if (!reset)
+            {
+                KaiJiang14.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                    "UI_create_btn_check_2";
+                roominfo.JiangMa.Remove(3);
+            }
+            else
+            {
+                if (!roominfo.JiangMa.Contains(3))
+                {
+                    KaiJiang14.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                        "UI_create_btn_check_1";
+                    roominfo.JiangMa.Add(3);
+                }
+            }
         }
         else
         {
@@ -135,9 +164,20 @@ public class DzPanelCreatRoom : MonoBehaviour
     {
         if (KaiJiang13.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName == "UI_create_btn_check_1")//勾选上的
         {
-            if (reset) return;
-            KaiJiang13.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
-            roominfo.JiangMa.Remove(2);
+            if (!reset)
+            {
+                KaiJiang13.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                    "UI_create_btn_check_2";
+                roominfo.JiangMa.Remove(2);
+            }
+            else
+            {
+                if (!roominfo.JiangMa.Contains(2))
+                {
+                    KaiJiang13.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+                    roominfo.JiangMa.Add(2);
+                }
+            }
         }
         else
         {
@@ -150,9 +190,19 @@ public class DzPanelCreatRoom : MonoBehaviour
     {
         if (KaiJiang11.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName == "UI_create_btn_check_1")//勾选上的
         {
-            if (reset) return;
-            KaiJiang11.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
-            roominfo.JiangMa.Remove(1);
+            if (!reset)
+            {
+                KaiJiang11.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
+                roominfo.JiangMa.Remove(1);
+            }
+            else
+            {
+                if (!roominfo.JiangMa.Contains(1))
+                {
+                    KaiJiang11.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+                    roominfo.JiangMa.Add(1);
+                }
+            }
         }
         else
         {
@@ -165,9 +215,20 @@ public class DzPanelCreatRoom : MonoBehaviour
     {
         if (KaiJiang7.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName == "UI_create_btn_check_1")//勾选上的
         {
-            if (reset) return;
-            KaiJiang7.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName ="UI_create_btn_check_2";
-            roominfo.JiangMa.Remove(0);
+            if (!reset)
+            {
+                KaiJiang7.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName =
+                    "UI_create_btn_check_2";
+                roominfo.JiangMa.Remove(0);
+            }
+            else
+            {
+                if (!roominfo.JiangMa.Contains(0))
+                {
+                    KaiJiang7.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+                    roominfo.JiangMa.Add(0);
+                }
+            }
         }
         else
         {
@@ -258,7 +319,7 @@ public class DzPanelCreatRoom : MonoBehaviour
         if (FiveRound.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName == "UI_create_btn_check_1")//勾选上的
         {
             //FiveRound.transform.FindChild("Sprite").transform.GetComponent<UISprite>().spriteName ="UI_create_btn_check_2";
-           
+
         }
         else
         {
@@ -296,7 +357,7 @@ public class DzPanelCreatRoom : MonoBehaviour
         }
         else
         {
-           // BaWangBtn.transform.FindChild("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
+            // BaWangBtn.transform.FindChild("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
         }
     }
 
@@ -326,11 +387,6 @@ public class DzPanelCreatRoom : MonoBehaviour
             roominfo.ClubId = DzViewMain.Instance.ChosedClubId;
             ClientToServerMsg.SendCreatRoom(roominfo);
         }
-       
-    }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    }
 }

@@ -69,12 +69,18 @@ namespace S2CEntity {
             "SW5mbxIUCgxwbGF5ZXJfY291bnQYDyABKA0SEgoKcGxheV9jb3VudBgQIAEo",
             "DRIRCglwbGF5X3R5cGUYESABKA0SEAoIamlhbmdfbWEYEiADKA0SEgoKZmFf",
             "d2FuZ190cBgTIAEoCBIRCgl3dV96aGFfdHAYFCABKAgSEgoKaXNfYmFfd2Fu",
-            "ZxgVIAEoCCLeAQoIR2FtZU92ZXISFAoMcm9vbV9jb2RlX2lkGAEgASgNEhcK",
-            "D3podWFuZ19wb3NpdGlvbhgCIAEoDRIXCg9mcmllbmRfcG9zaXRpb24YAyAB",
-            "KA0SNQoOZ2FtZV9vdmVyX2luZm8YBCADKAsyHS5TMkNFbnRpdHkuR2FtZU92",
-            "ZXJQbGF5ZXJJbmZvEioKC2ZpbmlzaF9pbmZvGAUgAygLMhUuUzJDRW50aXR5",
-            "LkZpbmlzaEluZm8SGAoQYmFvX3BhaV9wb3NpdGlvbhgGIAEoDRINCgVpc190",
-            "cBgHIAEoCGIGcHJvdG8z"));
+            "ZxgVIAEoCCKmAQoPUGxheWVyU2NvcmVJbmZvEgwKBGd1aWQYASABKAQSEQoJ",
+            "b3RoZXJOYW1lGAIgASgJEg4KBmhlYWRJZBgDIAEoCRIUCgxjaGFuZ2Vfc2Nv",
+            "cmUYBCABKAUSEgoKYmFzZV9zY29yZRgFIAEoBRISCgpib21iX3Njb3JlGAYg",
+            "ASgFEhUKDWZhX3dhbmdfc2NvcmUYByABKAUSDQoFc2NvcmUYCCABKAUiQwoK",
+            "R2FtZVJlY29yZBI1ChFwbGF5ZXJfc29jcmVfaW5mbxgBIAMoCzIaLlMyQ0Vu",
+            "dGl0eS5QbGF5ZXJTY29yZUluZm8iigIKCEdhbWVPdmVyEhQKDHJvb21fY29k",
+            "ZV9pZBgBIAEoDRIXCg96aHVhbmdfcG9zaXRpb24YAiABKA0SFwoPZnJpZW5k",
+            "X3Bvc2l0aW9uGAMgASgNEjUKDmdhbWVfb3Zlcl9pbmZvGAQgAygLMh0uUzJD",
+            "RW50aXR5LkdhbWVPdmVyUGxheWVySW5mbxIqCgtmaW5pc2hfaW5mbxgFIAMo",
+            "CzIVLlMyQ0VudGl0eS5GaW5pc2hJbmZvEhgKEGJhb19wYWlfcG9zaXRpb24Y",
+            "BiABKA0SDQoFaXNfdHAYByABKAgSKgoLZ2FtZV9yZWNvcmQYCCADKAsyFS5T",
+            "MkNFbnRpdHkuR2FtZVJlY29yZGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::C2SEntity.C2SReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -87,7 +93,9 @@ namespace S2CEntity {
             new pbr::GeneratedClrTypeInfo(typeof(global::S2CEntity.GameOverPlayerInfo), global::S2CEntity.GameOverPlayerInfo.Parser, new[]{ "IsWinner", "Position", "Score", "ChangeScore", "BaseScore", "ZhanDanScore", "FaWangScore", "Cards", "CatchedCard" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::S2CEntity.GameOverInfo), global::S2CEntity.GameOverInfo.Parser, new[]{ "ZhuangPosition", "FriendPosition", "GameOverPlayerInfo", "FinishInfo", "BaoPaiPosition", "IsTp" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::S2CEntity.SendRoomInfo), global::S2CEntity.SendRoomInfo.Parser, new[]{ "RoomCodeId", "CreatorGuid", "GameCount", "CreateRoomType", "ZhuangPosition", "ZhuangCount", "RoomStatus", "CurGameCount", "QueryDisposeRoom", "TimerRest", "AgressPosition", "SitPlayerInfo", "PlayStatusInfo", "GameOverInfo", "PlayerCount", "PlayCount", "PlayType", "JiangMa", "FaWangTp", "WuZhaTp", "IsBaWang" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::S2CEntity.GameOver), global::S2CEntity.GameOver.Parser, new[]{ "RoomCodeId", "ZhuangPosition", "FriendPosition", "GameOverInfo", "FinishInfo", "BaoPaiPosition", "IsTp" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::S2CEntity.PlayerScoreInfo), global::S2CEntity.PlayerScoreInfo.Parser, new[]{ "Guid", "OtherName", "HeadId", "ChangeScore", "BaseScore", "BombScore", "FaWangScore", "Score" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::S2CEntity.GameRecord), global::S2CEntity.GameRecord.Parser, new[]{ "PlayerSocreInfo" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::S2CEntity.GameOver), global::S2CEntity.GameOver.Parser, new[]{ "RoomCodeId", "ZhuangPosition", "FriendPosition", "GameOverInfo", "FinishInfo", "BaoPaiPosition", "IsTp", "GameRecord" }, null, null, null)
           }));
     }
     #endregion
@@ -3189,6 +3197,455 @@ namespace S2CEntity {
 
   }
 
+  public sealed partial class PlayerScoreInfo : pb::IMessage<PlayerScoreInfo> {
+    private static readonly pb::MessageParser<PlayerScoreInfo> _parser = new pb::MessageParser<PlayerScoreInfo>(() => new PlayerScoreInfo());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<PlayerScoreInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::S2CEntity.S2CReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PlayerScoreInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PlayerScoreInfo(PlayerScoreInfo other) : this() {
+      guid_ = other.guid_;
+      otherName_ = other.otherName_;
+      headId_ = other.headId_;
+      changeScore_ = other.changeScore_;
+      baseScore_ = other.baseScore_;
+      bombScore_ = other.bombScore_;
+      faWangScore_ = other.faWangScore_;
+      score_ = other.score_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PlayerScoreInfo Clone() {
+      return new PlayerScoreInfo(this);
+    }
+
+    /// <summary>Field number for the "guid" field.</summary>
+    public const int GuidFieldNumber = 1;
+    private ulong guid_;
+    /// <summary>
+    /// 玩家uid
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong Guid {
+      get { return guid_; }
+      set {
+        guid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "otherName" field.</summary>
+    public const int OtherNameFieldNumber = 2;
+    private string otherName_ = "";
+    /// <summary>
+    /// 玩家昵称
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string OtherName {
+      get { return otherName_; }
+      set {
+        otherName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "headId" field.</summary>
+    public const int HeadIdFieldNumber = 3;
+    private string headId_ = "";
+    /// <summary>
+    /// 玩家头像
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string HeadId {
+      get { return headId_; }
+      set {
+        headId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "change_score" field.</summary>
+    public const int ChangeScoreFieldNumber = 4;
+    private int changeScore_;
+    /// <summary>
+    /// 改变的分数
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ChangeScore {
+      get { return changeScore_; }
+      set {
+        changeScore_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "base_score" field.</summary>
+    public const int BaseScoreFieldNumber = 5;
+    private int baseScore_;
+    /// <summary>
+    /// 基础分
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int BaseScore {
+      get { return baseScore_; }
+      set {
+        baseScore_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bomb_score" field.</summary>
+    public const int BombScoreFieldNumber = 6;
+    private int bombScore_;
+    /// <summary>
+    /// 炸弹分
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int BombScore {
+      get { return bombScore_; }
+      set {
+        bombScore_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "fa_wang_score" field.</summary>
+    public const int FaWangScoreFieldNumber = 7;
+    private int faWangScore_;
+    /// <summary>
+    /// 罚王分
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FaWangScore {
+      get { return faWangScore_; }
+      set {
+        faWangScore_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "score" field.</summary>
+    public const int ScoreFieldNumber = 8;
+    private int score_;
+    /// <summary>
+    /// 总分
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Score {
+      get { return score_; }
+      set {
+        score_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PlayerScoreInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PlayerScoreInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Guid != other.Guid) return false;
+      if (OtherName != other.OtherName) return false;
+      if (HeadId != other.HeadId) return false;
+      if (ChangeScore != other.ChangeScore) return false;
+      if (BaseScore != other.BaseScore) return false;
+      if (BombScore != other.BombScore) return false;
+      if (FaWangScore != other.FaWangScore) return false;
+      if (Score != other.Score) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Guid != 0UL) hash ^= Guid.GetHashCode();
+      if (OtherName.Length != 0) hash ^= OtherName.GetHashCode();
+      if (HeadId.Length != 0) hash ^= HeadId.GetHashCode();
+      if (ChangeScore != 0) hash ^= ChangeScore.GetHashCode();
+      if (BaseScore != 0) hash ^= BaseScore.GetHashCode();
+      if (BombScore != 0) hash ^= BombScore.GetHashCode();
+      if (FaWangScore != 0) hash ^= FaWangScore.GetHashCode();
+      if (Score != 0) hash ^= Score.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Guid != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(Guid);
+      }
+      if (OtherName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(OtherName);
+      }
+      if (HeadId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(HeadId);
+      }
+      if (ChangeScore != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(ChangeScore);
+      }
+      if (BaseScore != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(BaseScore);
+      }
+      if (BombScore != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(BombScore);
+      }
+      if (FaWangScore != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(FaWangScore);
+      }
+      if (Score != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(Score);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Guid != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Guid);
+      }
+      if (OtherName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(OtherName);
+      }
+      if (HeadId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(HeadId);
+      }
+      if (ChangeScore != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ChangeScore);
+      }
+      if (BaseScore != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(BaseScore);
+      }
+      if (BombScore != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(BombScore);
+      }
+      if (FaWangScore != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FaWangScore);
+      }
+      if (Score != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(PlayerScoreInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Guid != 0UL) {
+        Guid = other.Guid;
+      }
+      if (other.OtherName.Length != 0) {
+        OtherName = other.OtherName;
+      }
+      if (other.HeadId.Length != 0) {
+        HeadId = other.HeadId;
+      }
+      if (other.ChangeScore != 0) {
+        ChangeScore = other.ChangeScore;
+      }
+      if (other.BaseScore != 0) {
+        BaseScore = other.BaseScore;
+      }
+      if (other.BombScore != 0) {
+        BombScore = other.BombScore;
+      }
+      if (other.FaWangScore != 0) {
+        FaWangScore = other.FaWangScore;
+      }
+      if (other.Score != 0) {
+        Score = other.Score;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Guid = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            OtherName = input.ReadString();
+            break;
+          }
+          case 26: {
+            HeadId = input.ReadString();
+            break;
+          }
+          case 32: {
+            ChangeScore = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            BaseScore = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            BombScore = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            FaWangScore = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            Score = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GameRecord : pb::IMessage<GameRecord> {
+    private static readonly pb::MessageParser<GameRecord> _parser = new pb::MessageParser<GameRecord>(() => new GameRecord());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GameRecord> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::S2CEntity.S2CReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameRecord() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameRecord(GameRecord other) : this() {
+      playerSocreInfo_ = other.playerSocreInfo_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameRecord Clone() {
+      return new GameRecord(this);
+    }
+
+    /// <summary>Field number for the "player_socre_info" field.</summary>
+    public const int PlayerSocreInfoFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::S2CEntity.PlayerScoreInfo> _repeated_playerSocreInfo_codec
+        = pb::FieldCodec.ForMessage(10, global::S2CEntity.PlayerScoreInfo.Parser);
+    private readonly pbc::RepeatedField<global::S2CEntity.PlayerScoreInfo> playerSocreInfo_ = new pbc::RepeatedField<global::S2CEntity.PlayerScoreInfo>();
+    /// <summary>
+    /// 玩家记录
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::S2CEntity.PlayerScoreInfo> PlayerSocreInfo {
+      get { return playerSocreInfo_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GameRecord);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GameRecord other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!playerSocreInfo_.Equals(other.playerSocreInfo_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= playerSocreInfo_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      playerSocreInfo_.WriteTo(output, _repeated_playerSocreInfo_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += playerSocreInfo_.CalculateSize(_repeated_playerSocreInfo_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GameRecord other) {
+      if (other == null) {
+        return;
+      }
+      playerSocreInfo_.Add(other.playerSocreInfo_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            playerSocreInfo_.AddEntriesFrom(input, _repeated_playerSocreInfo_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class GameOver : pb::IMessage<GameOver> {
     private static readonly pb::MessageParser<GameOver> _parser = new pb::MessageParser<GameOver>(() => new GameOver());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3196,7 +3653,7 @@ namespace S2CEntity {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::S2CEntity.S2CReflection.Descriptor.MessageTypes[9]; }
+      get { return global::S2CEntity.S2CReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3220,6 +3677,7 @@ namespace S2CEntity {
       finishInfo_ = other.finishInfo_.Clone();
       baoPaiPosition_ = other.baoPaiPosition_;
       isTp_ = other.isTp_;
+      gameRecord_ = other.gameRecord_.Clone();
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3323,6 +3781,19 @@ namespace S2CEntity {
       }
     }
 
+    /// <summary>Field number for the "game_record" field.</summary>
+    public const int GameRecordFieldNumber = 8;
+    private static readonly pb::FieldCodec<global::S2CEntity.GameRecord> _repeated_gameRecord_codec
+        = pb::FieldCodec.ForMessage(66, global::S2CEntity.GameRecord.Parser);
+    private readonly pbc::RepeatedField<global::S2CEntity.GameRecord> gameRecord_ = new pbc::RepeatedField<global::S2CEntity.GameRecord>();
+    /// <summary>
+    /// 历史记录
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::S2CEntity.GameRecord> GameRecord {
+      get { return gameRecord_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GameOver);
@@ -3343,6 +3814,7 @@ namespace S2CEntity {
       if(!finishInfo_.Equals(other.finishInfo_)) return false;
       if (BaoPaiPosition != other.BaoPaiPosition) return false;
       if (IsTp != other.IsTp) return false;
+      if(!gameRecord_.Equals(other.gameRecord_)) return false;
       return true;
     }
 
@@ -3356,6 +3828,7 @@ namespace S2CEntity {
       hash ^= finishInfo_.GetHashCode();
       if (BaoPaiPosition != 0) hash ^= BaoPaiPosition.GetHashCode();
       if (IsTp != false) hash ^= IsTp.GetHashCode();
+      hash ^= gameRecord_.GetHashCode();
       return hash;
     }
 
@@ -3388,6 +3861,7 @@ namespace S2CEntity {
         output.WriteRawTag(56);
         output.WriteBool(IsTp);
       }
+      gameRecord_.WriteTo(output, _repeated_gameRecord_codec);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3410,6 +3884,7 @@ namespace S2CEntity {
       if (IsTp != false) {
         size += 1 + 1;
       }
+      size += gameRecord_.CalculateSize(_repeated_gameRecord_codec);
       return size;
     }
 
@@ -3435,6 +3910,7 @@ namespace S2CEntity {
       if (other.IsTp != false) {
         IsTp = other.IsTp;
       }
+      gameRecord_.Add(other.gameRecord_);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3471,6 +3947,10 @@ namespace S2CEntity {
           }
           case 56: {
             IsTp = input.ReadBool();
+            break;
+          }
+          case 66: {
+            gameRecord_.AddEntriesFrom(input, _repeated_gameRecord_codec);
             break;
           }
         }

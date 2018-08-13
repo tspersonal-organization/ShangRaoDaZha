@@ -1,15 +1,18 @@
 ﻿using FrameworkForCSharp.Utils;
 using System.Collections;
 using System.Collections.Generic;
+using S2CEntity;
 using UnityEngine;
 
-public class PartGameOverControl  {
+public class PartGameOverControl
+{
 
     public static PartGameOverControl _partGameOverControl;
 
     public static PartGameOverControl instance
     {
-        get {
+        get
+        {
             if (_partGameOverControl == null)
             {
                 _partGameOverControl = new PartGameOverControl();
@@ -37,13 +40,13 @@ public class PartGameOverControl  {
 //讨赏
 public class SettleDownInfo
 {
-   
+
     public bool IsWin;
     public int pos;
     public int Score;
     public int HuiHeFen;
     public int TaoShangFen;
-    public  int ChangeScore;
+    public int ChangeScore;
 
     public int ZhaDanScore;
     public int FaWangScore;
@@ -53,6 +56,8 @@ public class SettleDownInfo
     public int Index;//第几个完成
 
     public List<List<uint>> TaoShangCardList = new List<List<uint>>();//打出的讨赏牌
+
+
 }
 
 #region//无挡胡
