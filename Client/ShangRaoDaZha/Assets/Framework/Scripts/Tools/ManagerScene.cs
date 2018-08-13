@@ -38,6 +38,7 @@ public class ManagerScene
 
     public void LoadScene(SceneType type)
     {
+        bool bClear = true;
         switch (type)
         {
             case SceneType.InitGame:
@@ -80,8 +81,13 @@ public class ManagerScene
                 currentSceneType = SceneType.NiuNiu;
                 break;
             default:
+                bClear = false;
                 Log.Debug("没有找到场景" + type.ToString());
                 break;
+        }
+        if (bClear)
+        {
+            UIManager.Instance.Clear();
         }
     }
 }

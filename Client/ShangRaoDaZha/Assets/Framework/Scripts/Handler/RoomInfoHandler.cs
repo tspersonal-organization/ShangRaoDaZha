@@ -1605,7 +1605,7 @@ public class RoomInfoHandler
                    // DDZMainGame.Instance.SetTotalJifen(Changepos, TotalScore);//设置积分
                     DDZMainGame.Instance.SetTaoShangFen(Changepos, TotalScore);
 
-                    Debug.LogError("----------TotalScore");
+                    Debug.Log("----------TotalScore");
                 }
             }
         }

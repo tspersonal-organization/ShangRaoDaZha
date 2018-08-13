@@ -108,7 +108,7 @@ public class GameSetting1 : UIBase<GameSetting1>
 
     private void Close()
     {
-        UIManager.Instance.HideUiPanel(UIPaths.PanelSetting);
+        UIManager.Instance.HideUiPanel(UIPaths.PanelSetting2);
     }
 
    

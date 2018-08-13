@@ -146,6 +146,19 @@ public class UIManager : UIBase<UIManager>, IResourceListener
         yield break;
     }
 
+    public void Clear()
+    {
+        foreach (var dic in nameUIDict)
+        {
+            if (dic.Value != null)
+            {
+                Destroy(dic.Value);
+            }
+        }
+        nameUIDict.Clear();
+        uiNameDict.Clear();
+    }
+
     protected override void OnDestroy()
     {
 
