@@ -63,7 +63,7 @@ public class ResultCodeHandler
                 GameData.ResultCodeStr = "邀请成功";
              
                 UIManager.Instance.ShowUiPanel(UIPaths.PanelDialog, OpenPanelType.MinToMax);
-                InvitePlayerControl.Instance.gameObject.SetActive(false);
+                DzPanelJoinMomentInvite.Instance.gameObject.SetActive(false);
 
                 break;
             case Opcodes.Client_Change_Club_Name://改变俱乐部名称

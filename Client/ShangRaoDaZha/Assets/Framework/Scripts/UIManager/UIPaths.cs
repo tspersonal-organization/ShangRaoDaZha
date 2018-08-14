@@ -25,8 +25,6 @@ public class UIPaths
     public const string ClubMastorPanel = "Panel/ClubMastorPanel";//俱乐部管理panel
     public const string ClubListPanel = "Panel/ClubListPanel";//俱乐部列表panelClubInfoPanel
 
-    public const string PkPlayerInfoPanel = "Panel/PkPlayerInfoPanel";//申请加入俱乐部PkPlayerInfoPanel InviteJoinClubPanel
-    public const string InviteJoinClubPanel = "Panel/InviteJoinClubPanel";//申请加入俱乐部PkPlayerInfoPanel 
 
     public const string GlobleTipPanel = "Panel/GlobalTipPanel";
 
@@ -68,7 +66,9 @@ public class UIPaths
     public const string PanelTips = "Prefabs/Common/Panel/PanelTips";//主动操作的提示
 
     public const string PanelJoinMoment = "Prefabs/Dz/Panel/PanelJoinMoment";//申请加入俱乐部
+    public const string PanelJoinMomentInvite = "Prefabs/Dz/Panel/PanelJoinMomentInvite";//邀请加入俱乐部 
     public const string PanelMomentInfo = "Prefabs/Dz/Panel/PanelMomentInfo";//俱乐部信息
+    public const string PanelPlayerInfo = "Prefabs/Dz/Panel/PanelPlayerInfo";// 俱乐部成员信息
 
     public const string PanelUserInfo = "Prefabs/Dz/Panel/PanelUserInfo";//用户信息
     public const string PanelCreatRoom = "Prefabs/Dz/Panel/PanelCreatRoom";//创建房间

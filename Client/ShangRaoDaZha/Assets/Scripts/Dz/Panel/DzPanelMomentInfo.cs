@@ -4,35 +4,58 @@ using UnityEngine;
 public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
 {
     public GameObject MasterObj;
-    public GameObject GuanLiYuanObj;
+    public GameObject Administrator;
 
     public UILabel ClubId;
     public UILabel GameCount;
-   
 
     public UIButton InviteBtn;
     public UIButton QuiteBtn;
     public UIButton CloseBtn;
 
- 
+    public UIButton AdminPower;
+    public UIButton MemberPower;
+
+    public GameObject ClubMemItem;
+    public GameObject SearchAll;
+    public Transform ClubMemItemParent;
+    List<GameObject> CreatRoomItem = new List<GameObject>();//生成的房间配置
+
     void OnEnable()
     {
+        for (var i = 0; i < ClubMemItemParent.childCount; i++)
+        {
+            GameObject go = ClubMemItemParent.GetChild(i).gameObject;
+            go.SetActive(false);
+            CreatRoomItem.Add(go);
+        }
         InitData();
     }
 
+    void Start()
+    {
+        CloseBtn.onClick.Add(new EventDelegate(this.CloseBtnClick));
+        InviteBtn.onClick.Add(new EventDelegate(this.ClubMastorBtnClick));
+        QuiteBtn.onClick.Add(new EventDelegate(this.QuiteBtnClick));
+        UIEventListener.Get(SearchAll).onClick = delegate
+        {
+            LoadMemer(13, GameData.CurrentClubInfo.MemList.Count);
+            SearchAll.SetActive(false);
+        };
+    }
 
     public void InitData()
     {
+        SearchAll.SetActive(false);
         InviteBtn.gameObject.SetActive(false);
         QuiteBtn.gameObject.SetActive(true);
 
+        //设置自己的权限
         if (GameData.CurrentClubInfo.CreatorGUID == Player.Instance.guid)
         {
-             InviteBtn.gameObject.SetActive(true);
+            InviteBtn.gameObject.SetActive(true);
             QuiteBtn.gameObject.SetActive(false);
         }
-
-
         for (int i = 0; i < GameData.CurrentClubInfo.MemMasterList.Count; i++)
         {
             if (GameData.CurrentClubInfo.MemMasterList[i].guid == Player.Instance.guid)
@@ -41,62 +64,104 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
                 QuiteBtn.gameObject.SetActive(false);
             }
         }
-         ClubId.text=GameData.CurrentClubInfo.Id.ToString();
-    GameCount.text=0.ToString();
-    DownloadImage.Instance.Download(MasterObj.transform.Find("MasterTexture").GetComponent<UITexture>(),GameData.CurrentClubInfo.CreatorName);
-        MasterObj.transform.Find("MasterNane").GetComponent<UILabel>().text = GameData.CurrentClubInfo.CreatorName;
-        for (int i = 0; i < 2; i++)
+        ClubId.text = "好友圈ID:" + GameData.CurrentClubInfo.Id.ToString();
+        GameCount.text = "牌局总数:" + GameData.CurrentClubInfo.ActiveRoomInfoList.Count.ToString();
+        int nPower = (int) GameData.CurrentClubInfo.creatPower;
+        AdminPower.enabled = false;
+        MemberPower.enabled = false;
+        if (nPower == 0)
         {
-            GuanLiYuanObj.transform.Find("MasterTexture" + i).gameObject.SetActive(false);
+            //管理员开房
+            AdminPower.transform.Find("Check").GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
+            MemberPower.transform.Find("Check").GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+        }
+        else if (nPower == 1)
+        {
+            //会员开房    
+            AdminPower.transform.Find("Check").GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+            MemberPower.transform.Find("Check").GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
+        }
+        else
+        {
+            //无
+            AdminPower.transform.Find("Check").GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+            MemberPower.transform.Find("Check").GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+        }
+
+        //设置会长信息
+        DownloadImage.Instance.Download(MasterObj.transform.Find("MasterTexture").GetComponent<UITexture>(), GameData.CurrentClubInfo.CreatorName);
+        MasterObj.transform.Find("MasterName").GetComponent<UILabel>().text = GameData.CurrentClubInfo.CreatorName;
+
+        //设置管理员信息  最多2个
+        for (int i = 0; i < 2; i++){
+            Administrator.transform.Find("Administrator" + (i + 1)).gameObject.SetActive(false);
         }
 
         for (int i = 0; i < GameData.CurrentClubInfo.MemMasterList.Count; i++)
         {
-            GuanLiYuanObj.transform.Find("MasterTexture" + i).gameObject.SetActive(true);
-            DownloadImage.Instance.Download(GuanLiYuanObj.transform.Find("MasterTexture" + i).GetComponent<UITexture>(), GameData.CurrentClubInfo.MemMasterList[i].headid);
-            GuanLiYuanObj.transform.Find("MasterTexture" + i+ "/MasterNane").GetComponent<UILabel>().text = GameData.CurrentClubInfo.MemMasterList[i].name;
+            if (i < 2)
+            {
+                Transform admin = Administrator.transform.Find("Administrator" + (i + 1));
+                admin.gameObject.SetActive(true);
+                admin.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.MemList[i]);
+            }
         }
-        CreatMem();
+        
+        //成员信息
+        int nMemerCount = GameData.CurrentClubInfo.MemList.Count;
+        if (nMemerCount > 13)
+        {
+            SearchAll.SetActive(true);
+            LoadMemer(0, 13);
+        }
+        else if (nMemerCount == 13)
+        {
+            SearchAll.SetActive(false);
+            LoadMemer(0, 13);
+        }
+        else
+        {
+            SearchAll.SetActive(false);
+            LoadMemer(0, nMemerCount);
+        }
     }
 
-    public GameObject ClubMemItem;
-    public Transform ClubMemItemParent;
-
-    List<GameObject> CreatRoomItem = new List<GameObject>();//生成的房间配置
-    private void CreatMem()
+    /// <summary>
+    /// 加载成员
+    /// </summary>
+    /// <param name="nStart">初始下标</param>
+    /// <param name="nCount">加载数量</param>
+    private void LoadMemer(int nStart = 0,int nCount = 13)
     {
-        int count = CreatRoomItem.Count;
-        for (int i = 0; i < count; i++)
+        for (int i = nStart; i < nCount; i++)
         {
-            Destroy(CreatRoomItem[i]);
-        }
-        CreatRoomItem = new List<GameObject>();
-        for (int i = 0; i < GameData.CurrentClubInfo.MemList.Count; i++)
-        {
-            GameObject item = Instantiate(ClubMemItem, ClubMemItemParent);
-            item.SetActive(true);
-            item.transform.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.MemList[i]);
-            item.transform.localPosition = new Vector3(-310+100*(i%7),-85-90*(i/7),0);
-            CreatRoomItem.Add(item);
+            GameObject item = null;
+            if (i < CreatRoomItem.Count)
+            {
+                item = CreatRoomItem[i];
+                item.SetActive(true);
+                item.transform.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.MemList[i]);
+            }
+            else
+            {
+                item = Instantiate(ClubMemItem, ClubMemItemParent);
+                item.SetActive(true);
+                item.transform.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.MemList[i]);
+                CreatRoomItem.Add(item);
+            }
         }
     }
-	// Use this for initialization
-	void Start () {
-        CloseBtn.onClick.Add(new EventDelegate(this.CloseBtnClick));
-        InviteBtn.onClick.Add(new EventDelegate(this.ClubMastorBtnClick));
-        QuiteBtn.onClick.Add(new EventDelegate(this.QuiteBtnClick));
-	}
 
     //我要退出点击
     private void QuiteBtnClick()
     {
         this.gameObject.SetActive(false);
-        ClientToServerMsg.QuiteClub((uint)GameData.CurrentClubInfo.Id,Player.Instance.guid);
+        ClientToServerMsg.QuiteClub((uint)GameData.CurrentClubInfo.Id, Player.Instance.guid);
     }
-   //邀请玩家店家
+    //邀请玩家店家
     private void ClubMastorBtnClick()
     {
-        UIManager.Instance.ShowUiPanel(UIPaths.InviteJoinClubPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelJoinMomentInvite, OpenPanelType.MinToMax);
     }
 
     //关闭点击
@@ -104,9 +169,4 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
     {
         this.gameObject.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

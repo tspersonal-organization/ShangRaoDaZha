@@ -43,7 +43,7 @@ public class DzPanelMessage : UIBase<DzPanelMessage>
         {
             GameObject item = Instantiate(EmailItem, EmailItemParent);
             item.SetActive(true);
-            item.transform.GetComponent<EmailItemControl>().SetValue(GameData.CurrentClubInfo.ApplyMemList[i], false);
+            item.transform.GetComponent<DzItemMessage>().SetValue(GameData.CurrentClubInfo.ApplyMemList[i], false);
             //todo  设置信息
             item.transform.localPosition = new Vector3(0, 166 - EmailItemList.Count * 100, 0);
             EmailItemList.Add(item);
@@ -53,14 +53,14 @@ public class DzPanelMessage : UIBase<DzPanelMessage>
         {
             GameObject item = Instantiate(EmailItem, EmailItemParent);
             item.SetActive(true);
-            item.transform.GetComponent<EmailItemControl>().SetValue(GameData.CurrentClubInfo.InviteList[i], true);
+            item.transform.GetComponent<DzItemMessage>().SetValue(GameData.CurrentClubInfo.InviteList[i], true);
             //todo  设置信息
             item.transform.localPosition = new Vector3(0, 166 - EmailItemList.Count * 100, 0);
             EmailItemList.Add(item);
         }
     }
 
-    private void CloseBtnClick()
+    public void CloseBtnClick()
     {
         this.gameObject.SetActive(false);
     }

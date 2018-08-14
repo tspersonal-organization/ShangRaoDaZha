@@ -1,11 +1,10 @@
-﻿using UnityEngine;
-
-public class DzPanelJoinMomentInvite : MonoBehaviour {
+﻿public class DzPanelJoinMomentInvite : UIBase<DzPanelJoinMomentInvite>
+{
 
     public UIButton SeruBtn;
     public UIButton MaskBtn;
     public UIInput input;
-    // Use this for initialization
+
     void Start () {
         MaskBtn.onClick.Add(new EventDelegate(()=>
         {
@@ -23,8 +22,8 @@ public class DzPanelJoinMomentInvite : MonoBehaviour {
         ClientToServerMsg.InvitePlayerJoinClub(ulong.Parse(input.value),(uint)GameData.CurrentClubInfo.Id);
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
 }

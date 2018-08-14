@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ClubMemInfoControl : MonoBehaviour {
 
@@ -36,7 +33,7 @@ public class ClubMemInfoControl : MonoBehaviour {
     private void ClickItemClick()
     {
         GameData.ChoseMem = DataInfo;
-        UIManager.Instance.ShowUiPanel(UIPaths.PkPlayerInfoPanel, OpenPanelType.MinToMax);
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelPlayerInfo, OpenPanelType.MinToMax);
     }
 
     // Update is called once per frame

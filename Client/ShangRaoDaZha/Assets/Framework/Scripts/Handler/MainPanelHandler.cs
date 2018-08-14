@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using FrameworkForCSharp.NetWorks;
+﻿using FrameworkForCSharp.NetWorks;
 using FrameworkForCSharp.Utils;
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 public class MainPanelHandler
 {

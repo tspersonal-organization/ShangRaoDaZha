@@ -1,0 +1,38 @@
+Handler.addPlayerHandler(Opcodes.Client_Club_Invite_Player, onClubInvitePlayer);//俱乐部邀请玩家
+ulong invitedGUID = message.readUInt64();//被邀请的玩家guid
+uint invitingClubGUID = message.readUInt32();//发出邀请的俱乐部id
+
+收到has_email后，信息红点，发送请求俱乐部申请人信息协议，如下
+ Handler.addPlayerHandler(Opcodes.Client_Query_Club_Player_Info, onQueryClubPlayerInfo);//获取俱乐部玩家信息
+这条协议如果传俱乐部id了，同时返回俱乐部申请信息和邀请你加入俱乐部的信息
+如果俱乐部id传0，则返回邀请你加入俱乐部信息
+返回协议
+ NetworkMessage message = NetworkMessage.Create((ushort)Opcodes.Client_Query_Club_Player_Info_Ack, 50);
+//先读readbool，获取是否有俱乐部申请信息，有就先读俱乐部申请数据，然后再读取邀请你加入俱乐部数据
+	if (code_id != 0)
+            {
+                message.writeBool(true);//是都有申请加入俱乐部数据
+ 		message.writeInt32(code_ids.Count);
+                foreach (var item in code_ids)
+                {
+			//俱乐部申请数据
+                	message.writeInt32(applicationList.Count);//申请人数
+            		foreach (var item in applicationList)
+            		{
+            		    message.writeString(item.name);//申请人名字
+            		    message.writeUInt64(item.guid);//申请人id
+            		    message.writeString(item.head_ip);//申请人头像
+            		}
+		}
+            }
+            else message.writeBool(false);//是否有申请加入俱乐部数据
+		//如果为false，直接读取邀请你加入俱乐部数据,就是下面的数据
+
+            message.writeInt32(player.inviteClubList.Count);
+            foreach(var item in player.inviteClubList.Values)
+            {
+                message.writeUInt64(item.player_uid);//邀请人uid
+                message.writeString(item.player_name);//邀请人名字
+                message.writeUInt32(item.club_id);//俱乐部id
+                message.writeString(item.club_name);//俱乐部名称
+            }

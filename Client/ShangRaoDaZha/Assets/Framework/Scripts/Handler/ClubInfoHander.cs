@@ -158,27 +158,7 @@ public class ClubInfoHander : MonoBehaviour
                 GameData.CurrentClubInfo.InviteList.Add(info);
             }
         }
-
-
-
-        DzPanelMessage.Instance.CreatData();//打开成员列表panel
-                                        //if (PanelMessage.Instance == null)
-                                        //{
-                                        //    PanelMessage.Instance.CreatData();//打开成员列表panel
-                                        //}
-                                        //else
-                                        //{
-                                        //    if (ClubMemControlPanelControl.Instance.gameObject.activeSelf)
-                                        //    {
-                                        //        ClubMemControlPanelControl.Instance.InitData();
-                                        //    }
-                                        //    else
-                                        //    {
-                                        //        UIManager.Instance.ShowUiPanel(UIPaths.ClubMemControlPanel, OpenPanelType.MinToMax);//打开成员列表panel
-                                        //    }
-                                        //}
-
-
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelMessage, OpenPanelType.MinToMax);
     }
 
 
@@ -219,14 +199,6 @@ public class ClubInfoHander : MonoBehaviour
             info.MemList.Add(Minfo);
         }
 
-        //message.writeInt32(admin_list.Count);//管理员信息
-        //foreach (var item in admin_list)
-        //{
-        //    message.writeString(item.name);//管理员名字
-        //    message.writeUInt64(item.guid);//管理员id
-        //    message.writeString(item.head_ip);//管理员头像
-
-        //}
         info.MemMasterList = new List<MemInfo>();
         int count1 = message.readInt32();//管理员
         for (int i = 0; i < count1; i++)
@@ -246,9 +218,6 @@ public class ClubInfoHander : MonoBehaviour
             DzPanelMomentInfo.Instance.InitData();
         }
         UIManager.Instance.ShowUiPanel(UIPaths.PanelMomentInfo, OpenPanelType.MinToMax);
-        //  PanelMomentInfo.Instance.InitData();
-        //  if (PanelMomentInfo.Instance!=null)
-        //  PanelMomentInfo.Instance.InitData();
     }
 
 

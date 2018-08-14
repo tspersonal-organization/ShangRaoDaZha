@@ -322,9 +322,9 @@ public class DzViewMain : UIBase<DzViewMain>
     /// </summary>
     private void OpenClubInfoPanel()
     {
-        GameData.Tips = "该功能暂未开放！";
-        UIManager.Instance.ShowUiPanel(UIPaths.PanelTips, OpenPanelType.MinToMax);
-        //ClientToServerMsg.GetClubInfo(GameData.CurrentClickClubInfo.ClubId);
+        //GameData.Tips = "该功能暂未开放！";
+        //UIManager.Instance.ShowUiPanel(UIPaths.PanelTips, OpenPanelType.MinToMax);
+        ClientToServerMsg.GetClubInfo(GameData.CurrentClickClubInfo.ClubId);
     }
 
     #endregion
