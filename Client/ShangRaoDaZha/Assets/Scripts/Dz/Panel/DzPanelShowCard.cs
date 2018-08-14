@@ -49,14 +49,14 @@ public class DzPanelShowCard : MonoBehaviour
         {
             PartGameOverControl.instance.SettleInfoList[i].LeftCardList = CardTools.CardValueSort(PartGameOverControl.instance.SettleInfoList[i].LeftCardList);
             PlayerList[i].SetActive(true);
-            PlayerList[i].transform.GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo((byte)PartGameOverControl.instance.SettleInfoList[i].pos).name.ToString();
-            PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].pos] = new List<GameObject>();
-            int count = PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].pos].Count;
+            PlayerList[i].transform.GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo((byte)PartGameOverControl.instance.SettleInfoList[i].Pos).name.ToString();
+            PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].Pos] = new List<GameObject>();
+            int count = PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].Pos].Count;
             for (int j = 0; j < count; j++)
             {
-                Destroy(PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].pos][j]);
+                Destroy(PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].Pos][j]);
             }
-            PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].pos] = new List<GameObject>();
+            PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].Pos] = new List<GameObject>();
             for (int j = 0; j < PartGameOverControl.instance.SettleInfoList[i].LeftCardList.Count; j++)
             {
                 GameObject g = GameObject.Instantiate(CardObj, PlayerList[i].transform.Find("CardPoint"));
@@ -64,7 +64,7 @@ public class DzPanelShowCard : MonoBehaviour
                 g.transform.localPosition = new Vector3(j * 25, 0, 0);
                 g.SetActive(true);
                 g.transform.GetComponent<Card>().SetValue(PartGameOverControl.instance.SettleInfoList[i].LeftCardList[j]);
-                PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].pos].Add(g);
+                PosAndCardList[PartGameOverControl.instance.SettleInfoList[i].Pos].Add(g);
             }
         }
 

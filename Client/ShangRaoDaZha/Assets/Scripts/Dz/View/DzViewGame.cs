@@ -857,7 +857,7 @@ public class DzViewGame : UIBase<DzViewGame>
     {
         for (int i = 0; i < PartGameOverControl.instance.SettleInfoList.Count; i++)
         {
-            if (PartGameOverControl.instance.SettleInfoList[i].pos == SelfPos)
+            if (PartGameOverControl.instance.SettleInfoList[i].Pos == SelfPos)
             {
                 if (PartGameOverControl.instance.SettleInfoList[i].IsWin)
                 {
@@ -893,7 +893,7 @@ public class DzViewGame : UIBase<DzViewGame>
                 ClearPlayedCard(i);
                 ShowOrHideDontPlayCard(i, false);//隐藏不出
 
-                SetTotalJifen(PartGameOverControl.instance.SettleInfoList[i - 1].pos, PartGameOverControl.instance.SettleInfoList[i - 1].Score);//显示积分
+                SetTotalJifen(PartGameOverControl.instance.SettleInfoList[i - 1].Pos, PartGameOverControl.instance.SettleInfoList[i - 1].Score);//显示积分
             }
 
         }
@@ -906,7 +906,7 @@ public class DzViewGame : UIBase<DzViewGame>
                 ClearPlayedCard(i);
                 ShowOrHideDontPlayCard(i, false);//隐藏不出
 
-                SetTotalJifen(PartGameOverControl.instance.SettleInfoList[i - 1].pos, PartGameOverControl.instance.SettleInfoList[i - 1].Score);//显示积分
+                SetTotalJifen(PartGameOverControl.instance.SettleInfoList[i - 1].Pos, PartGameOverControl.instance.SettleInfoList[i - 1].Score);//显示积分
             }
         }
 

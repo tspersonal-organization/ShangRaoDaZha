@@ -37,27 +37,24 @@ public class PartGameOverControl
     public HuType WDHHuType;
 }
 
-//讨赏
+//单据结算数据
 public class SettleDownInfo
 {
-
-    public bool IsWin;
-    public int pos;
-    public int Score;
-    public int HuiHeFen;
-    public int TaoShangFen;
-    public int ChangeScore;
-
-    public int ZhaDanScore;
-    public int FaWangScore;
+    public bool IsWin;//是否胜利
+    public int Pos;//位置
+    public int BaseScore;//基础分
+    public int TaoShangFen;//讨赏分
+    public int ZhaDanScore;//炸弹分
+    public int FaWangScore;//罚王分
+    public int ChangeScore;//改变分= 基础分+罚王分+炸弹分
+    public int Score;//总分=改变分+改变分
 
     public long Gold;//玩家的总金币数
     public List<uint> LeftCardList = new List<uint>();//剩余手牌数
     public int Index;//第几个完成
 
     public List<List<uint>> TaoShangCardList = new List<List<uint>>();//打出的讨赏牌
-
-
+    
 }
 
 #region//无挡胡

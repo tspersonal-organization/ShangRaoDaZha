@@ -1150,443 +1150,112 @@ public class RoomInfoHandler
                 break;
         }
     }
+
     /// <summary>
     /// 游戏结束
     /// </summary>
     /// <param name="message"></param>
     private void onGameOver(NetworkMessage message)
     {
-        Log.Debug("结算");
+        Log.Debug("单局结算");
+        RoomType overType = (RoomType) message.readUInt8();
+        long length = message.readInt64(); //数据长度
+        byte[] newbyte = new byte[length];
+        message.readBytes(newbyte);
 
-        RoomType OverType = (RoomType)message.readUInt8();
+        GameOver overinfo = GameOver.Parser.ParseFrom(newbyte);
 
-        if (GameData.GlobleRoomType == RoomType.PK)
+        PartGameOverControl.instance.ZhuangPos = (int) overinfo.ZhuangPosition;
+        PartGameOverControl.instance.HelperPos = (int) overinfo.FriendPosition;
+
+        int count = overinfo.GameOverInfo.Count;
+        PartGameOverControl.instance.SettleInfoList = new List<SettleDownInfo>();
+        for (int i = 0; i < count; i++)
         {
-            #region
+            bool isWin = overinfo.GameOverInfo[i].IsWinner;
+            byte pos = (byte) overinfo.GameOverInfo[i].Position;
+            int score = overinfo.GameOverInfo[i].Score;
+            int changeScore = overinfo.GameOverInfo[i].ChangeScore;
+            int baseScore = overinfo.GameOverInfo[i].BaseScore;
+            int zadanScore = (int) overinfo.GameOverInfo[i].ZhanDanScore;
+            int faWangScore = (int) overinfo.GameOverInfo[i].FaWangScore;
 
-            long length = message.readInt64();//数据长度
-            byte[] newbyte = new byte[length];
-            message.readBytes(newbyte);
+            //保存数据
+            SettleDownInfo info = new SettleDownInfo();
+            info.IsWin = isWin;
+            info.Pos = pos;
+            info.Score = score; //人物总积分
+            info.BaseScore = baseScore;
+            info.ChangeScore = changeScore; //总改变分数
+            info.ZhaDanScore = zadanScore;
+            info.FaWangScore = faWangScore;
 
-            GameOver overinfo = new GameOver();
-            overinfo = GameOver.Parser.ParseFrom(newbyte);
-
-            uint roomID = overinfo.RoomCodeId;
-            PartGameOverControl.instance.ZhuangPos =(int) overinfo.ZhuangPosition;
-            PartGameOverControl.instance.HelperPos = (int)overinfo.FriendPosition;
-
-            int count = overinfo.GameOverInfo.Count;
-
-            PartGameOverControl.instance.SettleInfoList = new List<SettleDownInfo>();
-            for (int i = 0; i < count; i++)
+            int leftCardCount = overinfo.GameOverInfo[i].Cards.Count; //剩余牌数
+            List<uint> cardslist = new List<uint>();
+            for (int j = 0; j < leftCardCount; j++)
             {
-                bool IsWin = overinfo.GameOverInfo[i].IsWinner;
-                byte pos = (byte)overinfo.GameOverInfo[i].Position;
+                cardslist.Add(overinfo.GameOverInfo[i].Cards[j]);
+            }
+            info.LeftCardList = cardslist; //剩余排数
+            info.Index = 4;
 
-                int Score = overinfo.GameOverInfo[i].Score;
-                int ChangeScore = overinfo.GameOverInfo[i].ChangeScore;
-                int HuiHeFen = overinfo.GameOverInfo[i].BaseScore;
-               // int TaoShangScore = (int)overinfo.GameOverInfo[i].TaoShangScore;
+            int outCardCount = overinfo.GameOverInfo[i].CatchedCard.Count; //总得出牌数
+            info.TaoShangCardList = new List<List<uint>>();
 
-                int zadanScore = (int)overinfo.GameOverInfo[i].ZhanDanScore;
-                int FaWangScore = (int)overinfo.GameOverInfo[i].FaWangScore;
+            for (int j = 0; j < outCardCount; j++)
+            {
+                List<uint> taoShangCardList = new List<uint>();
+                for (int k = 0; k < overinfo.GameOverInfo[i].CatchedCard[j].Card.Count; k++)
+                {
+                    taoShangCardList.Add(overinfo.GameOverInfo[i].CatchedCard[j].Card[k]);
+                }
 
+                info.TaoShangCardList.Add(taoShangCardList);
+            }
+            PartGameOverControl.instance.SettleInfoList.Add(info);
+        }
 
-                //保存数据
+        int playerCount = overinfo.FinishInfo.Count; //完成玩家人数
+        for (int i = 0; i < playerCount; i++)
+        {
+            int pos1 = (int) overinfo.FinishInfo[i].FinishPosition; //位置
+            int index = (int) overinfo.FinishInfo[i].FinishOrder; //第几个完成
+            for (int j = 0; j < PartGameOverControl.instance.SettleInfoList.Count; j++)
+            {
+                if (pos1 == PartGameOverControl.instance.SettleInfoList[j].Pos)
+                {
+                    PartGameOverControl.instance.SettleInfoList[j].Index = index;
+                }
+            }
+        }
+
+        if (DzViewGame.Instance != null) DzViewGame.Instance.onPartGameOver();
+
+        //当前局以及之前所有的记录
+        List<List<SettleDownInfo>> list = new List<List<SettleDownInfo>>();
+        for (var i = 0; i < overinfo.GameRecord.Count; i++)
+        {
+            List<SettleDownInfo> list1 = new List<SettleDownInfo>();
+            for (var j = 0; j < overinfo.GameRecord[i].PlayerSocreInfo.Count; j++)
+            {
+                bool isWin = overinfo.GameOverInfo[j].IsWinner;
+                byte pos = (byte) overinfo.GameOverInfo[j].Position;
+
                 SettleDownInfo info = new SettleDownInfo();
-                info.IsWin = IsWin;
-                info.pos = (int)pos;
-                info.Score = Score;//人物总积分
-                info.HuiHeFen = HuiHeFen;
-
-               // info.TaoShangFen = TaoShangScore;//讨赏分
-                info.ChangeScore = ChangeScore;//总改变分数
-
-                info.ZhaDanScore = zadanScore;
-                info.FaWangScore = FaWangScore;
-                if (IsPiPei)
-                {
-                   // info.Gold = message.readInt64();
-                }
-
-
-                int leftCardCount = overinfo.GameOverInfo[i].Cards.Count;//剩余牌数
-                List<uint> Cardslist = new List<uint>();
-                for (int j = 0; j < leftCardCount; j++)
-                {
-                    Cardslist.Add(overinfo.GameOverInfo[i].Cards[j]);
-                }
-                info.LeftCardList = Cardslist;//剩余排数
-                info.Index = 4;
-
-
-
-                int OutCardCount = overinfo.GameOverInfo[i].CatchedCard.Count;//总得出牌数
-                info.TaoShangCardList = new List<List<uint>>();
-               
-
-                for (int j = 0; j < OutCardCount; j++)
-                {
-                    List<uint> TaoShangCardList = new List<uint>();
-                    for (int k = 0; k < overinfo.GameOverInfo[i].CatchedCard[j].Card.Count; k++)
-                    {
-                        TaoShangCardList.Add(overinfo.GameOverInfo[i].CatchedCard[j].Card[k]);
-                    }
-
-                    info.TaoShangCardList.Add(TaoShangCardList);
-
-
-                    //bool HaveTaoShang = message.readBool();//是否为讨赏牌
-                    //if (HaveTaoShang)
-                    //{
-                    //    List<uint> TaoShangCardList = new List<uint>();
-                    //    int HaveCardCount = message.readInt32();
-                    //    for (int k = 0; k < overinfo.GameOverInfo[i].CatchedCard[j].Card.Count; k++)
-                    //    {
-                    //        TaoShangCardList.Add(message.readUInt32());
-                    //    }
-
-                    //    info.TaoShangCardList.Add(TaoShangCardList);
-
-                    //}
-                    //else
-                    //{
-
-                    //}
-                }
-
-                PartGameOverControl.instance.SettleInfoList.Add(info);
+                info.IsWin = isWin;
+                info.Pos = pos;
+                info.BaseScore = overinfo.GameRecord[i].PlayerSocreInfo[j].BaseScore;
+                info.ZhaDanScore = overinfo.GameRecord[i].PlayerSocreInfo[j].BombScore;
+                info.FaWangScore = overinfo.GameRecord[i].PlayerSocreInfo[j].FaWangScore;
+                info.ChangeScore = overinfo.GameRecord[i].PlayerSocreInfo[j].ChangeScore;//改变分数
+                info.Score = overinfo.GameRecord[i].PlayerSocreInfo[j].Score;//人物总积分
+                list1.Add(info);
             }
-
-            int playerCount = overinfo.FinishInfo.Count;//完成玩家人数
-            for (int i = 0; i < playerCount; i++)
-            {
-                int pos1 = (int)overinfo.FinishInfo[i].FinishPosition;//位置
-                int index = (int)overinfo.FinishInfo[i].FinishOrder;//第几个完成
-                for (int j = 0; j < PartGameOverControl.instance.SettleInfoList.Count; j++)
-                {
-                    if (pos1 == PartGameOverControl.instance.SettleInfoList[j].pos)
-                    {
-                        PartGameOverControl.instance.SettleInfoList[j].Index = index;
-                    }
-                }
-            }
-
-            if (DzViewGame.Instance != null) DzViewGame.Instance.onPartGameOver();
-
-            //当前局以及之前所有的记录
-            List<List<SettleDownInfo>> list = new List<List<SettleDownInfo>>();
-            for (var i = 0; i < overinfo.GameRecord.Count; i++)
-            {
-                List<SettleDownInfo> list1 = new List<SettleDownInfo>();
-                for (var j = 0; j < overinfo.GameRecord[i].PlayerSocreInfo.Count; j++)
-                {
-                    bool IsWin = overinfo.GameOverInfo[j].IsWinner;
-                    byte pos = (byte)overinfo.GameOverInfo[j].Position;
-                    int Score = overinfo.GameOverInfo[j].Score;
-                    int ChangeScore = overinfo.GameOverInfo[j].ChangeScore;
-                    int HuiHeFen = overinfo.GameOverInfo[j].BaseScore;
-                    int zadanScore = (int)overinfo.GameOverInfo[j].ZhanDanScore;
-                    int FaWangScore = (int)overinfo.GameOverInfo[j].FaWangScore;
-
-                    SettleDownInfo info = new SettleDownInfo();
-                    info.IsWin = IsWin;
-                    info.pos = (int)pos;
-                    info.Score = overinfo.GameRecord[i].PlayerSocreInfo[j].Score; ;//人物总积分
-                    info.HuiHeFen = overinfo.GameRecord[i].PlayerSocreInfo[j].BaseScore; ;
-                    info.ChangeScore = overinfo.GameRecord[i].PlayerSocreInfo[j].ChangeScore; ;//总改变分数
-                    info.ZhaDanScore = overinfo.GameRecord[i].PlayerSocreInfo[j].BombScore; ;
-                    info.FaWangScore = overinfo.GameRecord[i].PlayerSocreInfo[j].FaWangScore; ;
-
-                    list1.Add(info);
-                }
-                list.Add(list1);
-            }
-
-            PartGameOverControl.instance.ListGameOverSmall = list;
-
-            #endregion
+            list.Add(list1);
         }
-        else if (GameData.GlobleRoomType == RoomType.WDH)
-        {
-
-            #region
-            uint roomID = message.readUInt32();
-            uint ZhuangPos = message.readUInt8();
-            byte count = message.readUInt8();
-            for (int i = 0; i < count; i++)
-            {
-                byte pos = message.readUInt8();
-                PlayerInfo info = GameDataFunc.GetPlayerInfo(pos);
-
-                info.score = message.readInt32();
-                info.changeScore = message.readInt32();
-                info.HuiHeScore = message.readInt32();
-                info.TaoShangScore = (int)message.readUInt32();//奖码分
-
-                if (IsPiPei)
-                {
-                    info.Gold = message.readInt64();//玩家金币数
-                }
-                // info.menCount = message.readUInt8();
-                info.huType = (HuType)message.readUInt8();
-                info.prizeType = (PrizeType)message.readUInt8();//翻倍总类
-                info.GangKaiCount = (int)message.readUInt32();//杠开次数
-
-                //吃碰杠的牌
-                info.operateCardList.Clear();
-                byte oCount = message.readUInt8();
-                for (int k = 0; k < oCount; k++)
-                {
-                    OpreateCardInfo opInfo = new OpreateCardInfo();
-                    opInfo.pos = message.readUInt8();
-                    opInfo.opType = (CatchType)message.readUInt8();
-
-                    if (opInfo.opType == CatchType.Chi)
-                    {
-                        int chiCount = message.readInt32();
-                        for (int j = 0; j < chiCount; j++)
-                        {
-
-                        }
-                    }
-                    else
-                    {
-                        //没有吃所以不用判断牌型
-                        opInfo.opCard = message.readUInt32();
-                        info.operateCardList.Add(opInfo);
-                    }
-
-                }
-
-
-                info.localCardList.Clear();//手牌
-                oCount = message.readUInt8();
-                for (int k = 0; k < oCount; k++)
-                {
-                    info.localCardList.Add(message.readUInt32());
-                }
-            }
-
-            RoundOverInfo overInfo = new RoundOverInfo();
-            overInfo.isHuPai = message.readBool();
-            if (overInfo.isHuPai)
-            {
-                overInfo.huPos = message.readUInt8();
-                overInfo.huCard = message.readUInt32();
-
-            }
-            GameData.m_RoundOverInfo = overInfo;
-
-            if (!IsPiPei)
-            {
-                if (GameData.m_TableInfo.IsJIangMa)
-                {
-                    if (!overInfo.isHuPai)//没人胡牌（荒庄不传奖码信息）
-                    {
-                        if (WuDangHuGame.Instance != null) WuDangHuGame.Instance.onGameOver();
-                    }
-                }
-                else
-                {
-                    if (WuDangHuGame.Instance != null) WuDangHuGame.Instance.onGameOver();
-                }
-                WuDangHuGame.Instance.ViewHu();
-            }
-            else
-            {
-                if (GameData.m_TableInfo.IsJIangMa)
-                {
-                    if (!overInfo.isHuPai)//没人胡牌（荒庄不传奖码信息）
-                    {
-                        if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onGameOver();
-                    }
-                }
-                else
-                {
-                    if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onGameOver();
-                }
-                WuDangHuGameJinBi.Instance.ViewHu();
-            }
-
-
-
-            #endregion
-        }
-        else if (GameData.GlobleRoomType == RoomType.ZB)
-        {
-            #region
-            uint roomID = message.readUInt32();
-            uint ZhuangPos = message.readUInt8();
-            byte count = message.readUInt8();
-            for (int i = 0; i < count; i++)
-            {
-                byte pos = message.readUInt8();
-                PlayerInfo info = GameDataFunc.GetPlayerInfo(pos);
-
-                info.score = message.readInt32();
-                info.changeScore = message.readInt32();
-                info.HuiHeScore = message.readInt32();
-                info.TaoShangScore = (int)message.readUInt32();//奖码分
-
-                if (IsPiPei)
-                {
-                    info.Gold = message.readInt64();//玩家金币数
-                }
-                // info.menCount = message.readUInt8();
-                info.huType = (HuType)message.readUInt8();
-                info.prizeType = (PrizeType)message.readUInt8();//翻倍总类
-                info.GangKaiCount = (int)message.readUInt32();//杠开次数
-
-                //吃碰杠的牌
-                info.operateCardList.Clear();
-                byte oCount = message.readUInt8();
-                for (int k = 0; k < oCount; k++)
-                {
-                    OpreateCardInfo opInfo = new OpreateCardInfo();
-                    opInfo.pos = message.readUInt8();
-                    opInfo.opType = (CatchType)message.readUInt8();
-
-                    if (opInfo.opType == CatchType.Chi)
-                    {
-                        int chiCount = message.readInt32();
-                        for (int j = 0; j < chiCount; j++)
-                        {
-
-                        }
-                    }
-                    else
-                    {
-                        //没有吃所以不用判断牌型
-                        opInfo.opCard = message.readUInt32();
-                        info.operateCardList.Add(opInfo);
-                    }
-
-                }
-
-
-                info.localCardList.Clear();//手牌
-                oCount = message.readUInt8();
-                for (int k = 0; k < oCount; k++)
-                {
-                    info.localCardList.Add(message.readUInt32());
-                }
-            }
-
-            RoundOverInfo overInfo = new RoundOverInfo();
-            overInfo.isHuPai = message.readBool();
-            if (overInfo.isHuPai)
-            {
-                overInfo.huPos = message.readUInt8();
-                overInfo.huCard = message.readUInt32();
-
-                overInfo.MianCount = message.readUInt32();//吃面次数
-                overInfo.ZaiBaoCount = message.readUInt32();//载保次数
-                overInfo.GangCount = message.readUInt32();//杠次数
-
-                overInfo.IsUseMagicCard = message.readBool();//是否用财神
-
-            }
-            GameData.m_RoundOverInfo = overInfo;
-
-            if (!IsPiPei)
-            {
-                if (ZaiBaiGame.Instance != null) ZaiBaiGame.Instance.onGameOver();
-            }
-            else
-            {
-                // if (ZaiBaiGameJinBi.Instance != null)
-                ZaiBaiGameJinBi.Instance.onGameOver();
-            }
-
-            //if (GameData.m_TableInfo.IsJIangMa)
-            //{
-            //    if (!overInfo.isHuPai)//没人胡牌（荒庄不传奖码信息）
-            //    {
-            //        if (WuDangHuGame.Instance != null) WuDangHuGame.Instance.onGameOver();
-            //    }
-            //}
-            //else
-            //{
-            //    if (WuDangHuGame.Instance != null) WuDangHuGame.Instance.onGameOver();
-            //}
-            //WuDangHuGame.Instance.ViewHu();
-            #endregion
-        }
-        else if (GameData.GlobleRoomType == RoomType.NN)
-        {
-            uint roomID = message.readUInt32();
-           
-
-            PartGameOverControl.instance.ZhuangPos = (int)message.readUInt8();
-            int Count = message.readInt32();
-            NiuNiuPartOverInfo.WinPosList = new List<int>();
-            NiuNiuPartOverInfo.LosePosList = new List<int>();
-            NiuNiuPartOverInfo.PosAndChangeScore = new Dictionary<int, int>();
-            for (int i = 0; i < Count; i++)
-            {
-                byte pos = message.readUInt8();
-
-                int Score = message.readInt32();
-                int ChangeScore = message.readInt32();
-                int HuiHeFen = message.readInt32();//基础分 下注分
-
-                NiuNiuPartOverInfo.PosAndChangeScore[(int)pos] = ChangeScore;
-                for (int j = 0; j < GameData.m_PlayerInfoList.Count; j++)
-                {
-                    if (GameData.m_PlayerInfoList[j].pos == (int)pos)
-                    {
-                        GameData.m_PlayerInfoList[j].score = Score;
-                    }
-                }//更新积分
-                if (pos != GameData.m_TableInfo.ZhuangPos)
-                {
-                    if (ChangeScore > 0)
-                    {
-                        NiuNiuPartOverInfo.WinPosList.Add(pos);
-                    }
-                    else if (ChangeScore < 0)
-                    {
-                        NiuNiuPartOverInfo.LosePosList.Add(pos);
-                    }
-                }
-
-                if (roomType == RoomType.NN)
-                {
-                    if (IsPiPei)
-                    {
-                        message.readInt64();//金币数
-                    }
-                    List<List<uint>> PeiPaiInfo = new List<List<uint>>();
-                    int  listcount = message.readInt32();
-                    for (int l = 0; l < listcount; l++)
-                    {
-                        List<uint> PeiPaiItem = new List<uint>();
-                        int  listcount1 = message.readInt32();
-                        for (int n = 0; n < listcount1; n++)
-                        {
-                            PeiPaiItem.Add(message.readUInt32());
-                        }
-                        PeiPaiInfo.Add(PeiPaiItem);
-                    }
-
-                    NNType PeiPaiType = (NNType)message.readUInt8();
-                    UInt32 FanBeiCount = message.readUInt32();//翻倍数
-
-
-                    int ChipOther = message.readInt32();//下注到别人那里
-                    for (int j = 0; j < ChipOther; j++)
-                    {
-                        byte Chippos = message.readUInt8();//下注的位置
-                        UInt32 Chipcount = message.readUInt32();//下注的数量
-                    }
-                }
-            }
-
-            NiuNiuGame.Instance.onGameOver();
-        }
-
+        PartGameOverControl.instance.ListGameOverSmall = list;
     }
+
     /// <summary>
     /// 玩家操作
     /// </summary>
@@ -2444,9 +2113,9 @@ public class RoomInfoHandler
                 //保存数据
                 SettleDownInfo info1 = new SettleDownInfo();
                 info1.IsWin = IsWin;
-                info1.pos = (int)pos;
+                info1.Pos = (int)pos;
                 info1.Score = Score;//人物总积分
-                info1.HuiHeFen = HuiHeFen;
+                info1.BaseScore = HuiHeFen;
                // info1.TaoShangFen = (int)TaoShangScore;//讨赏分
                 info1.ChangeScore = ChangeScore;//总改变分数
 
@@ -2771,7 +2440,7 @@ public class RoomInfoHandler
 
                     int Score = message.readInt32();
                     int ChangeScore = message.readInt32();
-                    int HuiHeFen = message.readInt32();
+                    int BaseScore = message.readInt32();
                     uint TaoShangScore = message.readUInt32();
 
 
@@ -2780,7 +2449,7 @@ public class RoomInfoHandler
                     info1.IsWin = IsWin;
                     info1.pos = (int)pos;
                     info1.Score = Score;//人物总积分
-                    info1.HuiHeFen = HuiHeFen;
+                    info1.BaseScore = BaseScore;
                     info1.TaoShangFen = (int)TaoShangScore;//讨赏分
                     info1.ChangeScore = ChangeScore;//总改变分数
 
@@ -3024,9 +2693,9 @@ public class RoomInfoHandler
                 //保存数据
                 SettleDownInfo info1 = new SettleDownInfo();
                 info1.IsWin = IsWin;
-                info1.pos = (int)pos;
+                info1.Pos = (int)pos;
                 info1.Score = Score;//人物总积分
-                info1.HuiHeFen = HuiHeFen;
+                info1.BaseScore = HuiHeFen;
                 info1.TaoShangFen = (int)TaoShangScore;//讨赏分
                 info1.ChangeScore = ChangeScore;//总改变分数
 
@@ -3055,7 +2724,7 @@ public class RoomInfoHandler
                 int index = message.readUInt8();//第几个完成
                 for (int j = 0; j < PartGameOverControl.instance.SettleInfoList.Count; j++)
                 {
-                    if (pos1 == PartGameOverControl.instance.SettleInfoList[j].pos)
+                    if (pos1 == PartGameOverControl.instance.SettleInfoList[j].Pos)
                     {
                         PartGameOverControl.instance.SettleInfoList[j].Index = index;
                     }
@@ -3349,7 +3018,7 @@ public class RoomInfoHandler
 
             //    int Score = message.readInt32();
             //    int ChangeScore = message.readInt32();
-            //    int HuiHeFen = message.readInt32();
+            //    int BaseScore = message.readInt32();
             //    uint TaoShangScore = message.readUInt32();
 
 
@@ -3358,7 +3027,7 @@ public class RoomInfoHandler
             //    info1.IsWin = IsWin;
             //    info1.pos = (int)pos;
             //    info1.Score = Score;//人物总积分
-            //    info1.HuiHeFen = HuiHeFen;
+            //    info1.BaseScore = BaseScore;
             //    info1.TaoShangFen = (int)TaoShangScore;//讨赏分
             //    info1.ChangeScore = ChangeScore;//总改变分数
 

@@ -619,7 +619,7 @@ public class DDZJinBi : UIBase<DDZJinBi>
     {
         for (int i = 0; i < PartGameOverControl.instance.SettleInfoList.Count; i++)
         {
-            if (PartGameOverControl.instance.SettleInfoList[i].pos == SelfPos)
+            if (PartGameOverControl.instance.SettleInfoList[i].Pos == SelfPos)
             {
                 if (PartGameOverControl.instance.SettleInfoList[i].IsWin)
                 {
@@ -650,7 +650,7 @@ public class DDZJinBi : UIBase<DDZJinBi>
             ClearPlayedCard(i);
             ShowOrHideDontPlayCard(i, false);//隐藏不出
 
-            SetTotalJifen(PartGameOverControl.instance.SettleInfoList[i - 1].pos, PartGameOverControl.instance.SettleInfoList[i - 1].Gold);//显示积分
+            SetTotalJifen(PartGameOverControl.instance.SettleInfoList[i - 1].Pos, PartGameOverControl.instance.SettleInfoList[i - 1].Gold);//显示积分
         }
 
         CurChooseCardsObjList = new List<GameObject>();
