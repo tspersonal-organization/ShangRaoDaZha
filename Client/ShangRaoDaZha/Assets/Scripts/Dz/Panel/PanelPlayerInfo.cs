@@ -15,25 +15,29 @@
 
     private void OnEnable()
     {
-        CancleMasterBtn.gameObject.SetActive(false);
-        SetMasterBtn.gameObject.SetActive(false);
-        TickOutBtn.gameObject.SetActive(false);
-
-        if (GameData.CurrentClubInfo.CreatorGUID == Player.Instance.guid)
+        if (ManagerScene.Instance.currentSceneType != SceneType.Game)
         {
-            // InviteBtn.gameObject.SetActive(true);
-            CancleMasterBtn.gameObject.SetActive(true);
-            SetMasterBtn.gameObject.SetActive(true);
-            TickOutBtn.gameObject.SetActive(true);
-        }
-
-
-        for (int i = 0; i < GameData.CurrentClubInfo.MemMasterList.Count; i++)
-        {
-            if (GameData.CurrentClubInfo.MemMasterList[i].guid == Player.Instance.guid)
+            if (GameData.CurrentClubInfo.CreatorGUID == Player.Instance.guid)
             {
+                // InviteBtn.gameObject.SetActive(true);
+                CancleMasterBtn.gameObject.SetActive(true);
+                SetMasterBtn.gameObject.SetActive(true);
                 TickOutBtn.gameObject.SetActive(true);
             }
+
+            for (int i = 0; i < GameData.CurrentClubInfo.MemMasterList.Count; i++)
+            {
+                if (GameData.CurrentClubInfo.MemMasterList[i].guid == Player.Instance.guid)
+                {
+                    TickOutBtn.gameObject.SetActive(true);
+                }
+            }
+        }
+        else
+        {
+            CancleMasterBtn.gameObject.SetActive(false);
+            SetMasterBtn.gameObject.SetActive(false);
+            TickOutBtn.gameObject.SetActive(false);
         }
 
         DownloadImage.Instance.Download(Headtexture, GameData.ChoseMem.headid);

@@ -12,7 +12,7 @@ public class Handler
         new ResultCodeHandler();
         new LoginHandler();
         new RoomManagerHandler();
-        new MainPanelHandler();
+        new MainHandler();
        new  ClubInfoHander();
     }
 

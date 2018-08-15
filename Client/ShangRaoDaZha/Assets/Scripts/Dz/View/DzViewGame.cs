@@ -50,7 +50,7 @@ public class DzViewGame : UIBase<DzViewGame>
     List<List<uint>> CanPressCardList = new List<List<uint>>();//提示能打过的牌
 
     private uint LargestPos = 0;
-    public  int SelfPos;//自己的位置
+    public int SelfPos;//自己的位置
     public int FriendPos = 0;
 
     public bool IsTuoGuan = false;//玩家是否托管
@@ -85,10 +85,10 @@ public class DzViewGame : UIBase<DzViewGame>
     // Use this for initialization
     void Start()
     {
-        BaoPaiButton.onClick.Add(new EventDelegate(()=>
+        BaoPaiButton.onClick.Add(new EventDelegate(() =>
         {
             BaoPaiTipPanel.SetActive(false);
-            ClientToServerMsg.SendBaoPaiInfo((uint)GameData.m_TableInfo.id,true);
+            ClientToServerMsg.SendBaoPaiInfo((uint)GameData.m_TableInfo.id, true);
         }));
         CancleBaoPaiButton.onClick.Add(new EventDelegate(() =>
         {
@@ -101,7 +101,7 @@ public class DzViewGame : UIBase<DzViewGame>
         GameData.m_IsNormalOver = false;//重置
         SortBtn.onClick.Add(new EventDelegate(this.SetCardSortType));
         ChatBtn.onClick.Add(new EventDelegate(this.OpenChatPanel));
-      //  AiButton.onClick.Add(new EventDelegate(this.SetAi));
+        //  AiButton.onClick.Add(new EventDelegate(this.SetAi));
         SettingBtn.onClick.Add(new EventDelegate(this.OpenSettingPanel));
         UIEventListener.Get(TableMask).onClick = this.CancleSelectCard;
         DisMissRoomBtn.onClick.Add(new EventDelegate(this.DisMissRoom));//DisposRoomBtn
@@ -208,32 +208,32 @@ public class DzViewGame : UIBase<DzViewGame>
 
     void ShareInvite()
     {
-        AuthorizeOrShare.Instance.ShareRoomID(GameData.m_TableInfo.id, "一起来玩儿欢乐上饶打炸！", "欢乐上饶打炸") ;// + ((int)GameData.m_TableInfo.configRoundIndex).ToString() + "局!" + (GameData.m_PlayerInfoList.Count).ToString() + "缺" + (4 - GameData.m_PlayerInfoList.Count).ToString() + "!" + "  房主支付!", "闲娱狗讨赏");
+        AuthorizeOrShare.Instance.ShareRoomID(GameData.m_TableInfo.id, "一起来玩儿欢乐上饶打炸！", "欢乐上饶打炸");// + ((int)GameData.m_TableInfo.configRoundIndex).ToString() + "局!" + (GameData.m_PlayerInfoList.Count).ToString() + "缺" + (4 - GameData.m_PlayerInfoList.Count).ToString() + "!" + "  房主支付!", "闲娱狗讨赏");
 
         return;
         // jishu = (int)GameData.m_TableInfo.configPayIndex;
         switch ((int)GameData.m_TableInfo.configPayIndex)
         {
-           // jishu = (int)GameData.m_TableInfo.configPayIndex;
+            // jishu = (int)GameData.m_TableInfo.configPayIndex;
             case 0:
-               // jishu =1111;
-                AuthorizeOrShare.Instance.ShareRoomID(GameData.m_TableInfo.id, "一起来玩闲娱狗吧！"+ ((int)GameData.m_TableInfo.configRoundIndex).ToString() + "局!"+ (GameData.m_PlayerInfoList.Count).ToString() + "缺" +(4 - GameData.m_PlayerInfoList.Count).ToString() +"!"+"  房主支付!","闲娱狗讨赏");
+                // jishu =1111;
+                AuthorizeOrShare.Instance.ShareRoomID(GameData.m_TableInfo.id, "一起来玩闲娱狗吧！" + ((int)GameData.m_TableInfo.configRoundIndex).ToString() + "局!" + (GameData.m_PlayerInfoList.Count).ToString() + "缺" + (4 - GameData.m_PlayerInfoList.Count).ToString() + "!" + "  房主支付!", "闲娱狗讨赏");
                 // RuleLable.text = "局数：" + GameData.m_TableInfo.curGameCount.ToString() + "/" + GameData.m_TableInfo.configRoundIndex.ToString() + "  房主支付";
-              //  jishu = 11112222;
+                //  jishu = 11112222;
                 break;
             case 1:
-              //  jishu = 2222;
+                //  jishu = 2222;
                 AuthorizeOrShare.Instance.ShareRoomID(GameData.m_TableInfo.id, "一起来玩闲娱狗吧！" + ((int)GameData.m_TableInfo.configRoundIndex).ToString() + "局!" + (GameData.m_PlayerInfoList.Count).ToString() + "缺" + (4 - GameData.m_PlayerInfoList.Count).ToString() + "!" + "  平摊支付!", "闲娱狗讨赏");
                 // RuleLable.text = "局数：" + GameData.m_TableInfo.curGameCount.ToString() + "/" + GameData.m_TableInfo.configRoundIndex.ToString() + "  平均支付";
-               // jishu = 22223333;
+                // jishu = 22223333;
                 break;
         }
-      
+
 
     }
 
 
-  
+
     #region  聊天相关
     //聊天内容
     List<string> ChatList = new List<string>() {
@@ -274,11 +274,11 @@ public class DzViewGame : UIBase<DzViewGame>
                     if (GameData.m_PlayerInfoList[i].guid == ulong.Parse(strs[1]))
                     {
                         IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.Find("ChatSprite").GetComponent<ChatControl>().SetValue(strs[2]);
-                       // SoundControl.Instance.PlayChatSound((int)GameData.m_PlayerInfoList[i].sex, int.Parse(strs[2]));
+                        // SoundControl.Instance.PlayChatSound((int)GameData.m_PlayerInfoList[i].sex, int.Parse(strs[2]));
                     }
                 }
             }
-           
+
         }
     }
     /// <summary>
@@ -294,7 +294,7 @@ public class DzViewGame : UIBase<DzViewGame>
     /// 发送表情聊天信息
     /// </summary>
     /// <param name="content"></param>
-    public void onPlayerSendFaceChatFace(uint roomid,string content)
+    public void onPlayerSendFaceChatFace(uint roomid, string content)
     {
         StartCoroutine(AsynCreateChatFace(content));
     }
@@ -383,7 +383,7 @@ public class DzViewGame : UIBase<DzViewGame>
     /// </summary>
     public void ResetPlayerAI()
     {
-       // AiButton.gameObject.SetActive(true);
+        // AiButton.gameObject.SetActive(true);
         for (int i = 0; i < GameData.m_PlayerInfoList.Count; i++)
         {
             OnPlayerAi((int)GameData.m_TableInfo.id, GameData.m_PlayerInfoList[i].pos, GameData.m_PlayerInfoList[i].IsAi);
@@ -422,7 +422,7 @@ public class DzViewGame : UIBase<DzViewGame>
     {
         if (pos != 0)
         {
-            for (int i = 1; i < IdAndPlayerDic.Count+1; i++)
+            for (int i = 1; i < IdAndPlayerDic.Count + 1; i++)
             {
                 //
                 IdAndPlayerDic[pos].transform.Find("OtherPanel").Find("LandSprite").gameObject.SetActive(false);
@@ -453,7 +453,7 @@ public class DzViewGame : UIBase<DzViewGame>
             }
 
             // IdAndPlayerDic[pos].transform.FindChild("FriendCard").gameObject.SetActive(true);
-           // IdAndPlayerDic[pos].transform.FindChild("FriendCard").GetComponent<Card>().SetValue(CardValue);
+            // IdAndPlayerDic[pos].transform.FindChild("FriendCard").GetComponent<Card>().SetValue(CardValue);
         }
         //  if(SelfPos==)
         IdAndPlayerDic[SelfPos].transform.Find("OtherPanel").Find("HelperSprite").gameObject.SetActive(false);
@@ -467,10 +467,10 @@ public class DzViewGame : UIBase<DzViewGame>
         for (int i = 0; i < IdAndPlayerDic.Count; i++)
         {
             //LandSprite
-            IdAndPlayerDic[i+1].transform.Find("OtherPanel").Find("HelperSprite").gameObject.SetActive(false);
+            IdAndPlayerDic[i + 1].transform.Find("OtherPanel").Find("HelperSprite").gameObject.SetActive(false);
             IdAndPlayerDic[i + 1].transform.Find("OtherPanel").Find("LandSprite").gameObject.SetActive(false);
 
-           // IdAndPlayerDic[i + 1].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(true);
+            // IdAndPlayerDic[i + 1].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(true);
         }
         if (pos != 0)
         {
@@ -497,10 +497,10 @@ public class DzViewGame : UIBase<DzViewGame>
                             .SetActive(true);
                     }
                 }
-              //  IdAndPlayerDic[pos].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(false);
+                //  IdAndPlayerDic[pos].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(false);
             }
-           // IdAndPlayerDic[pos].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(false);
-          //  IdAndPlayerDic[pos].transform.FindChild("OtherPanel").FindChild("LandSprite").gameObject.SetActive(false);
+            // IdAndPlayerDic[pos].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(false);
+            //  IdAndPlayerDic[pos].transform.FindChild("OtherPanel").FindChild("LandSprite").gameObject.SetActive(false);
             // IdAndPlayerDic[pos].transform.FindChild("FriendCard").gameObject.SetActive(true);
             // IdAndPlayerDic[pos].transform.FindChild("FriendCard").GetComponent<Card>().SetValue(CardValue);
         }
@@ -531,7 +531,7 @@ public class DzViewGame : UIBase<DzViewGame>
     {
         PlayerInfo selfinfo = GameDataFunc.GetPlayerInfo(Player.Instance.guid);
 
-       
+
         IdAndPlayerDic = new Dictionary<int, GameObject>();
         #region   设置位置
 
@@ -655,9 +655,9 @@ public class DzViewGame : UIBase<DzViewGame>
 
         //  onZhuangPosition();//庄的位置
 
-      
 
-      //  ResetPlayerAI();//重置托管
+
+        //  ResetPlayerAI();//重置托管
 
 
         if (GameData.m_TableInfo.roomState == RoomStatusType.Active)
@@ -685,13 +685,13 @@ public class DzViewGame : UIBase<DzViewGame>
                 if (GameData.m_PlayerInfoList[i].pos == LargestPos)
                 {
                     LargestCard = GameData.m_PlayerInfoList[i].outCardList;
-                  
+
                 }
 
                 SetTotalJifen(GameData.m_PlayerInfoList[i].pos, GameData.m_PlayerInfoList[i].score);//重置总积分
                 SetTaoShangFen(GameData.m_PlayerInfoList[i].pos, (int)GameData.m_PlayerInfoList[i].TSTaoShangScore);//重置讨赏分
-              //  ShowLeftCardNum(GameData.m_PlayerInfoList[i].pos, GameData.m_PlayerInfoList[i].LeftCardNum);//重置剩余多少张手牌
-              //  IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos]
+                                                                                                                    //  ShowLeftCardNum(GameData.m_PlayerInfoList[i].pos, GameData.m_PlayerInfoList[i].LeftCardNum);//重置剩余多少张手牌
+                                                                                                                    //  IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos]
             }
 
 
@@ -705,7 +705,7 @@ public class DzViewGame : UIBase<DzViewGame>
             {
                 ShowOperatePanle(GameData.m_TableInfo.waitOutCardPos, PuKeOperateType.JiePai);
             }
-          
+
 
             InviteFriend.gameObject.SetActive(false);
             DisposRoomBtn.gameObject.SetActive(false);//DisposRoomBtn
@@ -734,7 +734,7 @@ public class DzViewGame : UIBase<DzViewGame>
                     IdAndPlayerDic[i + 1].transform.Find("OtherPanel").Find("HelperSprite").gameObject.SetActive(false);
                     IdAndPlayerDic[i + 1].transform.Find("OtherPanel").Find("LandSprite").gameObject.SetActive(false);
 
-                  //  IdAndPlayerDic[i + 1].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(true);
+                    //  IdAndPlayerDic[i + 1].transform.FindChild("OtherPanel").FindChild("HelperSprite").gameObject.SetActive(true);
                 }
                 if (GameData.m_TableInfo.ZhuangPos == SelfPos || GameData.m_TableInfo.FriendPos == SelfPos)
                 {
@@ -748,7 +748,7 @@ public class DzViewGame : UIBase<DzViewGame>
                 }
                 else
                 {
-                    for (int i = 1; i < IdAndPlayerDic.Count+1; i++)
+                    for (int i = 1; i < IdAndPlayerDic.Count + 1; i++)
                     {
                         if (GameData.m_TableInfo.configPlayerIndex == 4)
                         {
@@ -823,7 +823,7 @@ public class DzViewGame : UIBase<DzViewGame>
         {
             onPlayerOnForce(GameData.m_PlayerInfoList[i].pos, GameData.m_PlayerInfoList[i].isForce);
         }
-       
+
     }
     /// <summary>
     /// 重连生成打出的牌
@@ -899,7 +899,7 @@ public class DzViewGame : UIBase<DzViewGame>
         }
         else if (GameData.m_TableInfo.configPlayerIndex == 2)
         {
-            for (int i = 1; i <3; i++)
+            for (int i = 1; i < 3; i++)
             {
                 SetTaoShangFen(i, 0);//设置讨赏分
                 HideOperatePanle(i);
@@ -919,7 +919,7 @@ public class DzViewGame : UIBase<DzViewGame>
 
         ResetLeftCardNum();
         HideZhuangAndHelper();
-     
+
         FriendCard.SetActive(false);
         ResetFinishPlayerIndex();
 
@@ -928,7 +928,7 @@ public class DzViewGame : UIBase<DzViewGame>
 
 
         ResetCardSortType();//重置排序
-      //  StartCoroutine(GameOverTimeDely());
+                            //  StartCoroutine(GameOverTimeDely());
     }
 
     IEnumerator GameOverTimeDely()
@@ -969,7 +969,7 @@ public class DzViewGame : UIBase<DzViewGame>
 
         HideZhuangAndHelper();
         //ReadyBtn.gameObject.SetActive(true);
-      //  AiButton.gameObject.SetActive(false);
+        //  AiButton.gameObject.SetActive(false);
         FriendCard.SetActive(false);
 
     }
@@ -1178,15 +1178,15 @@ public class DzViewGame : UIBase<DzViewGame>
         else
         {
             TipSeperateBoomObj.SetActive(true);
-           pams = pms;
+            pams = pms;
         }
 
-       
+
         // ClientToServerMsg.SendChuPai(GameData.m_DDZTableInfo.id, cards);
     }
 
 
-   public  object[] pams;
+    public object[] pams;
     /// <summary>
     /// 提示拆炸弹出牌
     /// </summary>
@@ -1255,24 +1255,24 @@ public class DzViewGame : UIBase<DzViewGame>
                         showStr += " " + GameData.sendroominfo.JiangMa[i].ToString();
                         break;
                     case 11:
-                        showStr += " J" ;
+                        showStr += " J";
                         break;
                     case 13:
-                        showStr += " K" ;
+                        showStr += " K";
                         break;
                     case 14:
-                        showStr += " A" ;
+                        showStr += " A";
                         break;
                 }
-              
+
             }
             showStr += "开奖";
         }
-        if (GameData.sendroominfo.FaWangTp) showStr +="  罚王摊牌";
+        if (GameData.sendroominfo.FaWangTp) showStr += "  罚王摊牌";
 
         if (GameData.sendroominfo.WuZhaTp) showStr += "  无炸摊牌";
 
-       
+
 
         DetailRuleLable.text = showStr;
     }
@@ -1365,7 +1365,7 @@ public class DzViewGame : UIBase<DzViewGame>
                 }
             }
         }
-      
+
 
         #region
         //switch (GameData.m_PlayerInfoList.Count)//设置玩家的显示
@@ -1543,7 +1543,7 @@ public class DzViewGame : UIBase<DzViewGame>
             // PlayerObjList[(int)GameData.m_PlayerInfoList[i].LVD].transform.Find("ready").gameObject.SetActive(false);
         }
         GameData.m_TableInfo.roomState = RoomStatusType.Active;
-      
+
         SetRoomInfo();//更新房间信息
         #region
         //if (GameData.m_TableInfo.configPlayerIndex == 2)
@@ -1639,7 +1639,7 @@ public class DzViewGame : UIBase<DzViewGame>
         QuiteRoomBtn.gameObject.SetActive(false);
         ReadyBtn.gameObject.SetActive(false);
         EffectCount = 4;//重置有效玩家数
-        
+
         PlayerInfo info = GameDataFunc.GetPlayerInfo(Player.Instance.guid);
         CardDataList = new List<CardData>();
         CardList = info.localCardList;//还原手牌数据
@@ -1652,7 +1652,7 @@ public class DzViewGame : UIBase<DzViewGame>
 
             GameObject item = GameObject.Instantiate(CardObj, CardPoint.transform);
             item.transform.localPosition = new Vector3(0, 0, 0);
-            item.transform.localScale =new Vector3(1.3f,1.3f,0);
+            item.transform.localScale = new Vector3(1.3f, 1.3f, 0);
             item.transform.GetComponent<Card>().SetValue(info.localCardList[i]);
             item.SetActive(false);
             LocalCardsObjList.Add(item);//增加手牌
@@ -1690,7 +1690,7 @@ public class DzViewGame : UIBase<DzViewGame>
     {
         for (int i = 0; i < LocalCardsObjList.Count; i++)
         {
-            LocalCardsObjList[i].transform.localPosition = new Vector3(-590f + (ScreenWith / LocalCardsObjList.Count) * i, 0, 0);
+            LocalCardsObjList[i].transform.localPosition = new Vector3(-573 + ((ScreenWith / LocalCardsObjList.Count) - 2) * i, 0, 0);
             LocalCardsObjList[i].SetActive(true);
             LocalCardsObjList[i].transform.GetComponent<Card>().ScaleMove();
             yield return new WaitForSeconds(0.1f);
@@ -1706,7 +1706,7 @@ public class DzViewGame : UIBase<DzViewGame>
 
 
 
-  
+
     bool MoveEnd = false;
     /// <summary>
     /// 往中间走
@@ -1734,7 +1734,7 @@ public class DzViewGame : UIBase<DzViewGame>
         NumSort//数量排序
 
     };
-     SortType CardSortType = SortType.ValueSort;//牌排序的方式
+    SortType CardSortType = SortType.ValueSort;//牌排序的方式
     bool NumSort = false;//是否数量排序
     /// <summary>
     /// 设置排序
@@ -1772,293 +1772,301 @@ public class DzViewGame : UIBase<DzViewGame>
         // LocalCardsObjList.Sort();
         // CardDataList.Sort();
 
-        #region 
-        if (CardSortType == SortType.ValueSort)
-        {
-            List<CardData> newlist = CardDataSort(CardDataList);
-            for (int i = 0; i < newlist.Count; i++)
-            {
-                LocalCardsObjList[i].transform.GetComponent<Card>().SetValue(newlist[i].data, newlist[i].Index);
-            }
-
-        }
-        else
-        {
-            List<CardData> a = CardDataNumSort(CardDataList);
-
-            for (int i = 0; i < a.Count; i++)
-
-            {
-                LocalCardsObjList[i].transform.GetComponent<Card>().SetValue(a[i].data, a[i].Index);
-            }
-        }
-
-
         #region
-        //    if (LocalCardsObjList.Count >= 20)//25张的排序
-        //    {
-        //        float startDistance = 32f * (LocalCardsObjList.Count / 2) + 64f;
-        //        for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        {
-        //            //  Vector3 v = LocalCardsObjList[i].transform.position;
-        //            //if (i == 0)
-        //            //{
-        //            //    LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint - (ScreenWith / (float)LocalCardsObjList.Count) * i , 0, 0);
-        //            //}
-        //            //else
-        //            //{
-        //            //    LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint - (ScreenWith / (float)LocalCardsObjList.Count) * i - 30, 0, 0);
-        //            //}
-        //            LocalCardsObjList[i].transform.localPosition = new Vector3(20-StartCardPoint - (ScreenWith / (float)LocalCardsObjList.Count) * i, 0, 0);
-        //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
-        //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
-        //            if (i != 0)
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //            }
-        //            else
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //            }
-        //        }
-        //    }
-        //   else if (LocalCardsObjList.Count < 20 && LocalCardsObjList.Count > 15)
-        //    {
 
-        //        for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        {
-        //            //  Vector3 v = LocalCardsObjList[i].transform.position;
-        //            LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint1 - (ScreenWith1 / LocalCardsObjList.Count) * i, 0, 0);
-        //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
-        //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
-        //            if (i != 0)
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //            }
-        //            else
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //            }
-        //        }
-        //        #region  
-        //        //if (LocalCardsObjList.Count % 2 == 1)//基数张
-        //        //{
-        //        //    for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        //    {
-        //        //        LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 50 - 50 * i, CardPoint.transform.position.y, 0);
-        //        //      //  LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 35- 35 * i, CardPoint.transform.position.y, 0);
-        //        //        if (i != 0)
-        //        //        {
-        //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //        //        }
-        //        //        else
-        //        //        {
-        //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //        //        }
-        //        //    }
+        try
+        {
+            if (CardSortType == SortType.ValueSort)
+            {
+                List<CardData> newlist = CardDataSort(CardDataList);
+                for (int i = 0; i < newlist.Count; i++)
+                {
+                    LocalCardsObjList[i].transform.GetComponent<Card>().SetValue(newlist[i].data, newlist[i].Index);
+                }
 
+            }
+            else
+            {
+                List<CardData> a = CardDataNumSort(CardDataList);
 
-        //        //}
+                for (int i = 0; i < a.Count; i++)
 
-        //        //else //偶数张
-        //        //{
-        //        //    for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        //    {
-        //        //        LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count ) / 2) * 50 - 50 * i - 50, CardPoint.transform.position.y, 0);
-        //        //        if (i != 0)
-        //        //        {
-        //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //        //        }
-        //        //        else
-        //        //        {
-        //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //        //        }
-        //        //    }
-        //        //}
+                {
+                    LocalCardsObjList[i].transform.GetComponent<Card>().SetValue(a[i].data, a[i].Index);
+                }
+            }
 
-        //        #endregion
-        //    }
+            #region
+            //    if (LocalCardsObjList.Count >= 20)//25张的排序
+            //    {
+            //        float startDistance = 32f * (LocalCardsObjList.Count / 2) + 64f;
+            //        for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        {
+            //            //  Vector3 v = LocalCardsObjList[i].transform.position;
+            //            //if (i == 0)
+            //            //{
+            //            //    LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint - (ScreenWith / (float)LocalCardsObjList.Count) * i , 0, 0);
+            //            //}
+            //            //else
+            //            //{
+            //            //    LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint - (ScreenWith / (float)LocalCardsObjList.Count) * i - 30, 0, 0);
+            //            //}
+            //            LocalCardsObjList[i].transform.localPosition = new Vector3(20-StartCardPoint - (ScreenWith / (float)LocalCardsObjList.Count) * i, 0, 0);
+            //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
+            //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
+            //            if (i != 0)
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //            }
+            //            else
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //            }
+            //        }
+            //    }
+            //   else if (LocalCardsObjList.Count < 20 && LocalCardsObjList.Count > 15)
+            //    {
 
-        //    else if (LocalCardsObjList.Count <= 15 && LocalCardsObjList.Count > 10)
-        //    {
-        //        for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        {
-        //            //  Vector3 v = LocalCardsObjList[i].transform.position;
-        //            LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint2 - (ScreenWith2 / LocalCardsObjList.Count) * i, 0, 0);
-        //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
-        //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
-        //            if (i != 0)
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //            }
-        //            else
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //            }
-        //        }
-        //        #region
-        //        //if (LocalCardsObjList.Count % 2 == 1)//基数张
-        //        //{
-        //        //    for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        //    {
-        //        //        LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 60 - 60 * i, CardPoint.transform.position.y, 0);
-        //        //        if (i != 0)
-        //        //        {
-        //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //        //        }
-        //        //        else
-        //        //        {
-        //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //        //        }
-        //        //    }
+            //        for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        {
+            //            //  Vector3 v = LocalCardsObjList[i].transform.position;
+            //            LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint1 - (ScreenWith1 / LocalCardsObjList.Count) * i, 0, 0);
+            //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
+            //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
+            //            if (i != 0)
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //            }
+            //            else
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //            }
+            //        }
+            //        #region  
+            //        //if (LocalCardsObjList.Count % 2 == 1)//基数张
+            //        //{
+            //        //    for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        //    {
+            //        //        LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 50 - 50 * i, CardPoint.transform.position.y, 0);
+            //        //      //  LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 35- 35 * i, CardPoint.transform.position.y, 0);
+            //        //        if (i != 0)
+            //        //        {
+            //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //        //        }
+            //        //        else
+            //        //        {
+            //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //        //        }
+            //        //    }
 
 
-        //        //}
+            //        //}
 
-        //        //else //偶数张
-        //        //{
-        //        //    for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        //    {
-        //        //        LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 60 - 60 * i -50, CardPoint.transform.position.y, 0);
-        //        //        if (i != 0)
-        //        //        {
-        //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //        //        }
-        //        //        else
-        //        //        {
-        //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //        //        }
-        //        //    }
-        //        //}
-        //        #endregion
-        //    }
-        //    else  if (LocalCardsObjList.Count <= 10 && LocalCardsObjList.Count > 5)
-        //        {
-        //        for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        {
-        //            //  Vector3 v = LocalCardsObjList[i].transform.position;
-        //            LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint3 -(ScreenWith3 / LocalCardsObjList.Count) * i, 0, 0);
-        //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
-        //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
-        //            if (i != 0)
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //            }
-        //            else
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //            }
-        //        }
-        //        #region
-        //        /*
-        //            if (LocalCardsObjList.Count % 2 == 1)//基数张
-        //            {
-        //                for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //                {
-        //                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 65 - 65 * i, CardPoint.transform.position.y, 0);
-        //                    if (i != 0)
-        //                    {
-        //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //                    }
-        //                    else
-        //                    {
-        //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //                    }
-        //                }
+            //        //else //偶数张
+            //        //{
+            //        //    for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        //    {
+            //        //        LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count ) / 2) * 50 - 50 * i - 50, CardPoint.transform.position.y, 0);
+            //        //        if (i != 0)
+            //        //        {
+            //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //        //        }
+            //        //        else
+            //        //        {
+            //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //        //        }
+            //        //    }
+            //        //}
 
+            //        #endregion
+            //    }
 
-        //            }
-
-        //            else //偶数张
-        //            {
-        //                for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //                {
-        //                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 55 -50 * i +50, CardPoint.transform.position.y, 0);
-        //                    if (i != 0)
-        //                    {
-        //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //                    }
-        //                    else
-        //                    {
-        //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //                    }
-        //                }
-        //            }
-
-        //*/
-
-        //        #endregion
-        //    }
+            //    else if (LocalCardsObjList.Count <= 15 && LocalCardsObjList.Count > 10)
+            //    {
+            //        for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        {
+            //            //  Vector3 v = LocalCardsObjList[i].transform.position;
+            //            LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint2 - (ScreenWith2 / LocalCardsObjList.Count) * i, 0, 0);
+            //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
+            //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
+            //            if (i != 0)
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //            }
+            //            else
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //            }
+            //        }
+            //        #region
+            //        //if (LocalCardsObjList.Count % 2 == 1)//基数张
+            //        //{
+            //        //    for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        //    {
+            //        //        LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 60 - 60 * i, CardPoint.transform.position.y, 0);
+            //        //        if (i != 0)
+            //        //        {
+            //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //        //        }
+            //        //        else
+            //        //        {
+            //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //        //        }
+            //        //    }
 
 
-        //    else  if (LocalCardsObjList.Count <= 5 && LocalCardsObjList.Count > 1)
-        //        {
-        //        for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //        {
-        //            //  Vector3 v = LocalCardsObjList[i].transform.position;
-        //            LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint4 - (ScreenWith4 / LocalCardsObjList.Count) * i, 0, 0);
-        //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
-        //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
-        //            if (i != 0)
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //            }
-        //            else
-        //            {
-        //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //            }
-        //        }
-        //        #region
-        //        /*
-        //            if (LocalCardsObjList.Count % 2 == 1)//基数张
-        //            {
-        //                for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //                {
-        //                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 60 - 60 * i, CardPoint.transform.position.y, 0);
-        //                    if (i != 0)
-        //                    {
-        //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //                    }
-        //                    else
-        //                    {
-        //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //                    }
-        //                }
+            //        //}
+
+            //        //else //偶数张
+            //        //{
+            //        //    for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        //    {
+            //        //        LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 60 - 60 * i -50, CardPoint.transform.position.y, 0);
+            //        //        if (i != 0)
+            //        //        {
+            //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //        //        }
+            //        //        else
+            //        //        {
+            //        //            LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //        //        }
+            //        //    }
+            //        //}
+            //        #endregion
+            //    }
+            //    else  if (LocalCardsObjList.Count <= 10 && LocalCardsObjList.Count > 5)
+            //        {
+            //        for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        {
+            //            //  Vector3 v = LocalCardsObjList[i].transform.position;
+            //            LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint3 -(ScreenWith3 / LocalCardsObjList.Count) * i, 0, 0);
+            //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
+            //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
+            //            if (i != 0)
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //            }
+            //            else
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //            }
+            //        }
+            //        #region
+            //        /*
+            //            if (LocalCardsObjList.Count % 2 == 1)//基数张
+            //            {
+            //                for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //                {
+            //                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 65 - 65 * i, CardPoint.transform.position.y, 0);
+            //                    if (i != 0)
+            //                    {
+            //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //                    }
+            //                    else
+            //                    {
+            //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //                    }
+            //                }
 
 
-        //            }
+            //            }
 
-        //            else //偶数张
-        //            {
-        //                for (int i = 0; i < LocalCardsObjList.Count; i++)
-        //                {
-        //                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 60 - 60 * i + 50, CardPoint.transform.position.y, 0);
-        //                    if (i != 0)
-        //                    {
-        //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
-        //                    }
-        //                    else
-        //                    {
-        //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
-        //                    }
-        //                }
-        //            }
+            //            else //偶数张
+            //            {
+            //                for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //                {
+            //                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 55 -50 * i +50, CardPoint.transform.position.y, 0);
+            //                    if (i != 0)
+            //                    {
+            //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //                    }
+            //                    else
+            //                    {
+            //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //                    }
+            //                }
+            //            }
 
-        //*/
+            //*/
 
-        //        #endregion
-        //    }
+            //        #endregion
+            //    }
 
-        //    else if ( LocalCardsObjList.Count == 1)
-        //    {
-        //        LocalCardsObjList[0].transform.localPosition = Vector3.zero;
-        //    }
 
-        #endregion
+            //    else  if (LocalCardsObjList.Count <= 5 && LocalCardsObjList.Count > 1)
+            //        {
+            //        for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //        {
+            //            //  Vector3 v = LocalCardsObjList[i].transform.position;
+            //            LocalCardsObjList[i].transform.localPosition = new Vector3(-StartCardPoint4 - (ScreenWith4 / LocalCardsObjList.Count) * i, 0, 0);
+            //            // AnimSystem.Instance.MoveTo(LocalCardsObjList[i], new Vector3((startDistance - 32 * i) / 350f, CardPoint.transform.position.y, 0), iTween.EaseType.easeOutBack);
+            //            // LocalCardsObjList[i].transform.localPosition = new Vector3((startDistance -40  * i)/320f, CardPoint.transform.position.y, 0);
+            //            if (i != 0)
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //            }
+            //            else
+            //            {
+            //                LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //            }
+            //        }
+            //        #region
+            //        /*
+            //            if (LocalCardsObjList.Count % 2 == 1)//基数张
+            //            {
+            //                for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //                {
+            //                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 60 - 60 * i, CardPoint.transform.position.y, 0);
+            //                    if (i != 0)
+            //                    {
+            //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //                    }
+            //                    else
+            //                    {
+            //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //                    }
+            //                }
 
-        CardDistanceControl();
-        SortBtn.gameObject.SetActive(true);//显示排序按钮
 
+            //            }
+
+            //            else //偶数张
+            //            {
+            //                for (int i = 0; i < LocalCardsObjList.Count; i++)
+            //                {
+            //                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * 60 - 60 * i + 50, CardPoint.transform.position.y, 0);
+            //                    if (i != 0)
+            //                    {
+            //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = LocalCardsObjList[i - 1].transform.GetComponent<UISprite>().depth - 1;
+            //                    }
+            //                    else
+            //                    {
+            //                        LocalCardsObjList[i].transform.GetComponent<UISprite>().depth = 30;
+            //                    }
+            //                }
+            //            }
+
+            //*/
+
+            //        #endregion
+            //    }
+
+            //    else if ( LocalCardsObjList.Count == 1)
+            //    {
+            //        LocalCardsObjList[0].transform.localPosition = Vector3.zero;
+            //    }
+
+            #endregion
+
+            CardDistanceControl();
+            SortBtn.gameObject.SetActive(true);//显示排序按钮
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message + "手牌动画中，但是房间已销毁，手牌被删除。");
+            return;
+        }
 
         #endregion
 
@@ -2077,7 +2085,7 @@ public class DzViewGame : UIBase<DzViewGame>
         if (LocalCardsObjList.Count >= 20)//25张的排序
         {
 
-            float newStartIndex = (ScreenWith / (float)LocalCardsObjList.Count);//牌间距
+            float newStartIndex = (ScreenWith / (float)LocalCardsObjList.Count) - 2;//牌间距(减去2因为增加了牌的宽度 所以间距减少一点)
             for (int i = 0; i < LocalCardsObjList.Count; i++)
             {
                 if (LocalCardsObjList.Count % 2 == 0)//偶数张
@@ -2121,13 +2129,13 @@ public class DzViewGame : UIBase<DzViewGame>
             {
                 if (LocalCardsObjList.Count % 2 == 0)//偶数张
                 {
-                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count/2) * newStartIndex-(newStartIndex/2f)) - newStartIndex * i, 0, 0);
+                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count / 2) * newStartIndex - (newStartIndex / 2f)) - newStartIndex * i, 0, 0);
                 }
                 else
                 {
-                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count-1) / 2) * newStartIndex  - newStartIndex * i, 0, 0);
+                    LocalCardsObjList[i].transform.localPosition = new Vector3(((LocalCardsObjList.Count - 1) / 2) * newStartIndex - newStartIndex * i, 0, 0);
                 }
-               // LocalCardsObjList[i].transform.localPosition = new Vector3(NewStartPoint - (ScreenWith / ((float)LocalCardsObjList.Count - 1)) * i, 0, 0);
+                // LocalCardsObjList[i].transform.localPosition = new Vector3(NewStartPoint - (ScreenWith / ((float)LocalCardsObjList.Count - 1)) * i, 0, 0);
 
                 if (i != 0)
                 {
@@ -2204,7 +2212,7 @@ public class DzViewGame : UIBase<DzViewGame>
 
                 }
 
-               
+
                 else
                 {
                     if (newList.Count > 1)
@@ -2214,7 +2222,7 @@ public class DzViewGame : UIBase<DzViewGame>
                             return -((int)a.data - (int)b.data);
                         });
                     }
-                   
+
                     newListIndex.AddRange(newList);
                     newList = new List<CardData>();
                     newList.Add(cardlist[i]);
@@ -2245,7 +2253,7 @@ public class DzViewGame : UIBase<DzViewGame>
         {
             cardlist[i].Index = i;
         }
-        
+
         return cardlist;
     }
 
@@ -2263,7 +2271,7 @@ public class DzViewGame : UIBase<DzViewGame>
         }
         newlist = CardTools.CardNumSort(newlist);
         List<CardData> newCardDataList = new List<CardData>();
-       // cardlist = new List<CardData>();
+        // cardlist = new List<CardData>();
         //for (int i = 0; i < newlist.Count; i++)
         //{
         //    CardData data = new CardData();
@@ -2275,7 +2283,7 @@ public class DzViewGame : UIBase<DzViewGame>
         //    //newCardDataList[i].Index = i;
         //}
 
-        for (int i = newlist.Count-1; i >=0; i--)
+        for (int i = newlist.Count - 1; i >= 0; i--)
         {
             CardData data = new CardData();
             data.data = newlist[i];
@@ -2493,7 +2501,7 @@ public class DzViewGame : UIBase<DzViewGame>
 
         // HideOperateBtn();
         PlayerInfo info = GameDataFunc.GetPlayerInfo(pos);
-       // SetTaoShangFen(pos, TaoShangScore);//设置讨赏分
+        // SetTaoShangFen(pos, TaoShangScore);//设置讨赏分
         NoticeClickCount = -1;//提示相关
         // IdAndPlayerDic[pos].transform.FindChild("TaoShangSprite").FindChild("Label").GetComponent<UILabel>().text = TaoShangScore.ToString();
         switch (opType)
@@ -2595,7 +2603,7 @@ public class DzViewGame : UIBase<DzViewGame>
                 item.Value.transform.Find("OtherPanel").Find("LandSprite").gameObject.SetActive(true);
             }
         }
-      //  ShowOperatePanle(GameData.m_TableInfo.ZhuangPos, PuKeOperateType.ChuPai);
+        //  ShowOperatePanle(GameData.m_TableInfo.ZhuangPos, PuKeOperateType.ChuPai);
 
 
         Debug.Log("庄家位置返回");
@@ -2653,7 +2661,7 @@ public class DzViewGame : UIBase<DzViewGame>
         {
 
         }
-        if (type==PuKeOperateType.ChuPai)
+        if (type == PuKeOperateType.ChuPai)
         {
             for (int i = 1; i < 5; i++)
             {
@@ -2668,7 +2676,7 @@ public class DzViewGame : UIBase<DzViewGame>
     public void CheckOperateShow(PuKeOperateType type)
     {
 
-        if (type==PuKeOperateType.ChuPai)
+        if (type == PuKeOperateType.ChuPai)
         {
             IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("DontPlayOperateSprite").gameObject.SetActive(true);
             IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("NoticeSprite").gameObject.SetActive(true);
@@ -2706,44 +2714,44 @@ public class DzViewGame : UIBase<DzViewGame>
             //}
             //else
             //{
-                #region 判断有没有大过的牌
-                List<uint> uintCard = new List<uint>();
-                List<List<uint>> CanPressList = new List<List<uint>>();
-                for (int i = 0; i < LocalCardsObjList.Count; i++)
-                {
-                    uintCard.Add(uint.Parse(LocalCardsObjList[i].transform.GetComponent<UISprite>().spriteName));
-                }
-                if (LargestCard.Count != 0)
-                {
-                    // CanPressCardList = myQiPaiHelper.Instance.getFitCards(LargestCard, uintCard, ref IsSeperateBoom);
+            #region 判断有没有大过的牌
+            List<uint> uintCard = new List<uint>();
+            List<List<uint>> CanPressList = new List<List<uint>>();
+            for (int i = 0; i < LocalCardsObjList.Count; i++)
+            {
+                uintCard.Add(uint.Parse(LocalCardsObjList[i].transform.GetComponent<UISprite>().spriteName));
+            }
+            if (LargestCard.Count != 0)
+            {
+                // CanPressCardList = myQiPaiHelper.Instance.getFitCards(LargestCard, uintCard, ref IsSeperateBoom);
 
-                    CanPressList = myQiPaiHelper.Instance.getFitCards(LargestCard, uintCard, GameData.m_TableInfo.isBawang);
-                    //  SetNoticeCardShow(NoticeClickCount);
-                }
-                else
-                {
-                    Debug.LogError("当前没有最大牌");
-                }
-                #endregion
+                CanPressList = myQiPaiHelper.Instance.getFitCards(LargestCard, uintCard, GameData.m_TableInfo.isBawang);
+                //  SetNoticeCardShow(NoticeClickCount);
+            }
+            else
+            {
+                Debug.LogError("当前没有最大牌");
+            }
+            #endregion
 
-                if (CanPressList.Count > 0)//有大过的牌
-                {
-
-                }
-                else//没有大过的牌
-                {
-                    IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("DontPlayOperateSprite").gameObject.SetActive(false);
-                    IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("NoticeSprite").gameObject.SetActive(false);
-                    IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("PlaySprite").gameObject.SetActive(false);
-                    IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("YaoBuYiSprite").gameObject.SetActive(true);
-                    IdAndPlayerDic[SelfPos].transform.Find("NoLargeCardNoticeSprite").gameObject.SetActive(true);
-                }
-
+            if (CanPressList.Count > 0)//有大过的牌
+            {
 
             }
-        }
+            else//没有大过的牌
+            {
+                IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("DontPlayOperateSprite").gameObject.SetActive(false);
+                IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("NoticeSprite").gameObject.SetActive(false);
+                IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("PlaySprite").gameObject.SetActive(false);
+                IdAndPlayerDic[SelfPos].transform.Find("OperatePanel").Find("YaoBuYiSprite").gameObject.SetActive(true);
+                IdAndPlayerDic[SelfPos].transform.Find("NoLargeCardNoticeSprite").gameObject.SetActive(true);
+            }
 
-   // }
+
+        }
+    }
+
+    // }
 
     /// <summary>
     /// 隐藏操作界面
@@ -2879,7 +2887,7 @@ public class DzViewGame : UIBase<DzViewGame>
     /// <summary>
     /// 除掉选中的牌(出牌返回)
     /// </summary>
-  
+
     public void DestroyChoseCard()
     {
         List<GameObject> NewCard = new List<GameObject>();
@@ -2921,11 +2929,11 @@ public class DzViewGame : UIBase<DzViewGame>
         {
             Destroy(NeedDestroycard[i]);
         }
-      
-       
-            CardSort();
-       
-    
+
+
+        CardSort();
+
+
         CurChooseCardsObjList = new List<GameObject>();
     }
     /// <summary>
@@ -2944,8 +2952,8 @@ public class DzViewGame : UIBase<DzViewGame>
                 IdAndPlayerDic[pos].transform.Find("PlayedCardPoint").localPosition = new Vector3(-240 - cardlist.Count * 12, 0, 0);
             }
         }
-       
-         if (SelfPos - pos == 1 || SelfPos - pos == -3)//左边玩家
+
+        if (SelfPos - pos == 1 || SelfPos - pos == -3)//左边玩家
         {
 
         }
@@ -2975,7 +2983,7 @@ public class DzViewGame : UIBase<DzViewGame>
             else
             {
                 card.transform.localPosition = new Vector3(i * 25, 0, 0);
-              //  card.transform.GetComponent<UISprite>().depth=
+                //  card.transform.GetComponent<UISprite>().depth=
             }
 
             card.transform.GetComponent<Card>().SetValue(cardlist[i]);
@@ -2989,7 +2997,7 @@ public class DzViewGame : UIBase<DzViewGame>
                 PosAndPlayedCard[pos][i].transform.GetComponent<UISprite>().depth = PosAndPlayedCard[pos][0].transform.GetComponent<UISprite>().depth * 2 * i;
                 PosAndPlayedCard[pos][i].transform.Find("Sprite").GetComponent<UISprite>().depth = PosAndPlayedCard[pos][i].transform.GetComponent<UISprite>().depth + 1;
             }
-           
+
         }
     }
 
@@ -3047,8 +3055,8 @@ public class DzViewGame : UIBase<DzViewGame>
                 IdAndPlayerDic[pos].transform.Find("LeftCard").Find("Label").GetComponent<UILabel>().text = leftCardNum.ToString();
             }
         }
-        
-       
+
+
     }
 
     /// <summary>
