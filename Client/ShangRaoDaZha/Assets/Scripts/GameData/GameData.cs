@@ -38,6 +38,7 @@ public class PKClubRoomInfo
 
     public List<PKClubPlayerInfo> PKClubPlayerInfoList = new List<PKClubPlayerInfo>(); 
 }
+
 //房间里的玩家信息
 public class PKClubPlayerInfo
 {
@@ -46,6 +47,7 @@ public class PKClubPlayerInfo
     public string OtherName;
     public string HeadId;
 }
+
 public class GameData
 {
     #region 牛牛开房记录
@@ -102,6 +104,9 @@ public class GameData
 
     #endregion
 
+
+
+    public static PlayerInfo ChosePlayer;//游戏中选择的玩家
 
     public static MemInfo ChoseMem ;//俱乐部成员列表点击的成员
     public static List<PKClubRoomInfo> PKClubRoomList = new List<PKClubRoomInfo>();//莫格俱乐部开的房间数

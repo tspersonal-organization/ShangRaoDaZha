@@ -1412,7 +1412,8 @@ public class DzViewGame : UIBase<DzViewGame>
             IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.Find("TaoShangSprite/NameLable").GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo(GameData.m_PlayerInfoList[i].pos).name.ToString();
             // IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.FindChild("JiFenLabel").GetComponent<UILabel>().text = "讨赏分：" + 0.ToString();// GameDataFunc.GetPlayerInfo(GameData.m_PlayerInfoList[i].pos).name.ToString();
             DownloadImage.Instance.Download(IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].transform.Find("HeadSprite").GetComponent<UITexture>(), GameData.m_PlayerInfoList[i].headID);
-
+            //设置玩家头像的点击事件
+            IdAndPlayerDic[GameData.m_PlayerInfoList[i].pos].GetComponent<ClubMemInfoControl>().SetDataGame(GameData.m_PlayerInfoList[i]);
             SetTotalJifen(GameData.m_PlayerInfoList[i].pos, 0);//设置积分
             SetTaoShangFen(GameData.m_PlayerInfoList[i].pos, 0);//设置讨赏分
 
@@ -1501,8 +1502,9 @@ public class DzViewGame : UIBase<DzViewGame>
         IdAndPlayerDic[info.pos].gameObject.SetActive(true);
         IdAndPlayerDic[info.pos].transform.Find("NameLabel").GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo(info.pos).name.ToString();
         IdAndPlayerDic[info.pos].transform.Find("TaoShangSprite/NameLable").GetComponent<UILabel>().text = GameDataFunc.GetPlayerInfo(info.pos).name.ToString();
-
         DownloadImage.Instance.Download(IdAndPlayerDic[info.pos].transform.Find("HeadSprite").GetComponent<UITexture>(), info.headID);
+        //设置玩家头像的点击事件
+        IdAndPlayerDic[info.pos].GetComponent<ClubMemInfoControl>().SetDataGame(GameDataFunc.GetPlayerInfo(info.pos));
         SetTotalJifen(info.pos, 0);//设置积分
         SetTaoShangFen(info.pos, 0);//设置讨赏分
     }

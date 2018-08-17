@@ -2,29 +2,48 @@
 
 public class ClubMemInfoControl : MonoBehaviour {
 
-    public UITexture HeadTexture;
-    public UILabel NameLable;
-    public UIButton ClickItem;
+    private UITexture _headTexture;
+    private UILabel _nameLable;
+    private UIButton _clickItem;
 
-    private MemInfo DataInfo;
+    private MemInfo _menInfo;
+    private PlayerInfo _playerInfo;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="info"></param>
+    public ClubMemInfoControl(UIButton clickItem)
+    {
+        _clickItem = clickItem;
+    }
+    
+    void Start()
+    {
+        if (ManagerScene.Instance.currentSceneType != SceneType.Game)
+        {
+            _headTexture = transform.Find("Head").GetComponent<UITexture>();
+            _nameLable = transform.Find("Name").GetComponent<UILabel>();
+            _clickItem = gameObject.GetComponent<UIButton>();
+            _clickItem.onClick.Add(new EventDelegate(this.ClickItemClick));
+        }
+        else
+        {
+            _clickItem = gameObject.GetComponent<UIButton>();
+            _clickItem.onClick.Add(new EventDelegate(this.ClickItemClickGame));
+        }
+    }
+    
     public void SetData(MemInfo info)
     {
-        DataInfo = info;
-        DownloadImage.Instance.Download(HeadTexture,info.headid);
-        NameLable.text = info.name;
-
-
+        _menInfo = info;
+        if (ManagerScene.Instance.currentSceneType != SceneType.Game)
+        {
+            _headTexture = transform.Find("Head").GetComponent<UITexture>();
+            _nameLable = transform.Find("Name").GetComponent<UILabel>();
+            DownloadImage.Instance.Download(_headTexture, info.HeadId);
+            _nameLable.text = info.Name;
+        }
     }
-	// Use this for initialization
-	void Start () {
-       
-        ClickItem.onClick.Add(new EventDelegate(this.ClickItemClick));
-
+    public void SetDataGame(PlayerInfo info)
+    {
+        _playerInfo = info;
     }
 
     /// <summary>
@@ -32,12 +51,15 @@ public class ClubMemInfoControl : MonoBehaviour {
     /// </summary>
     private void ClickItemClick()
     {
-        GameData.ChoseMem = DataInfo;
+        GameData.ChoseMem = _menInfo;
         UIManager.Instance.ShowUiPanel(UIPaths.PanelPlayerInfo, OpenPanelType.MinToMax);
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    /// <summary>
+    /// 成员点击
+    /// </summary>
+    private void ClickItemClickGame()
+    {
+        GameData.ChosePlayer = _playerInfo;
+        UIManager.Instance.ShowUiPanel(UIPaths.PanelPlayerInfo, OpenPanelType.MinToMax);
+    }
 }

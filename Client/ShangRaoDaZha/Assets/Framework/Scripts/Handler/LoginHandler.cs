@@ -99,6 +99,7 @@ public class LoginHandler
         Player.Instance.RoomCard = message.readInt64();//房卡
         Player.Instance.money = message.readInt64();//钻石
         Player.Instance.Gold = message.readInt64();//金币
+        Player.Instance.Ip = message.readString();//ip
 
         Player.Instance.shareUrl = message.readString();
         Player.Instance.lastEnterRoomID = message.readUInt32();//（0,房间id）

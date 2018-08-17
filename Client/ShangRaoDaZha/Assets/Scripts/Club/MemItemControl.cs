@@ -32,17 +32,17 @@ public class MemItemControl : MonoBehaviour {
 
     private void RemoveBtnClick()
     {
-        ClientToServerMsg.RemovePlayerFromClub((uint)GameData.CurrentClubInfo.Id, MeminfoData.guid);
+        ClientToServerMsg.RemovePlayerFromClub((uint)GameData.CurrentClubInfo.Id, MeminfoData.Guid);
     }
 
     private void RefuseBtnClick()
     {
-        ClientToServerMsg.OperatePlayerApply((uint)GameData.CurrentClubInfo.Id, MeminfoData.guid,false);
+        ClientToServerMsg.OperatePlayerApply((uint)GameData.CurrentClubInfo.Id, MeminfoData.Guid,false);
     }
 
     private void AgreeBtnClick()
     {
-        ClientToServerMsg.OperatePlayerApply((uint)GameData.CurrentClubInfo.Id, MeminfoData.guid, true);
+        ClientToServerMsg.OperatePlayerApply((uint)GameData.CurrentClubInfo.Id, MeminfoData.Guid, true);
     }
 
     // Update is called once per frame
@@ -80,11 +80,11 @@ public class MemItemControl : MonoBehaviour {
 
        
         // HeadTex;
-        NameLable.text="名称:"+ MeminfoData.name.ToString();
-        IdLable.text="ID:"+ MeminfoData.guid.ToString();
+        NameLable.text="名称:"+ MeminfoData.Name.ToString();
+        IdLable.text="ID:"+ MeminfoData.Guid.ToString();
         try
         {
-            DownloadImage.Instance.Download(HeadTex, MeminfoData.headid);
+            DownloadImage.Instance.Download(HeadTex, MeminfoData.HeadId);
         }
         catch
         {

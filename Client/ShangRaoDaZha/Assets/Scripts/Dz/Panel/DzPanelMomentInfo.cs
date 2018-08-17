@@ -39,7 +39,7 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
         QuiteBtn.onClick.Add(new EventDelegate(this.QuiteBtnClick));
         UIEventListener.Get(SearchAll).onClick = delegate
         {
-            LoadMemer(13, GameData.CurrentClubInfo.MemList.Count);
+            LoadMemer(13, GameData.CurrentClubInfo.NormalMemList.Count);
             SearchAll.SetActive(false);
         };
     }
@@ -49,19 +49,22 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
         SearchAll.SetActive(false);
         InviteBtn.gameObject.SetActive(false);
         QuiteBtn.gameObject.SetActive(true);
+        QuiteBtn.transform.localPosition = Vector3.zero;
 
         //设置自己的权限
-        if (GameData.CurrentClubInfo.CreatorGUID == Player.Instance.guid)
+        if (GameData.CurrentClubInfo.CreatorGuid == Player.Instance.guid)
         {
             InviteBtn.gameObject.SetActive(true);
-            QuiteBtn.gameObject.SetActive(false);
+            QuiteBtn.transform.localPosition = new Vector3(-130, -210, 0);
+            InviteBtn.transform.localPosition = new Vector3(130, -210, 0);
         }
         for (int i = 0; i < GameData.CurrentClubInfo.MemMasterList.Count; i++)
         {
-            if (GameData.CurrentClubInfo.MemMasterList[i].guid == Player.Instance.guid)
+            if (GameData.CurrentClubInfo.MemMasterList[i].Guid == Player.Instance.guid)
             {
                 InviteBtn.gameObject.SetActive(true);
-                QuiteBtn.gameObject.SetActive(false);
+                QuiteBtn.transform.localPosition = new Vector3(-130, -210, 0);
+                InviteBtn.transform.localPosition = new Vector3(130, -210, 0);
             }
         }
         ClubId.text = "好友圈ID:" + GameData.CurrentClubInfo.Id.ToString();
@@ -89,8 +92,7 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
         }
 
         //设置会长信息
-        DownloadImage.Instance.Download(MasterObj.transform.Find("MasterTexture").GetComponent<UITexture>(), GameData.CurrentClubInfo.CreatorName);
-        MasterObj.transform.Find("MasterName").GetComponent<UILabel>().text = GameData.CurrentClubInfo.CreatorName;
+        MasterObj.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.CreatorMemInfo);
 
         //设置管理员信息  最多2个
         for (int i = 0; i < 2; i++){
@@ -103,12 +105,12 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
             {
                 Transform admin = Administrator.transform.Find("Administrator" + (i + 1));
                 admin.gameObject.SetActive(true);
-                admin.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.MemList[i]);
+                admin.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.NormalMemList[i]);
             }
         }
         
         //成员信息
-        int nMemerCount = GameData.CurrentClubInfo.MemList.Count;
+        int nMemerCount = GameData.CurrentClubInfo.NormalMemList.Count;
         if (nMemerCount > 13)
         {
             SearchAll.SetActive(true);
@@ -140,13 +142,13 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
             {
                 item = CreatRoomItem[i];
                 item.SetActive(true);
-                item.transform.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.MemList[i]);
+                item.transform.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.NormalMemList[i]);
             }
             else
             {
                 item = Instantiate(ClubMemItem, ClubMemItemParent);
                 item.SetActive(true);
-                item.transform.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.MemList[i]);
+                item.transform.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.NormalMemList[i]);
                 CreatRoomItem.Add(item);
             }
         }

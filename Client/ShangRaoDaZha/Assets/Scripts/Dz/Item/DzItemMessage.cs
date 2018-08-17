@@ -26,7 +26,7 @@ public class DzItemMessage : MonoBehaviour {
         }
         else
         {
-            ClientToServerMsg.OperatePlayerApply(infoData.ClubId, infoData.guid,false);
+            ClientToServerMsg.OperatePlayerApply(infoData.ClubId, infoData.Guid,false);
         }
     }
 
@@ -38,7 +38,7 @@ public class DzItemMessage : MonoBehaviour {
         }
         else
         {
-            ClientToServerMsg.OperatePlayerApply(infoData.ClubId, infoData.guid, true);
+            ClientToServerMsg.OperatePlayerApply(infoData.ClubId, infoData.Guid, true);
         }
     }
 
@@ -56,14 +56,14 @@ public class DzItemMessage : MonoBehaviour {
     {
         Invite = IsInvite;
         this.infoData = info;
-        DownloadImage.Instance.Download(HeadTexture, info.headid);
+        DownloadImage.Instance.Download(HeadTexture, info.HeadId);
         if (Invite)//是邀请信息
         {
-            DescLable.text = info.name + " 邀请你加入 " + info.ClubName;
+            DescLable.text = info.Name + " 邀请你加入 " + info.ClubName;
         }
         else
         {
-            DescLable.text = info.name + " 申请加入俱乐部 " ;
+            DescLable.text = info.Name + " 申请加入俱乐部 " ;
         }
 
     }

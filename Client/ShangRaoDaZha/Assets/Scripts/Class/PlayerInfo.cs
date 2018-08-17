@@ -36,6 +36,7 @@ public class PlayerInfo
     public bool isNextReady;
     public bool isForce;
     public string ip;
+    public string address;
     public string mask;
     public string name;
     public string headID;
@@ -48,6 +49,7 @@ public class PlayerInfo
 
     public PrizeType prizeType;//翻倍类型
     public int GangKaiCount;//杠次数
+    public uint playCount;//玩的次数
   
 
     public uint fangPaoScore;

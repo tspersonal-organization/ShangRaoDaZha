@@ -56,7 +56,6 @@ public class ConnServer : UIBase<ConnServer>
                 if(ServerInfo.Data.version == Application.version)
                 {
                     ConnectionServer(ToolsFunc.GetServerIP(ServerInfo.Data.ip), (ushort)ServerInfo.Data.port);
-                    if (!ServerInfo.Data.login_with_device) GetGPS.Instance.InitGPS();
                 }
                 else
                 {

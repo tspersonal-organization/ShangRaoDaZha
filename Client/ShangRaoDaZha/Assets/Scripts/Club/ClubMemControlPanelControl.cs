@@ -125,11 +125,11 @@ public class ClubMemControlPanelControl : UIBase<ClubMemControlPanelControl>
 
     void CreatAllItem()
     {
-        for (int i = 0; i < GameData.CurrentClubInfo.MemList.Count; i++)
+        for (int i = 0; i < GameData.CurrentClubInfo.NormalMemList.Count; i++)
         {
             GameObject g = GameObject.Instantiate(item, ItemParent);
             g.transform.localScale = Vector3.one;
-            g.transform.GetComponent<MemItemControl>().SetValue(false, GameData.CurrentClubInfo.MemList[i]);
+            g.transform.GetComponent<MemItemControl>().SetValue(false, GameData.CurrentClubInfo.NormalMemList[i]);
             g.transform.localPosition = new Vector3(0, 90 - 100 * CreatedObj.Count, 0);
             g.SetActive(true);
             CreatedObj.Add(g);

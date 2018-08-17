@@ -27,12 +27,10 @@ public class ClientToServerMsg
     /// <summary>
     /// 发送地址给
     /// </summary>
-    /// <param name="roomid"></param>
-    /// <param name="agree"></param>
     public static void SetAdrress(string address)
     {
         NetworkMessage message = NetworkMessage.Create((ushort)Opcodes.Client_Set_Client_Address, 100);
-        message.writeString(address);//房间号
+        message.writeString(address);
        
 
         SendMsg(message);

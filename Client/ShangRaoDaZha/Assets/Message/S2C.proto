@@ -38,6 +38,8 @@ message SitPlayerInfo{
 	int32 card_count = 19;//玩家手牌数量（位置非当前玩家位置，只有手牌数，没有具体手牌）
 	repeated uint32 hold_cards = 20;//手牌(如果位置不同，这处手牌为空，其他人看不到别人手牌)
 	repeated uint32 drop_cards = 21;//丢弃的牌
+	string address = 22;//玩家地址
+	uint32 total_play_count = 23;//总玩的局数
 	
 }
 

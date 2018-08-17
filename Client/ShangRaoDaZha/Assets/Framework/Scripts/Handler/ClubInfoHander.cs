@@ -125,9 +125,9 @@ public class ClubInfoHander : MonoBehaviour
                     MemInfo info = new MemInfo();
                     info.ClubId = clubid;
                     info.ClubName = ClubName;
-                    info.name = message.readString();
-                    info.guid = message.readUInt64();
-                    info.headid = message.readString();
+                    info.Name = message.readString();
+                    info.Guid = message.readUInt64();
+                    info.HeadId = message.readString();
                     GameData.CurrentClubInfo.ApplyMemList.Add(info);
                 }
             }
@@ -137,8 +137,8 @@ public class ClubInfoHander : MonoBehaviour
             {
                 MemInfo inviteM = new MemInfo();
 
-                inviteM.guid = message.readUInt64();//邀请人guid
-                inviteM.name = message.readString();//邀请人名字
+                inviteM.Guid = message.readUInt64();//邀请人guid
+                inviteM.Name = message.readString();//邀请人名字
                 inviteM.ClubId = message.readUInt32();//俱乐部id
                 inviteM.ClubName = message.readString();//俱乐部名字
 
@@ -152,9 +152,9 @@ public class ClubInfoHander : MonoBehaviour
             for (int i = 0; i < count2; i++)
             {
                 MemInfo info = new MemInfo();
-                info.name = message.readString();
-                info.guid = message.readUInt64();
-                info.headid = message.readString();
+                info.Name = message.readString();
+                info.Guid = message.readUInt64();
+                info.HeadId = message.readString();
                 GameData.CurrentClubInfo.InviteList.Add(info);
             }
         }
@@ -176,40 +176,67 @@ public class ClubInfoHander : MonoBehaviour
         info.Id = (int)message.readUInt32();
         info.ClubName = message.readString();
         info.CreatorName = message.readString();
-        info.CreatorGUID = message.readUInt64();
+        info.CreatorGuid = message.readUInt64();
         info.CreatorPhoneNum = message.readString();
         info.Gold = message.readInt64();
         info.creatPower = (ClubCreatePower)message.readUInt8();//开房权限
         info.PlayerCount = message.readInt32();//俱乐部人数
 
-        info.MemList = new List<MemInfo>();
-        int count = message.readInt32();//玩家信息
+        //所有的玩家信息 包括俱乐部群主 以及管理员
+        info.AllMemList = new List<MemInfo>();
+        int count = message.readInt32();
         for (int i = 0; i < count; i++)
         {
-            MemInfo Minfo = new MemInfo();
+            MemInfo memInfo = new MemInfo();
+            memInfo.Name = message.readString();
+            memInfo.Guid = message.readUInt64();
+            memInfo.HeadId = message.readString();
+            memInfo.Sex = message.readUInt8();
+            memInfo.Ip = message.readString();
+            memInfo.Adress = message.readString();
+            memInfo.PlayCount = message.readUInt32();
 
-            Minfo.name = message.readString();
-            Minfo.guid = message.readUInt64();
-            Minfo.headid = message.readString();
-
-            Minfo.IP = message.readString();
-            Minfo.Adress = message.readString();
-            Minfo.PlayCount = message.readUInt32();
-
-            info.MemList.Add(Minfo);
+            info.AllMemList.Add(memInfo);
         }
 
-        info.MemMasterList = new List<MemInfo>();
-        int count1 = message.readInt32();//管理员
+        info.MemMasterList = new List<MemInfo>();//管理员
+        int count1 = message.readInt32();
         for (int i = 0; i < count1; i++)
         {
-            MemInfo MasterInfo = new MemInfo();
-            MasterInfo.name = message.readString();
+            MemInfo masterInfo = new MemInfo();
+            masterInfo.Name = message.readString();
+            masterInfo.Guid = message.readUInt64();
+            masterInfo.HeadId = message.readString();
+            info.MemMasterList.Add(masterInfo);
+        }
 
-            MasterInfo.guid = message.readUInt64();
-            MasterInfo.headid = message.readString();
-            info.MemMasterList.Add(MasterInfo);
-
+        //设置群主、管理员、普通会员数据
+        info.NormalMemList = new List<MemInfo>();//玩家信息
+        for (var i = 0; i < info.AllMemList.Count; i++)
+        {
+            var data = info.AllMemList[i];
+            bool bNormal = true;
+            if (data.Guid == info.CreatorGuid)
+            {
+                bNormal = false;
+                info.CreatorMemInfo = data;
+            }
+            else
+            {
+                for (var j = 0; j < info.MemMasterList.Count; j++)
+                {
+                    var data1 = info.MemMasterList[j];
+                    if (data1.Guid == data.Guid)
+                    {
+                        bNormal = false;
+                        info.MemMasterList[j] = data;
+                    }
+                }
+            }
+            if (bNormal)
+            {
+                info.NormalMemList.Add(data);
+            }
         }
 
         GameData.CurrentClubInfo = info;//当前申请的俱乐部
@@ -250,24 +277,23 @@ public class ClubInfo
 {
     public string ClubName;
     public string CreatorName;
-    public ulong CreatorGUID;
+    public ulong CreatorGuid;
     public string CreatorPhoneNum;
     public long Gold;//俱乐部资金
-
-    public ClubCreatePower creatPower;//开房权限
     public int PlayerCount;
     public int Id;
+    public ClubCreatePower creatPower;//开房权限
 
     public List<RoomConfig> RoomConfigList = new List<RoomConfig>();//房间配置的类型
-
     public List<ActiveRoomInfo> ActiveRoomInfoList = new List<ActiveRoomInfo>();//已经激活的房间
-
     public List<HistoryData> HistoryDataList = new List<HistoryData>();//历史数据
 
-    public List<MemInfo> ApplyMemList = new List<MemInfo>();//申请的列表
-    public List<MemInfo> MemList = new List<MemInfo>();//成员列表
-    public List<MemInfo> InviteList = new List<MemInfo>();//邀请列表
+    public List<MemInfo> AllMemList = new List<MemInfo>();//成员列表
+    public MemInfo CreatorMemInfo = new MemInfo();//群主信息
+    public List<MemInfo> NormalMemList = new List<MemInfo>();//成员列表
     public List<MemInfo> MemMasterList = new List<MemInfo>();//管理员列表
+    public List<MemInfo> InviteList = new List<MemInfo>();//邀请列表
+    public List<MemInfo> ApplyMemList = new List<MemInfo>();//申请的列表
 }
 
 //局头配置的房间
@@ -323,16 +349,13 @@ public class HistoryData
 /// </summary>
 public class MemInfo
 {
-    public string name;
-    public ulong guid;
-    public string headid;
-
-    public string IP;
+    public string Name;
+    public ulong Guid;
+    public string HeadId;
+    public int Sex;
+    public string Ip;
     public string Adress;
-
     public uint PlayCount;//玩的次数
-
-
     public uint ClubId;
     public string ClubName;//所在俱乐部的名字（邀请玩家加入的时候有用）
 }

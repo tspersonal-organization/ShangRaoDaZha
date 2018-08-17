@@ -40,7 +40,7 @@ public class RoomInfoHandler
         RoomManagerHandler.addServerHandler(RoomMessageType.WaitPlayerChooseScore, onWaitPlayerChooseScore);//等待玩家选择积分
         RoomManagerHandler.addServerHandler(RoomMessageType.PlayerChooseScore, onPlayerChooseScore);//玩家选择了分数
         RoomManagerHandler.addServerHandler(RoomMessageType.PlayerHoldCards, onPlayerHoldCards);//开始发牌
-       
+
 
         RoomManagerHandler.addServerHandler(RoomMessageType.playerOperate, onPlayerOperate);//玩家操作
         RoomManagerHandler.addServerHandler(RoomMessageType.GameOver, onGameOver);//结算
@@ -75,9 +75,9 @@ public class RoomInfoHandler
         //message.writeUInt8((byte)position);//包牌的位置
 
         message.readUInt32();
-       byte pos= message.readUInt8();//包牌人信息
+        byte pos = message.readUInt8();//包牌人信息
         PartGameOverControl.instance.HelperPos = (int)pos;
-        if (DzViewGame.Instance != null) DzViewGame.Instance.OnShowBaoPaiInfo( pos);
+        if (DzViewGame.Instance != null) DzViewGame.Instance.OnShowBaoPaiInfo(pos);
 
 
     }
@@ -93,9 +93,9 @@ public class RoomInfoHandler
         //message.writeUInt8((byte)position);//询问的位置
 
         message.readUInt32();
-      byte pos=  message.readUInt8();
-        Debug.Log("广播包牌---"+ pos);
-        if (pos == DzViewGame.Instance.LocalPos|| pos == DzViewGame.Instance.SelfPos)
+        byte pos = message.readUInt8();
+        Debug.Log("广播包牌---" + pos);
+        if (pos == DzViewGame.Instance.LocalPos || pos == DzViewGame.Instance.SelfPos)
         {
             DzViewGame.Instance.BaoPaiTipPanel.SetActive(true);
         }
@@ -119,15 +119,15 @@ public class RoomInfoHandler
             OtherChipDic[pos1] = SelfChip1;
         }
 
-        NiuNiuGame.Instance.PlayerChipIn(pos,SelfChip, OtherChipDic);
+        NiuNiuGame.Instance.PlayerChipIn(pos, SelfChip, OtherChipDic);
 
-      //  Debug.LogError("-----------chipPos----------------"+ pos);
+        //  Debug.LogError("-----------chipPos----------------"+ pos);
     }
 
 
 
 
-  
+
     /// <summary>
     /// 广播有谁抢庄
     /// </summary>
@@ -136,7 +136,7 @@ public class RoomInfoHandler
     {
         byte pos = message.readUInt8();
         bool Operate = message.readBool();
-        NiuNiuGame.Instance.OnWhoQiangZhuang(pos,Operate);
+        NiuNiuGame.Instance.OnWhoQiangZhuang(pos, Operate);
 
     }
 
@@ -166,12 +166,12 @@ public class RoomInfoHandler
             PeiPaiInfo.Add(PeiPaiItem);
         }
 
-      //  Debug.LogError("----------PeiPaiType-------------------"+ (int)PeiPaiType);
+        //  Debug.LogError("----------PeiPaiType-------------------"+ (int)PeiPaiType);
         for (int i = 0; i < PeiPaiInfo.Count; i++)
         {
             for (int j = 0; j < PeiPaiInfo[i].Count; j++)
             {
-              //  Debug.LogError(PeiPaiInfo[i][j]);
+                //  Debug.LogError(PeiPaiInfo[i][j]);
             }
         }
         NiuNiuGame.Instance.PlayerShowCard(pos, PeiPaiType, FanBeiCount, PeiPaiInfo);//玩家亮牌信息
@@ -200,25 +200,25 @@ public class RoomInfoHandler
         {
             byte pos = message.readUInt8();
             GameDataFunc.GetPlayerInfo(pos).Gold = message.readInt64();
-          
+
             //if (GameData.GlobleRoomType == RoomType.XYGQP)
             //{
 
             //    if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerEnter(GameDataFunc.GetPlayerInfo(pos));
 
             //}
-             if (GameData.GlobleRoomType == RoomType.WDH)
+            if (GameData.GlobleRoomType == RoomType.WDH)
             {
-              
-                    if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerEnter(GameDataFunc.GetPlayerInfo(pos),true);
-              
+
+                if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerEnter(GameDataFunc.GetPlayerInfo(pos), true);
+
 
             }
             else if (GameData.GlobleRoomType == RoomType.ZB)
             {
-              
-                    if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onPlayerEnter(GameDataFunc.GetPlayerInfo(pos),true);
-              
+
+                if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onPlayerEnter(GameDataFunc.GetPlayerInfo(pos), true);
+
 
             }
         }
@@ -267,8 +267,8 @@ public class RoomInfoHandler
                 ZaiBaiGameJinBi.Instance.onDeciesShow(DeviceOne, DeviceTwo, DeviceThree, DeviceFour, MainCard, MagicCard);
             }
         }
-        
-     
+
+
     }
 
 
@@ -299,7 +299,7 @@ public class RoomInfoHandler
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.OnJiangMa(JiangMaList);
             }
         }
-        
+
     }
 
     /// <summary>
@@ -322,7 +322,7 @@ public class RoomInfoHandler
                 player.index = index;
                 GameData.FinishPlayerPos.Add(player);
             }
-          
+
 
             if (!IsPiPei)
             {
@@ -331,14 +331,14 @@ public class RoomInfoHandler
             else
             {
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.OnSetFinishPlayerIndex();
-              
+
             }
         }
         else if (GameData.GlobleRoomType == RoomType.WDH)
         {
 
         }
-      
+
 
     }
 
@@ -414,7 +414,7 @@ public class RoomInfoHandler
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.OnPlayerAi(roomNum, pos, isAi);
             }
         }
-       
+
     }
 
 
@@ -426,10 +426,10 @@ public class RoomInfoHandler
     {
         Debug.Log("广播由谁出牌");
         uint RoomId = message.readUInt32();
-        PositionType Playerpos =(PositionType) message.readUInt8();
+        PositionType Playerpos = (PositionType)message.readUInt8();
         int NextPlayerPos = message.readUInt8();
 
-       //byte IsGiveToFriend = message.readUInt8();
+        //byte IsGiveToFriend = message.readUInt8();
 
         PuKeOperateType type = (PuKeOperateType)message.readUInt8();
         if (GameData.GlobleRoomType == RoomType.PK)
@@ -445,20 +445,20 @@ public class RoomInfoHandler
             switch (type)
             {
                 case PuKeOperateType.ChuPai:
-                    Debug.Log(Playerpos+"/"+"出牌");
+                    Debug.Log(Playerpos + "/" + "出牌");
                     break;
                 case PuKeOperateType.JiePai:
                     Debug.Log(Playerpos + "/" + "接牌");
                     break;
 
             }
-           
+
         }
         if (GameData.GlobleRoomType == RoomType.WDH)
         {
-          //  if (WuDangHuGame.Instance != null) WuDangHuGame.Instance.onPlayerInCard(pos, card, resCards);
+            //  if (WuDangHuGame.Instance != null) WuDangHuGame.Instance.onPlayerInCard(pos, card, resCards);
         }
-           
+
     }
 
 
@@ -473,7 +473,7 @@ public class RoomInfoHandler
             int pos = (int)message.readUInt8();
             PartGameOverControl.instance.HelperPos = (int)pos;
             uint card = message.readUInt32();
-           
+
             if (!IsPiPei)
             {
                 PartGameOverControl.instance.HelperPos = (int)pos;
@@ -485,7 +485,7 @@ public class RoomInfoHandler
 
             }
         }
-      
+
     }
     /// <summary>
     /// 获得friendcard
@@ -507,11 +507,11 @@ public class RoomInfoHandler
             else
             {
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.OnFriendCard(pos, GameData.m_TableInfo.FriendCard);
-               // if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerLeave((int)pos);
+                // if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerLeave((int)pos);
 
             }
         }
-        
+
     }
 
     /// <summary>
@@ -615,10 +615,10 @@ public class RoomInfoHandler
                 {
                     if (DDZJinBi.Instance != null)
                         DDZJinBi.Instance.onPlayerSendChatFace(roomID, connect);
-                   
+
                 }
 
-               
+
             }
             else if (strs[0] == "3")//表情
             {
@@ -631,12 +631,12 @@ public class RoomInfoHandler
                 {
                     if (DDZJinBi.Instance != null)// "3@" + Player.Instance.guid + "@" + faceID;
                         DDZJinBi.Instance.onPlayerSendFaceChatFace(roomID, connect);
-                 
+
 
                 }
                 //if (Game.Instance != null)
                 //  Game.Instance.onPlayerSendChatFace(connect);
-               
+
             }
             else if (strs[0] == "5")//快捷文字
             {
@@ -650,11 +650,11 @@ public class RoomInfoHandler
                 {
                     if (DDZJinBi.Instance != null)
                         DDZJinBi.Instance.onPlayerSendChatFace(roomID, connect);
-                   
+
 
 
                 }
-             
+
             }
 
             #endregion
@@ -685,7 +685,7 @@ public class RoomInfoHandler
                     if (WuDangHuGameJinBi.Instance != null)
                         WuDangHuGameJinBi.Instance.onPlayerSendChatFace(roomID, connect);
                 }
-              
+
             }
             else if (strs[0] == "3")//表情
             {
@@ -702,7 +702,7 @@ public class RoomInfoHandler
                         WuDangHuGameJinBi.Instance.onPlayerSendChatFace(connect);
                 }
 
-               
+
             }
             else if (strs[0] == "6")//快捷文字
             {
@@ -716,7 +716,7 @@ public class RoomInfoHandler
                     if (WuDangHuGameJinBi.Instance != null)
                         WuDangHuGameJinBi.Instance.onPlayerSendChatFace(roomID, connect);
                 }
-              
+
             }
 
             #endregion
@@ -746,7 +746,7 @@ public class RoomInfoHandler
                     if (ZaiBaiGameJinBi.Instance != null)
                         ZaiBaiGameJinBi.Instance.onPlayerSendChatFace(roomID, connect);
                 }
-               
+
             }
             else if (strs[0] == "3")//表情
             {
@@ -762,7 +762,7 @@ public class RoomInfoHandler
                     if (ZaiBaiGameJinBi.Instance != null)// "3@" + Player.Instance.guid + "@" + faceID;
                         ZaiBaiGameJinBi.Instance.onPlayerSendChatFace(connect);
                 }
-               
+
             }
             else if (strs[0] == "6")//快捷文字
             {
@@ -776,7 +776,7 @@ public class RoomInfoHandler
                     if (ZaiBaiGameJinBi.Instance != null)
                         ZaiBaiGameJinBi.Instance.onPlayerSendChatFace(roomID, connect);
                 }
-               
+
             }
         }
 
@@ -810,11 +810,11 @@ public class RoomInfoHandler
                 {
                     if (DDZJinBi.Instance != null)
                         DDZJinBi.Instance.onPlayerOnForce(pos, isForce);
-                  
+
 
                 }
 
-              
+
             }
         }
 
@@ -838,7 +838,7 @@ public class RoomInfoHandler
                     if (WuDangHuGameJinBi.Instance != null)
                         WuDangHuGameJinBi.Instance.onPlayerOnForce(pos, isForce);
                 }
-               
+
             }
 
         }
@@ -862,7 +862,7 @@ public class RoomInfoHandler
                     if (ZaiBaiGameJinBi.Instance != null)
                         ZaiBaiGameJinBi.Instance.onPlayerOnForce(pos, isForce);
                 }
-               
+
             }
 
         }
@@ -965,15 +965,15 @@ public class RoomInfoHandler
         byte pos = message.readUInt8();
         if (roomID == GameData.m_TableInfo.id)
         {
-            GameData.m_TableInfo.queryLeaveRoomWaitTime =180;
+            GameData.m_TableInfo.queryLeaveRoomWaitTime = 180;
             GameData.m_TableInfo.operateLeaveRoomList.Clear();
             GameData.m_TableInfo.operateLeaveRoomList.Add(pos);
             UIManager.Instance.HideUiPanel(UIPaths.UIPanel_Setting);
             UIManager.Instance.ShowUiPanel(UIPaths.PanelDestoryRoom, OpenPanelType.MinToMax);
         }
-      
 
-           
+
+
     }
 
     /// <summary>
@@ -982,7 +982,7 @@ public class RoomInfoHandler
     /// <param name="message"></param>
     private void onPlayerOperateSuccess(NetworkMessage message)
     {
-        if (GameData.GlobleRoomType == RoomType.PK )
+        if (GameData.GlobleRoomType == RoomType.PK)
         {
 
         }
@@ -1000,7 +1000,7 @@ public class RoomInfoHandler
             {
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerOperateSuccess(pos, type);
             }
-          
+
         }
         else if (GameData.GlobleRoomType == RoomType.ZB)
         {
@@ -1016,7 +1016,7 @@ public class RoomInfoHandler
             {
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onPlayerOperateSuccess(pos, type);
             }
-          
+
         }
 
     }
@@ -1043,7 +1043,7 @@ public class RoomInfoHandler
             {
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerInCard(pos, card, resCards);
             }
-           
+
         }
 
         if (GameData.GlobleRoomType == RoomType.ZB)
@@ -1062,7 +1062,7 @@ public class RoomInfoHandler
             {
                 ZaiBaiGameJinBi.Instance.onPlayerInCard(pos, card, resCards);
             }
-          
+
         }
 
     }
@@ -1100,7 +1100,7 @@ public class RoomInfoHandler
                         GameData.GlobleTipString = "赠送金币" + addGold;
                         UIManager.Instance.ShowUiPanel(UIPaths.GlobleTipPanel);
                     }
-                   
+
                 }
             }
             PartGameOverControl.instance.TotalGameOverInfoList.Add(info);
@@ -1119,7 +1119,7 @@ public class RoomInfoHandler
                 }
                 break;
             case RoomDisposeType.PlayerQueryDispose:
-               
+
                 UIManager.Instance.HideUiPanel(UIPaths.PanelDestoryRoom);
                 if (GameData.GlobleRoomType != RoomType.PK)
                 {
@@ -1127,9 +1127,9 @@ public class RoomInfoHandler
                 }
                 else
                 {
-                   UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverBig, OpenPanelType.MinToMax);
+                    UIManager.Instance.ShowUiPanel(UIPaths.PanelGameOverBig, OpenPanelType.MinToMax);
                 }
-              
+
 
                 if (!IsPiPei)
                 {
@@ -1138,9 +1138,9 @@ public class RoomInfoHandler
                 else
                 {
                     if (DDZJinBi.Instance != null) DDZJinBi.Instance.GameReset();
-                  
+
                 }
-               
+
                 break;
             case RoomDisposeType.TimeOut:
                 ManagerScene.Instance.LoadScene(SceneType.Main);
@@ -1158,27 +1158,27 @@ public class RoomInfoHandler
     private void onGameOver(NetworkMessage message)
     {
         Log.Debug("单局结算");
-        RoomType overType = (RoomType) message.readUInt8();
+        RoomType overType = (RoomType)message.readUInt8();
         long length = message.readInt64(); //数据长度
         byte[] newbyte = new byte[length];
         message.readBytes(newbyte);
 
         GameOver overinfo = GameOver.Parser.ParseFrom(newbyte);
 
-        PartGameOverControl.instance.ZhuangPos = (int) overinfo.ZhuangPosition;
-        PartGameOverControl.instance.HelperPos = (int) overinfo.FriendPosition;
+        PartGameOverControl.instance.ZhuangPos = (int)overinfo.ZhuangPosition;
+        PartGameOverControl.instance.HelperPos = (int)overinfo.FriendPosition;
 
         int count = overinfo.GameOverInfo.Count;
         PartGameOverControl.instance.SettleInfoList = new List<SettleDownInfo>();
         for (int i = 0; i < count; i++)
         {
             bool isWin = overinfo.GameOverInfo[i].IsWinner;
-            byte pos = (byte) overinfo.GameOverInfo[i].Position;
+            byte pos = (byte)overinfo.GameOverInfo[i].Position;
             int score = overinfo.GameOverInfo[i].Score;
             int changeScore = overinfo.GameOverInfo[i].ChangeScore;
             int baseScore = overinfo.GameOverInfo[i].BaseScore;
-            int zadanScore = (int) overinfo.GameOverInfo[i].ZhanDanScore;
-            int faWangScore = (int) overinfo.GameOverInfo[i].FaWangScore;
+            int zadanScore = (int)overinfo.GameOverInfo[i].ZhanDanScore;
+            int faWangScore = (int)overinfo.GameOverInfo[i].FaWangScore;
 
             //保存数据
             SettleDownInfo info = new SettleDownInfo();
@@ -1218,8 +1218,8 @@ public class RoomInfoHandler
         int playerCount = overinfo.FinishInfo.Count; //完成玩家人数
         for (int i = 0; i < playerCount; i++)
         {
-            int pos1 = (int) overinfo.FinishInfo[i].FinishPosition; //位置
-            int index = (int) overinfo.FinishInfo[i].FinishOrder; //第几个完成
+            int pos1 = (int)overinfo.FinishInfo[i].FinishPosition; //位置
+            int index = (int)overinfo.FinishInfo[i].FinishOrder; //第几个完成
             for (int j = 0; j < PartGameOverControl.instance.SettleInfoList.Count; j++)
             {
                 if (pos1 == PartGameOverControl.instance.SettleInfoList[j].Pos)
@@ -1239,7 +1239,7 @@ public class RoomInfoHandler
             for (var j = 0; j < overinfo.GameRecord[i].PlayerSocreInfo.Count; j++)
             {
                 bool isWin = overinfo.GameOverInfo[j].IsWinner;
-                byte pos = (byte) overinfo.GameOverInfo[j].Position;
+                byte pos = (byte)overinfo.GameOverInfo[j].Position;
 
                 SettleDownInfo info = new SettleDownInfo();
                 info.IsWin = isWin;
@@ -1260,7 +1260,7 @@ public class RoomInfoHandler
     /// 玩家操作
     /// </summary>
     /// <param name="message"></param>
- 
+
     private void onPlayerOperate(NetworkMessage message)
     {
         Log.Debug("玩家操作");
@@ -1283,27 +1283,27 @@ public class RoomInfoHandler
             int ChangeCount = message.readInt32();//改变的玩家个数
             for (int i = 0; i < ChangeCount; i++)
             {
-              byte Changepos=  message.readUInt8();//位置
-             // int  ChangeScore=  message.readInt32();//改变的分数
-              int TotalScore= message.readInt32();//当前分(头像下面显示的)
+                byte Changepos = message.readUInt8();//位置
+                                                     // int  ChangeScore=  message.readInt32();//改变的分数
+                int TotalScore = message.readInt32();//当前分(头像下面显示的)
 
                 if (DzViewGame.Instance != null)
                 {
-                   // DzViewGame.Instance.SetTotalJifen(Changepos, TotalScore);//设置积分
+                    // DzViewGame.Instance.SetTotalJifen(Changepos, TotalScore);//设置积分
                     DzViewGame.Instance.SetTaoShangFen(Changepos, TotalScore);
 
                     Debug.Log("----------TotalScore");
                 }
             }
         }
-       
+
 
 
         if (GameData.GlobleRoomType == RoomType.PK)
         {
             #region
 
-           // int Tatalscore = message.readInt32();//讨赏分
+            // int Tatalscore = message.readInt32();//讨赏分
             if (PlayerLeftCard < 6)
             {
 
@@ -1314,10 +1314,10 @@ public class RoomInfoHandler
                 else
                 {
                     if (DDZJinBi.Instance != null) DDZJinBi.Instance.ShowLeftCardNum(pos, PlayerLeftCard);
-                    
+
 
                 }
-            
+
 
             }
 
@@ -1325,7 +1325,7 @@ public class RoomInfoHandler
             {
                 if (GameData.m_PlayerInfoList[i].pos == pos)
                 {
-                  //  if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerOperate(pos, type, OutCardList, PlayerLeftCard, GameData.m_PlayerInfoList[i].score, (int)GameData.m_PlayerInfoList[i].sex);
+                    //  if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerOperate(pos, type, OutCardList, PlayerLeftCard, GameData.m_PlayerInfoList[i].score, (int)GameData.m_PlayerInfoList[i].sex);
                     if (!IsPiPei)
                     {
                         if (DzViewGame.Instance != null) DzViewGame.Instance.onPlayerOperate(pos, type, OutCardList, PlayerLeftCard, GameData.m_PlayerInfoList[i].score, (int)GameData.m_PlayerInfoList[i].sex);
@@ -1333,11 +1333,11 @@ public class RoomInfoHandler
                     else
                     {
                         if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerOperate(pos, type, OutCardList, PlayerLeftCard, GameData.m_PlayerInfoList[i].score, (int)GameData.m_PlayerInfoList[i].sex);
-                      
+
 
 
                     }
-                  
+
                 }
             }
 
@@ -1345,7 +1345,7 @@ public class RoomInfoHandler
         }
         else if (GameData.GlobleRoomType == RoomType.WDH)
         {
-           
+
             byte outPos = message.readUInt8();
             bool isAnGang = message.readBool();
             if (!IsPiPei)
@@ -1357,11 +1357,11 @@ public class RoomInfoHandler
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerOperate(pos, type, OutCardList[0], outPos, isAnGang);
 
             }
-         
+
         }
         else if (GameData.GlobleRoomType == RoomType.ZB)
         {
-         
+
             byte outPos = message.readUInt8();
             bool isAnGang = message.readBool();
             if (!IsPiPei)
@@ -1372,7 +1372,7 @@ public class RoomInfoHandler
             {
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onPlayerOperate(pos, type, OutCardList[0], outPos, isAnGang);
             }
-          
+
         }
 
 
@@ -1397,9 +1397,9 @@ public class RoomInfoHandler
 
         #region  add
         //add 
-       bool haveDouble= message.readBool();//庄是不是有两张黑桃3 
-       byte ZhuangPos=  message.readUInt8();//庄的位置(即之后第一个出牌人的位置)
-       byte FriendPos= message.readUInt8();//朋友的位置（另一个黑桃3的位置，或者直接是
+        bool haveDouble = message.readBool();//庄是不是有两张黑桃3 
+        byte ZhuangPos = message.readUInt8();//庄的位置(即之后第一个出牌人的位置)
+        byte FriendPos = message.readUInt8();//朋友的位置（另一个黑桃3的位置，或者直接是
 
 
         GameData.m_TableInfo.makerPos = ZhuangPos;
@@ -1408,9 +1408,9 @@ public class RoomInfoHandler
         #endregion
         if (GameData.GlobleRoomType == RoomType.PK)
         {
-           
+
             // if (Game.Instance != null) Game.Instance.onPlayerHoldCards();
-           
+
 
             if (!IsPiPei)
             {
@@ -1441,7 +1441,7 @@ public class RoomInfoHandler
             {
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerHoldCards();
             }
-          
+
         }
         else if (GameData.GlobleRoomType == RoomType.ZB)
         {
@@ -1453,13 +1453,13 @@ public class RoomInfoHandler
             {
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onPlayerHoldCards();
             }
-           
+
         }
         else if (GameData.GlobleRoomType == RoomType.NN)
         {
-           
-                if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onPlayerHoldCards();
-           
+
+            if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onPlayerHoldCards();
+
         }
     }
 
@@ -1473,7 +1473,7 @@ public class RoomInfoHandler
         uint roomID = message.readUInt32();
         byte pos = message.readUInt8();
         uint chooseScore = message.readUInt32();
-      //  if (Game.Instance != null) Game.Instance.onPlayerChooseScore(pos, chooseScore);
+        //  if (Game.Instance != null) Game.Instance.onPlayerChooseScore(pos, chooseScore);
     }
 
     /// <summary>
@@ -1484,7 +1484,7 @@ public class RoomInfoHandler
     {
         Log.Debug("等待玩家选择积分");
         uint roomID = message.readUInt32();
-      //  if (Game.Instance != null) Game.Instance.onWaitPlayerChooseScore();
+        //  if (Game.Instance != null) Game.Instance.onWaitPlayerChooseScore();
     }
 
     /// <summary>
@@ -1516,12 +1516,12 @@ public class RoomInfoHandler
             else
             {
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.onZhuangPosition();
-                
+
 
             }
             // if (Game.Instance != null) Game.Instance.onZhuangPosition();//DzViewGame
 
-         
+
         }
         else if (GameData.GlobleRoomType == RoomType.WDH)
         {
@@ -1533,7 +1533,7 @@ public class RoomInfoHandler
             {
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onZhuangPosition();
             }
-           
+
         }
 
         else if (GameData.GlobleRoomType == RoomType.ZB)
@@ -1547,14 +1547,14 @@ public class RoomInfoHandler
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onZhuangPosition();
 
             }
-           
+
         }
         else if (GameData.GlobleRoomType == RoomType.NN)
         {
-           
-                if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onZhuangPosition();
 
-           
+            if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onZhuangPosition();
+
+
 
         }
 
@@ -1580,9 +1580,9 @@ public class RoomInfoHandler
             else
             {
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.onRoomActive();
-               
+
             }
-           
+
         }
         else if (GameData.GlobleRoomType == RoomType.WDH)
         {
@@ -1594,7 +1594,7 @@ public class RoomInfoHandler
             {
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onRoomActive();
             }
-           
+
         }
         else if (GameData.GlobleRoomType == RoomType.ZB)
         {
@@ -1606,7 +1606,7 @@ public class RoomInfoHandler
             {
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onRoomActive();
             }
-           
+
         }
 
         else if (GameData.GlobleRoomType == RoomType.NN)
@@ -1626,10 +1626,10 @@ public class RoomInfoHandler
 
     }
 
-   /// <summary>
-   /// 准备下一局
-   /// </summary>
-   /// <param name="message"></param>
+    /// <summary>
+    /// 准备下一局
+    /// </summary>
+    /// <param name="message"></param>
     private void onPlayerReadyForNext(NetworkMessage message)
     {
 
@@ -1645,11 +1645,11 @@ public class RoomInfoHandler
             else
             {
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerReadyForRoom(pos);
-               // if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerReadyForRoom(pos);
+                // if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerReadyForRoom(pos);
                 // if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerEnter(info);
             }
             //  if (Game.Instance != null) Game.Instance.onPlayerReadyForNext(pos);
-           
+
         }
 
         else if (GameData.GlobleRoomType == RoomType.WDH)
@@ -1662,7 +1662,7 @@ public class RoomInfoHandler
             {
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerReadyForNext(pos);
             }
-          
+
         }
         else if (GameData.GlobleRoomType == RoomType.ZB)
         {
@@ -1674,13 +1674,13 @@ public class RoomInfoHandler
             {
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onPlayerReadyForNext(pos);
             }
-          
+
         }
         else if (GameData.GlobleRoomType == RoomType.NN)
         {
-           
-                if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onPlayerReadyForRoom(pos);
-           
+
+            if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onPlayerReadyForRoom(pos);
+
 
         }
 
@@ -1697,9 +1697,9 @@ public class RoomInfoHandler
         byte pos = message.readUInt8();
         if (GameData.GlobleRoomType == RoomType.PK)
         {
-          
+
             // if (Game.Instance != null) Game.Instance.onPlayerReadyForRoom(pos);
-          
+
 
             if (!IsPiPei)
             {
@@ -1708,7 +1708,7 @@ public class RoomInfoHandler
             else
             {
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerReadyForRoom(pos);
-               // if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerEnter(info);
+                // if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerEnter(info);
             }
         }
         else if (GameData.GlobleRoomType == RoomType.WDH)
@@ -1721,7 +1721,7 @@ public class RoomInfoHandler
             {
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerReadyForRoom(pos);
             }
-          
+
         }
         else if (GameData.GlobleRoomType == RoomType.ZB)
         {
@@ -1733,16 +1733,14 @@ public class RoomInfoHandler
             {
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onPlayerReadyForRoom(pos);
             }
-            
+
         }
         else if (GameData.GlobleRoomType == RoomType.NN)
         {
-            
-                if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onPlayerReadyForRoom(pos);
-          
+
+            if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onPlayerReadyForRoom(pos);
+
         }
-
-
     }
 
     /// <summary>
@@ -1782,7 +1780,7 @@ public class RoomInfoHandler
             {
                 if (DDZJinBi.Instance != null) DDZJinBi.Instance.onPlayerEnter(info);
             }
-          
+
         }
         else if (GameData.GlobleRoomType == RoomType.WDH)
         {
@@ -1794,7 +1792,7 @@ public class RoomInfoHandler
             {
                 if (WuDangHuGameJinBi.Instance != null) WuDangHuGameJinBi.Instance.onPlayerEnter(info);
             }
-          
+
         }
         else if (GameData.GlobleRoomType == RoomType.ZB)
         {
@@ -1806,7 +1804,7 @@ public class RoomInfoHandler
             {
                 if (ZaiBaiGameJinBi.Instance != null) ZaiBaiGameJinBi.Instance.onPlayerEnter(info);
             }
-           
+
         }
         else if (GameData.GlobleRoomType == RoomType.NN)
         {
@@ -1816,17 +1814,17 @@ public class RoomInfoHandler
             //}
             //else
             //{
-                if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onPlayerEnter(info);
-           // }
+            if (NiuNiuGame.Instance != null) NiuNiuGame.Instance.onPlayerEnter(info);
+            // }
 
         }
 
     }
 
     RoomType roomType;//房间类型
-   public  bool IsPiPei = false;//是否为金币场
+    public bool IsPiPei = false;//是否为金币场
     public bool IsDaiLiCreat = false;
-   public   SendRoomInfo sendroominfo = null;//房间信息
+    public SendRoomInfo sendroominfo = null;//房间信息
     private void onRoomInfo(NetworkMessage message)
     {
         Log.Debug("房间基本信息");
@@ -1835,7 +1833,7 @@ public class RoomInfoHandler
         byte[] newbyte = new byte[length];
         message.readBytes(newbyte);
 
-         sendroominfo = SendRoomInfo.Parser.ParseFrom(newbyte);
+        sendroominfo = SendRoomInfo.Parser.ParseFrom(newbyte);
 
         GameData.sendroominfo = sendroominfo;
 
@@ -1844,18 +1842,8 @@ public class RoomInfoHandler
         GameDataFunc.ClearData();
         GameDataFunc.ClearDataObj();
 
-        #region  old  to new
-      
-        TableInfo info = new TableInfo();
-
-        // roomType =(RoomType)message.readUInt8();//房间类型
-        // IsDaiLiCreat = message.readBool();//是否为代理开房
-        // IsPiPei = message.readBool();//是否为匹配
-
-        //message.readUInt8();//开房类型creatRoomType
         GameData.GlobleRoomType = roomType;//全局房间类型
 
-       
         switch (roomType)
         {
             case RoomType.PK:
@@ -1873,50 +1861,6 @@ public class RoomInfoHandler
                 break;
         }
 
-      
-        //if (info.roomState == RoomStatusType.Play)
-        //{
-        //    if (DzViewGame.Instance != null) DzViewGame.Instance.ReconnectServer();//重连
-        //}
-
-        #endregion
-        // SendRoomInfo sendroominfo = new SendRoomInfo();//房间信息协议
-
-
-        #region  old
-        /*
-        TableInfo info = new TableInfo();
-
-         roomType =(RoomType)message.readUInt8();//房间类型
-         IsDaiLiCreat = message.readBool();//是否为代理开房
-         IsPiPei = message.readBool();//是否为匹配
-
-        message.readUInt8();//开房类型creatRoomType
-        GameData.GlobleRoomType = roomType;//全局房间类型
-
-        switch (roomType)
-        {
-            case RoomType.PK:
-                OnTaoShnagRoomInfo(message);
-                break;
-            case RoomType.WDH:
-                OnWuTangHuRoomInfo(message);
-                break;
-            case RoomType.ZB:
-                OnZaiBaoRoomInfo(message);
-                break;
-            case RoomType.NN:
-                OnNiuNiuRoomInfo(message);
-                break;
-        }
-
-        */
-        //if (info.roomState == RoomStatusType.Play)
-        //{
-        //    if (DzViewGame.Instance != null) DzViewGame.Instance.ReconnectServer();//重连
-        //}
-
-        #endregion
     }
     /// <summary>
     ///上饶
@@ -1933,14 +1877,13 @@ public class RoomInfoHandler
         info.isBawang = sendroominfo.IsBaWang;
         info.IsPiPei = IsPiPei;
         info.IsDaiLiCreat = IsDaiLiCreat;
-        // RoomType roomType = (RoomType)message.readUInt8();//房间类型 这里不需要
 
         info.id = sendroominfo.RoomCodeId;//房间号
         info.fangZhuGuid = sendroominfo.CreatorGuid;//房主ID
         info.configRoundIndex = (byte)sendroominfo.GameCount;//几局
 
-        info.configPlayerIndex =(byte) sendroominfo.PlayerCount;//人数config
-       // info.configPayIndex = message.readUInt8();
+        info.configPlayerIndex = (byte)sendroominfo.PlayerCount;//人数config
+                                                                // info.configPayIndex = message.readUInt8();
 
         info.ZhuangPos = (byte)sendroominfo.ZhuangPosition;//庄家位置
 
@@ -1950,35 +1893,19 @@ public class RoomInfoHandler
         info.roomState = (RoomStatusType)sendroominfo.RoomStatus;
 
         info.curGameCount = (uint)sendroominfo.CurGameCount;//当前局数
-                                                          //info.configPlayerIndex = message.readUInt8();
-
-        // info.makerPos = message.readUInt8();
-        //bool HaveColdTime = message.readBool();//是否有房间冷却
-        //if (HaveColdTime)
-        //{
-        //    uint time = message.readUInt32();
-        //}
-
 
         info.isQueryLeaveRoom = sendroominfo.QueryDisposeRoom;//是否有请求离开的请求
         info.queryLeaveRoomWaitTime = sendroominfo.TimerRest;//倒计时
         if (info.isQueryLeaveRoom)
         {
-            //info.queryLeaveRoomWaitTime = message.readUInt32();
-            //byte count = (byte)message.readUInt8();
-
             for (int i = 0; i < sendroominfo.AgressPosition.Count; i++)
                 info.operateLeaveRoomList.Add((byte)sendroominfo.AgressPosition[i]);
-
-
-
         }
-
-       // byte pCount = (byte)message.readUInt8();//玩家个数
+        
         for (int i = 0; i < sendroominfo.SitPlayerInfo.Count; i++)
         {
             PlayerInfo pInfo = new PlayerInfo();
-            pInfo.pos =(byte) sendroominfo.SitPlayerInfo[i].Position;
+            pInfo.pos = (byte)sendroominfo.SitPlayerInfo[i].Position;
             pInfo.N = sendroominfo.SitPlayerInfo[i].Positionx;
             pInfo.E = sendroominfo.SitPlayerInfo[i].Positiony;
             pInfo.guid = sendroominfo.SitPlayerInfo[i].Guid;
@@ -1986,11 +1913,11 @@ public class RoomInfoHandler
             pInfo.sex = (byte)sendroominfo.SitPlayerInfo[i].Sex;
             pInfo.isStartReady = sendroominfo.SitPlayerInfo[i].IsReadyForRoom;
             pInfo.isNextReady = sendroominfo.SitPlayerInfo[i].IsReadyForNextGame;
-
-           // pInfo.IsAi = sendroominfo.SitPlayerInfo[i].IsReadyForNextGame;//是否托管
+            
             pInfo.isForce = sendroominfo.SitPlayerInfo[i].OnForce;
 
             pInfo.ip = sendroominfo.SitPlayerInfo[i].ClientIp;
+            pInfo.address = sendroominfo.SitPlayerInfo[i].Address;
             pInfo.mask = sendroominfo.SitPlayerInfo[i].ClientMask;
             pInfo.name = sendroominfo.SitPlayerInfo[i].OtherName;
             pInfo.headID = sendroominfo.SitPlayerInfo[i].HeadIp;
@@ -1999,21 +1926,12 @@ public class RoomInfoHandler
 
             pInfo.TSTaoShangScore = (uint)sendroominfo.SitPlayerInfo[i].TaoShangScore;
             pInfo.score = sendroominfo.SitPlayerInfo[i].Score;
-
-            if (IsPiPei)//匹配的金币场
-            {
-              //  pInfo.Gold = message.readInt64();
-            }
-
+            
             pInfo.totalHuCount = sendroominfo.SitPlayerInfo[i].TotalWinCount;
             pInfo.totalMakerCount = sendroominfo.SitPlayerInfo[i].TotalZhuangCount;//当庄次数
             pInfo.OperateType = (CardOperateType)sendroominfo.SitPlayerInfo[i].LastOperateType;//操作类型
-            #region
+            pInfo.playCount = sendroominfo.SitPlayerInfo[i].TotalPlayCount;//玩的次数
 
-            #endregion
-            // byte oCount = message.readInt32();//玩家手牌
-
-            //int count = message.readInt32();
             pInfo.LeftCardNum = sendroominfo.SitPlayerInfo[i].HoldCards.Count;
             if (Player.Instance.guid == pInfo.guid)
             {
@@ -2022,16 +1940,6 @@ public class RoomInfoHandler
                     pInfo.localCardList.Add(sendroominfo.SitPlayerInfo[i].HoldCards[k]);
                 }
             }
-            else
-            {
-                //for (int k = 0; k < count; k++)
-                //{
-                //    pInfo.localCardList.Add(0);
-                //}
-            }
-
-
-           // int oCount = message.readInt32();//丢去的牌  出的牌
 
             for (int k = 0; k < sendroominfo.SitPlayerInfo[i].DropCards.Count; k++)
             {
@@ -2044,7 +1952,7 @@ public class RoomInfoHandler
 
         info.FriendPos = 0;//防止断线重连后位置有无
         if (sendroominfo.PlayStatusInfo != null) info.roomState = RoomStatusType.Play;
-        if(sendroominfo.GameOverInfo != null) info.roomState = RoomStatusType.Over;
+        if (sendroominfo.GameOverInfo != null) info.roomState = RoomStatusType.Over;
         if (info.roomState == RoomStatusType.Play)//断线回来有用
         {
 
@@ -2093,7 +2001,7 @@ public class RoomInfoHandler
             PartGameOverControl.instance.HelperPos = (int)sendroominfo.GameOverInfo.FriendPosition;
 
             PartGameOverControl.instance.SettleInfoList = new List<SettleDownInfo>();
-          //  int Count = message.readInt32();
+            //  int Count = message.readInt32();
             for (int i = 0; i < sendroominfo.GameOverInfo.GameOverPlayerInfo.Count; i++)
             {
 
@@ -2116,7 +2024,7 @@ public class RoomInfoHandler
                 info1.Pos = (int)pos;
                 info1.Score = Score;//人物总积分
                 info1.BaseScore = HuiHeFen;
-               // info1.TaoShangFen = (int)TaoShangScore;//讨赏分
+                // info1.TaoShangFen = (int)TaoShangScore;//讨赏分
                 info1.ChangeScore = ChangeScore;//总改变分数
 
                 info1.ZhaDanScore = ZaDanScore;//
@@ -2212,7 +2120,7 @@ public class RoomInfoHandler
         // info.makerPos = message.readUInt8();
         if (roomType == RoomType.NN)
         {
-            info.NNYongPaiType =(NNYongPai) message.readUInt8();//用牌
+            info.NNYongPaiType = (NNYongPai)message.readUInt8();//用牌
 
 
             info.EnShunZhiNiu = message.readBool();
@@ -2234,7 +2142,7 @@ public class RoomInfoHandler
         {
             uint time = message.readUInt32();
         }
-           
+
 
 
         info.isQueryLeaveRoom = message.readBool();//是否有请求离开的请求
@@ -2273,7 +2181,7 @@ public class RoomInfoHandler
 
             pInfo.changeScore = (int)message.readInt32();
 
-          //  pInfo.TSTaoShangScore = message.readUInt32();
+            //  pInfo.TSTaoShangScore = message.readUInt32();
             pInfo.score = message.readInt32();
 
             if (IsPiPei)//匹配的金币场
@@ -2323,8 +2231,8 @@ public class RoomInfoHandler
                 int OtherCount = message.readInt32();
                 for (int j = 0; j < OtherCount; j++)
                 {
-                  byte pos=  message.readUInt8();//下注位置
-                  uint chip=  message.readUInt32();//下注多少
+                    byte pos = message.readUInt8();//下注位置
+                    uint chip = message.readUInt32();//下注多少
                     pInfo.PosAndChipDic[pos] = chip;
                 }
 
@@ -2335,15 +2243,15 @@ public class RoomInfoHandler
                 {
                     List<uint> PeiPaiItem = new List<uint>();
                     uint listcount1 = message.readUInt32();
-                    for (int n= 0; n < listcount1; n++)
+                    for (int n = 0; n < listcount1; n++)
                     {
                         PeiPaiItem.Add(message.readUInt32());
                     }
                     pInfo.PeiPaiInfo.Add(PeiPaiItem);
                 }
 
-                pInfo. PeiPaiType =(NNType) message.readUInt8();
-               pInfo. FanBeiCount = message.readUInt32();//翻倍数
+                pInfo.PeiPaiType = (NNType)message.readUInt8();
+                pInfo.FanBeiCount = message.readUInt32();//翻倍数
             }
 
             GameData.m_PlayerInfoList.Add(pInfo);
@@ -2368,28 +2276,28 @@ public class RoomInfoHandler
                 }
             }
 
-           
-                info.IsXiaZhuState = message.readBool();
-           
-                info.PosAndChipDic = new Dictionary<int, int>();
-                int XiaZhuCount1 = message.readInt32();//下注人数
-                for (int i = 0; i < XiaZhuCount1; i++)
-                {
-                    uint pos = message.readUInt8();
-                    bool xiazhu = message.readBool();
-                    int chip = message.readInt32();//下的多少注
 
-                    info.PosAndChipDic[(int)pos] = chip;
-                }
-           
-          
+            info.IsXiaZhuState = message.readBool();
+
+            info.PosAndChipDic = new Dictionary<int, int>();
+            int XiaZhuCount1 = message.readInt32();//下注人数
+            for (int i = 0; i < XiaZhuCount1; i++)
+            {
+                uint pos = message.readUInt8();
+                bool xiazhu = message.readBool();
+                int chip = message.readInt32();//下的多少注
+
+                info.PosAndChipDic[(int)pos] = chip;
+            }
+
+
 
             bool HavePeiPaiTime = message.readBool();
             if (HavePeiPaiTime)
             {
                 uint time = message.readUInt32();//配牌剩余时间
             }
-        
+
 
         }
         else if (info.roomState == RoomStatusType.Over)
@@ -2423,70 +2331,70 @@ public class RoomInfoHandler
                     UInt32 FanBeiCount = message.readUInt32();//翻倍数
                 }
             }
+            #region
+
+            /*
+            PartGameOverControl.instance.HelperPos = (int)message.readUInt8();
+
+            PartGameOverControl.instance.SettleInfoList = new List<SettleDownInfo>();
+            int Count = message.readInt32();
+            for (int i = 0; i < Count; i++)
+            {
+
+
                 #region
+                bool IsWin = message.readBool();
+                byte pos = message.readUInt8();
 
-                /*
-                PartGameOverControl.instance.HelperPos = (int)message.readUInt8();
+                int Score = message.readInt32();
+                int ChangeScore = message.readInt32();
+                int BaseScore = message.readInt32();
+                uint TaoShangScore = message.readUInt32();
 
-                PartGameOverControl.instance.SettleInfoList = new List<SettleDownInfo>();
-                int Count = message.readInt32();
-                for (int i = 0; i < Count; i++)
+
+                //保存数据
+                SettleDownInfo info1 = new SettleDownInfo();
+                info1.IsWin = IsWin;
+                info1.pos = (int)pos;
+                info1.Score = Score;//人物总积分
+                info1.BaseScore = BaseScore;
+                info1.TaoShangFen = (int)TaoShangScore;//讨赏分
+                info1.ChangeScore = ChangeScore;//总改变分数
+
+
+
+
+
+                int leftCardCount = message.readInt32();
+                List<uint> Cardslist = new List<uint>();
+                for (int j = 0; j < leftCardCount; j++)
                 {
-
-
-                    #region
-                    bool IsWin = message.readBool();
-                    byte pos = message.readUInt8();
-
-                    int Score = message.readInt32();
-                    int ChangeScore = message.readInt32();
-                    int BaseScore = message.readInt32();
-                    uint TaoShangScore = message.readUInt32();
-
-
-                    //保存数据
-                    SettleDownInfo info1 = new SettleDownInfo();
-                    info1.IsWin = IsWin;
-                    info1.pos = (int)pos;
-                    info1.Score = Score;//人物总积分
-                    info1.BaseScore = BaseScore;
-                    info1.TaoShangFen = (int)TaoShangScore;//讨赏分
-                    info1.ChangeScore = ChangeScore;//总改变分数
-
-
-
-
-
-                    int leftCardCount = message.readInt32();
-                    List<uint> Cardslist = new List<uint>();
-                    for (int j = 0; j < leftCardCount; j++)
-                    {
-                        Cardslist.Add(message.readUInt32());
-                    }
-                    info1.LeftCardList = Cardslist;//剩余排数
-                    info1.Index = 4;
-                    PartGameOverControl.instance.SettleInfoList.Add(info1);
-
-                    #endregion
-
+                    Cardslist.Add(message.readUInt32());
                 }
+                info1.LeftCardList = Cardslist;//剩余排数
+                info1.Index = 4;
+                PartGameOverControl.instance.SettleInfoList.Add(info1);
 
-                int playerCount = message.readInt32();//完成玩家人数
-                for (int i = 0; i < playerCount; i++)
-                {
-                    int pos1 = message.readUInt8();//位置
-                    int index = message.readUInt8();//第几个完成
-                    for (int j = 0; j < PartGameOverControl.instance.SettleInfoList.Count; j++)
-                    {
-                        if (pos1 == PartGameOverControl.instance.SettleInfoList[j].pos)
-                        {
-                            PartGameOverControl.instance.SettleInfoList[j].Index = index;
-                        }
-                    }
-                }
-                */
                 #endregion
+
             }
+
+            int playerCount = message.readInt32();//完成玩家人数
+            for (int i = 0; i < playerCount; i++)
+            {
+                int pos1 = message.readUInt8();//位置
+                int index = message.readUInt8();//第几个完成
+                for (int j = 0; j < PartGameOverControl.instance.SettleInfoList.Count; j++)
+                {
+                    if (pos1 == PartGameOverControl.instance.SettleInfoList[j].pos)
+                    {
+                        PartGameOverControl.instance.SettleInfoList[j].Index = index;
+                    }
+                }
+            }
+            */
+            #endregion
+        }
 
 
         GameData.m_TableInfo = info;
@@ -2523,7 +2431,7 @@ public class RoomInfoHandler
 
         info.IsPiPei = IsPiPei;
         info.IsDaiLiCreat = IsDaiLiCreat;
-       // RoomType roomType = (RoomType)message.readUInt8();//房间类型 这里不需要
+        // RoomType roomType = (RoomType)message.readUInt8();//房间类型 这里不需要
 
         info.id = message.readUInt32();//房间号
         info.fangZhuGuid = message.readUInt64();//房主ID
@@ -2580,7 +2488,7 @@ public class RoomInfoHandler
             pInfo.name = message.readString();
             pInfo.headID = message.readString();
 
-            pInfo.changeScore =(int)message.readInt32();
+            pInfo.changeScore = (int)message.readInt32();
 
             pInfo.TSTaoShangScore = message.readUInt32();
             pInfo.score = message.readInt32();
@@ -2639,13 +2547,13 @@ public class RoomInfoHandler
             info.lastOutCardPos = message.readUInt8();//最后出牌的位置
             info.waitOutCardPos = message.readUInt8();//该出牌的位置
 
-            
+
 
             // info.resCardCount = message.readUInt32();
             info.isOutCardInfo = message.readBool();//是否有出的牌
             if (info.isOutCardInfo)
             {
-              
+
                 int count = message.readInt32();
                 for (int i = 0; i < count; i++)
                 {
@@ -2667,7 +2575,7 @@ public class RoomInfoHandler
                 GameData.FinishPlayerPos.Add(player);
             }
 
-        
+
         }
         else if (info.roomState == RoomStatusType.Over)
         {
@@ -2736,7 +2644,7 @@ public class RoomInfoHandler
 
 
         GameData.m_TableInfo = info;
-      
+
         GameData.Dice1 = GameData.GenerateDice(1);
         GameData.Dice2 = GameData.GenerateDice(2);
         UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
@@ -2749,7 +2657,7 @@ public class RoomInfoHandler
         {
             ManagerScene.Instance.LoadScene(SceneType.GameJinBi);
         }
-     
+
 
 
     }
@@ -2835,7 +2743,7 @@ public class RoomInfoHandler
             pInfo.totalHuCount = message.readUInt32();
             pInfo.totalMakerCount = message.readUInt32();//当庄次数
             pInfo.OperateType = (CardOperateType)message.readUInt8();//操作类型
-    
+
             // byte oCount = message.readInt32();//玩家手牌
 
             int count = message.readInt32();
@@ -2864,7 +2772,7 @@ public class RoomInfoHandler
                 pInfo.outCardList.Add(message.readUInt32());
             }
 
-          
+
 
 
             //玩家吃碰杠的牌
@@ -2893,10 +2801,10 @@ public class RoomInfoHandler
                         for (int k = 0; k < ChiCount; k++)
                         {
                             uint ChiCard = message.readUInt32();
-                          
+
                         }
                     }
-                    else if (playerOperateType == CatchType.AnGang|| playerOperateType == CatchType.Gang|| playerOperateType == CatchType.BuGang)//没有
+                    else if (playerOperateType == CatchType.AnGang || playerOperateType == CatchType.Gang || playerOperateType == CatchType.BuGang)//没有
                     {
                         uint ChiCard = message.readUInt32();
                         operateinfo.opCard = ChiCard;
@@ -2915,8 +2823,8 @@ public class RoomInfoHandler
             GameData.m_PlayerInfoList.Add(pInfo);
 
         }
-        
-        
+
+
         info.FriendPos = 0;//防止断线重连后位置有无
         if (info.roomState == RoomStatusType.Play)//断线回来有用
         {
@@ -2965,7 +2873,7 @@ public class RoomInfoHandler
             #region
 
 
-            
+
             // info.isWaitFangPao = !message.readBool();
             info.lastOutCardPos = message.readUInt8();
             info.waitOutCardPos = message.readUInt8();
@@ -3165,17 +3073,17 @@ public class RoomInfoHandler
                 }
             }
 
-          
 
 
-            PartGameOverControl.instance.ISWDHHuPai =message.readBool();//是否有人胡牌
+
+            PartGameOverControl.instance.ISWDHHuPai = message.readBool();//是否有人胡牌
             if (PartGameOverControl.instance.ISWDHHuPai)
             {
                 PartGameOverControl.instance.HuPos = message.readUInt8();
-                PartGameOverControl.instance.WDHHuType =(HuType) message.readUInt32();
+                PartGameOverControl.instance.WDHHuType = (HuType)message.readUInt32();
             }
-           
-            
+
+
 
         }
 
@@ -3187,7 +3095,7 @@ public class RoomInfoHandler
         UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
 
 
-      
+
 
         if (!IsPiPei)
         {
@@ -3306,7 +3214,7 @@ public class RoomInfoHandler
 
             for (int k = 0; k < oCount; k++)
             {
-                
+
                 pInfo.outCardList.Add(message.readUInt32());
             }
 
@@ -3412,8 +3320,8 @@ public class RoomInfoHandler
             #region
 
             info.RoomGuid = message.readUInt64();
-           info.FirstDices = message.readUInt32();//骰子
-           info.SecendDices= message.readUInt32();
+            info.FirstDices = message.readUInt32();//骰子
+            info.SecendDices = message.readUInt32();
             info.ThirdDices = message.readUInt32();//骰子
             info.FouthDices = message.readUInt32();
 
@@ -3424,9 +3332,9 @@ public class RoomInfoHandler
 
 
             info.MianCard = message.readUInt32();//面牌
-           info.MagicCard= message.readUInt32();//万能牌
+            info.MagicCard = message.readUInt32();//万能牌
 
-         
+
 
             // info.isWaitFangPao = !message.readBool();
             info.lastOutCardPos = message.readUInt8();
@@ -3464,7 +3372,7 @@ public class RoomInfoHandler
         #region
         else if (info.roomState == RoomStatusType.Over)
         {
-            
+
 
             int zhuangPos = message.readUInt8();//庄家位置
 
@@ -3561,8 +3469,8 @@ public class RoomInfoHandler
         GameData.m_TableInfo = info;
         GameData.m_TableInfo.ForbiddenIndex = 135 - ((int)(GameData.Dice3 + GameData.Dice4) * 2) - 1;
         GameData.m_TableInfo.makerPos = info.ZhuangPos;
-      //  GameData.Dice1 = GameData.GenerateDice(1);
-      //  GameData.Dice2 = GameData.GenerateDice(2);
+        //  GameData.Dice1 = GameData.GenerateDice(1);
+        //  GameData.Dice2 = GameData.GenerateDice(2);
         UIManager.Instance.HideUiPanel(UIPaths.PanelCreatRoom);
 
 
@@ -3574,7 +3482,7 @@ public class RoomInfoHandler
             List<uint> NewOutCardList = new List<uint>();
             for (int j = 0; j < GameData.m_PlayerInfoList[i].outCardList.Count; j++)
             {
-                if (GameData.m_PlayerInfoList[i].outCardList[j] == GameData.m_TableInfo.MianCard  )
+                if (GameData.m_PlayerInfoList[i].outCardList[j] == GameData.m_TableInfo.MianCard)
                 {
                     ChiMianCount++;
                     GameData.m_PlayerInfoList[i].MianCardList.Add(GameData.m_PlayerInfoList[i].outCardList[j]);//加到面牌里面
@@ -3597,7 +3505,7 @@ public class RoomInfoHandler
 
         #endregion
 
-       
+
 
         if (!IsPiPei)
         {

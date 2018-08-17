@@ -44,9 +44,6 @@ public class DzViewMain : UIBase<DzViewMain>
         GameEventDispatcher.Instance.addEventListener(EventIndex.PlayerLivingDataChange, this.SetPlayerInfo);
 
         CreatPkClubList();
-
-        //发送定位信息
-        //ClientToServerMsg.SetAdrress(location);
     }
 
     float speed = 30f;

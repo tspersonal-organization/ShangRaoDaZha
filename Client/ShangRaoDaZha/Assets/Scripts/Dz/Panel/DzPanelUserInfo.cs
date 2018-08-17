@@ -1,6 +1,7 @@
 ﻿public class DzPanelUserInfo : UIBase<DzPanelUserInfo>
 {
     public UITexture Headtexture;
+    public UISprite Sex;
     public UILabel Name;
     public UILabel Id;
     public UILabel Ip;
@@ -18,10 +19,19 @@
         TickOutBtn.gameObject.SetActive(false);
 
         DownloadImage.Instance.Download(Headtexture, Player.Instance.headID);
-        Name.text = Player.Instance.otherName;
-        Id.text = Player.Instance.guid.ToString();
-        Ip.text = string.IsNullOrEmpty(Player.Instance.Ip) ? "无" : Player.Instance.Ip;
-        Address.text = string.IsNullOrEmpty(Player.Instance.Address) ? "定位服务，正在开发中..." : Player.Instance.Address;
+        Name.text = "昵称:" + Player.Instance.otherName;
+        if (Player.Instance.sex == 1)
+        {
+            Sex.spriteName = "man";
+        }
+        else
+        {
+            Sex.spriteName = "girl";
+        }
+        Sex.MakePixelPerfect();
+        Id.text = "ID:" + Player.Instance.guid.ToString();
+        Ip.text = "IP:" + (string.IsNullOrEmpty(Player.Instance.Ip) ? "无" : Player.Instance.Ip);
+        Address.text = "地址:" + (string.IsNullOrEmpty(Player.Instance.Address) ? "无" : Player.Instance.Address);
     }
     // Use this for initialization
     void Start()
@@ -38,18 +48,18 @@
     private void CancleMasterBtnClick()
     {
         this.gameObject.SetActive(false);
-        ClientToServerMsg.SetMasterOper((uint)GameData.CurrentClubInfo.Id, GameData.ChoseMem.guid, false);
+        ClientToServerMsg.SetMasterOper((uint)GameData.CurrentClubInfo.Id, GameData.ChoseMem.Guid, false);
     }
 
     private void SetMasterBtnClick()
     {
         this.gameObject.SetActive(false);
-        ClientToServerMsg.SetMasterOper((uint)GameData.CurrentClubInfo.Id, GameData.ChoseMem.guid, true);
+        ClientToServerMsg.SetMasterOper((uint)GameData.CurrentClubInfo.Id, GameData.ChoseMem.Guid, true);
     }
 
     private void TickOutBtnClick()
     {
         this.gameObject.SetActive(false);
-        ClientToServerMsg.RemovePlayerFromClub((uint)GameData.CurrentClubInfo.Id, GameData.ChoseMem.guid);
+        ClientToServerMsg.RemovePlayerFromClub((uint)GameData.CurrentClubInfo.Id, GameData.ChoseMem.Guid);
     }
 }

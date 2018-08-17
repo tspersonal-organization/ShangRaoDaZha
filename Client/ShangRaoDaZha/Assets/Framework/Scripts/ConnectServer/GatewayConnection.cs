@@ -23,6 +23,7 @@ public class GatewayConnection:AuthConnectionClient
         if(!Player.Instance.isLogin)
         {
             ManagerScene.Instance.LoadScene(SceneType.Login);
+            AmapLocationManager.Instance.StartAmapLocation();//开始定位
         }
         else
         {
