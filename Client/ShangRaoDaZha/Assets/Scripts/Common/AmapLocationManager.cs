@@ -125,9 +125,9 @@ public class AmapLocationManager : MonoBehaviour
             }
             else
             {
-                Player.Instance.Address = sIdAddr;
+                Player.Instance.Address = amap.SIdAddr;
                 //发送定位信息
-                ClientToServerMsg.SetAdrress(sIdAddr);
+                ClientToServerMsg.SetAdrress(amap.SIdAddr);
             }
         }
         else
