@@ -49,7 +49,7 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
         SearchAll.SetActive(false);
         InviteBtn.gameObject.SetActive(false);
         QuiteBtn.gameObject.SetActive(true);
-        QuiteBtn.transform.localPosition = Vector3.zero;
+        QuiteBtn.transform.localPosition = new Vector3(0, -210, 0);
 
         //设置自己的权限
         if (GameData.CurrentClubInfo.CreatorGuid == Player.Instance.guid)
