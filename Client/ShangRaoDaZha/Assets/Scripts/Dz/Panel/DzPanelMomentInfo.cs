@@ -105,7 +105,7 @@ public class DzPanelMomentInfo : UIBase<DzPanelMomentInfo>
             {
                 Transform admin = Administrator.transform.Find("Administrator" + (i + 1));
                 admin.gameObject.SetActive(true);
-                admin.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.NormalMemList[i]);
+                admin.GetComponent<ClubMemInfoControl>().SetData(GameData.CurrentClubInfo.MemMasterList[i]);
             }
         }
         
