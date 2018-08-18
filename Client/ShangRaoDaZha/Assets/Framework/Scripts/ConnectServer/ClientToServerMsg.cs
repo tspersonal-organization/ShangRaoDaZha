@@ -124,7 +124,7 @@ public class ClientToServerMsg
     {
         NetworkMessage message = NetworkMessage.Create((ushort)Opcodes.Client_Club_Invite_Response, 100);
        
-        message.writeUInt64(clubid);
+        message.writeUInt32(clubid);
         message.writeBool(agree);
         SendMsg(message);
     }

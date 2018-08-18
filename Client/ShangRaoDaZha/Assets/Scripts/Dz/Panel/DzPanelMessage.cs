@@ -21,6 +21,10 @@ public class DzPanelMessage : UIBase<DzPanelMessage>
         {
             ClientToServerMsg.GetClubMemListInfo((uint) GameData.CurrentClubInfo.Id);
         }
+        else
+        {
+            CreatData();
+        }
         //  Reset();
     }
 

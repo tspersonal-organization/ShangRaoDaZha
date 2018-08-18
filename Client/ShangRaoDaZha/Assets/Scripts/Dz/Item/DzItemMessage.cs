@@ -23,10 +23,12 @@ public class DzItemMessage : MonoBehaviour {
         if (Invite)//是邀请信息
         {
             ClientToServerMsg.OperateInviteMessage(infoData.ClubId,false);
+            GameData.CurrentClubInfo.InviteList.Remove(infoData);
         }
         else
         {
             ClientToServerMsg.OperatePlayerApply(infoData.ClubId, infoData.Guid,false);
+            GameData.CurrentClubInfo.ApplyMemList.Remove(infoData);
         }
     }
 
@@ -35,10 +37,12 @@ public class DzItemMessage : MonoBehaviour {
         if (Invite)//是邀请信息
         {
             ClientToServerMsg.OperateInviteMessage(infoData.ClubId, true);
+            GameData.CurrentClubInfo.InviteList.Remove(infoData);
         }
         else
         {
             ClientToServerMsg.OperatePlayerApply(infoData.ClubId, infoData.Guid, true);
+            GameData.CurrentClubInfo.ApplyMemList.Remove(infoData);
         }
     }
 
