@@ -301,17 +301,9 @@ public class DzPanelCreatRoom : MonoBehaviour
 
     private void FourPlayerClick()
     {
-        if (FourPlayer.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName == "UI_create_btn_check_1")//勾选上的
-        {
-            //FiveRound.transform.FindChild("Sprite").transform.GetComponent<UISprite>().spriteName ="UI_create_btn_check_2";
-
-        }
-        else
-        {
-            FourPlayer.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
-            TwoPlayer.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
-            roominfo.PlayerCountIndex = 1;
-        }
+        FourPlayer.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_1";
+        TwoPlayer.transform.Find("Sprite").transform.GetComponent<UISprite>().spriteName = "UI_create_btn_check_2";
+        roominfo.PlayerCountIndex = 1;
     }
 
     private void FiveRoundClick()
