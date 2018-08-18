@@ -16,7 +16,11 @@ public class DzPanelMessage : UIBase<DzPanelMessage>
         {
             Destroy(EmailItemList[i]);
         }
-        ClientToServerMsg.GetClubMemListInfo((uint)GameData.CurrentClubInfo.Id);
+
+        if (GameData.CurrentClubInfo.ApplyMemList.Count <= 0 && GameData.CurrentClubInfo.InviteList.Count <= 0)
+        {
+            ClientToServerMsg.GetClubMemListInfo((uint) GameData.CurrentClubInfo.Id);
+        }
         //  Reset();
     }
 
@@ -29,11 +33,6 @@ public class DzPanelMessage : UIBase<DzPanelMessage>
     public void CreatData()
     {
         int count = EmailItemList.Count;
-        if (count == 0)
-        {
-            Player.Instance.HaveEmail = false;
-            DzViewMain.Instance.InitInviteClubMessage();
-        }
         for (int i = 0; i < count; i++)
         {
             Destroy(EmailItemList[i]);
@@ -62,6 +61,11 @@ public class DzPanelMessage : UIBase<DzPanelMessage>
 
     public void CloseBtnClick()
     {
+        if (GameData.CurrentClubInfo.ApplyMemList.Count <= 0 && GameData.CurrentClubInfo.InviteList.Count <= 0)
+        {
+            Player.Instance.HaveEmail = false;
+            DzViewMain.Instance.InitInviteClubMessage();
+        }
         this.gameObject.SetActive(false);
     }
 }

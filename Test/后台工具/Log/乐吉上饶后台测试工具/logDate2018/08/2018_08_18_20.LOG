@@ -1,0 +1,3 @@
+2018-08-18 20:13:41,271 C:\GameServer\ProjectItem\ljsrfz\Server\src\FrameworkForCSharp\NetWorks\ConnectionManager.cs[Line:108] [3] INFO : initPool 1:4096
+2018-08-18 20:30:35,211 C:\GameServer\ProjectItem\ljsrfz\Server\src\FrameworkForCSharp\NetWorks\Connection.cs[Line:194] [6] DEBUG: client:[id=>0] closed when recv, len : 0, error: ConnectionReset
+2018-08-18 20:30:40,080 C:\GameServer\ProjectItem\ljsrfz\Server\src\FrameworkForCSharp\NetWorks\ConnectionManager.cs[Line:136] [6] DEBUG: pool this connection:[id=>0] now in stop

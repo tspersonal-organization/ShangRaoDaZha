@@ -109,16 +109,16 @@ public class ClubInfoHander : MonoBehaviour
     /// <param name="message"></param>
     private void onClubMemInfoBack(NetworkMessage message)
     {
-
         GameData.CurrentClubInfo.ApplyMemList = new List<MemInfo>();
-        if (message.readBool())//有申请信息
+        bool bApply = message.readBool();
+        if (bApply) //有申请信息
         {
-            int ClubCount = message.readInt32();//俱乐部个数
+            int ClubCount = message.readInt32(); //俱乐部个数
             for (int j = 0; j < ClubCount; j++)
             {
                 uint clubid = message.readUInt32();
                 string ClubName = message.readString();
-                int count = message.readInt32();//申请的人数
+                int count = message.readInt32(); //申请的人数
 
                 for (int i = 0; i < count; i++)
                 {
@@ -131,34 +131,40 @@ public class ClubInfoHander : MonoBehaviour
                     GameData.CurrentClubInfo.ApplyMemList.Add(info);
                 }
             }
-            int count1 = message.readInt32();//邀请信息
+            int count1 = message.readInt32(); //邀请信息
             GameData.CurrentClubInfo.InviteList = new List<MemInfo>();
             for (int i = 0; i < count1; i++)
             {
                 MemInfo inviteM = new MemInfo();
 
-                inviteM.Guid = message.readUInt64();//邀请人guid
-                inviteM.Name = message.readString();//邀请人名字
-                inviteM.ClubId = message.readUInt32();//俱乐部id
-                inviteM.ClubName = message.readString();//俱乐部名字
+                inviteM.Guid = message.readUInt64(); //邀请人guid
+                inviteM.Name = message.readString(); //邀请人名字
+                inviteM.ClubId = message.readUInt32(); //俱乐部id
+                inviteM.ClubName = message.readString(); //俱乐部名字
 
                 GameData.CurrentClubInfo.InviteList.Add(inviteM);
             }
         }
         else
         {
-            int count2 = message.readInt32();//邀请信息
+            int count2 = message.readInt32(); //邀请信息
             GameData.CurrentClubInfo.InviteList = new List<MemInfo>();
             for (int i = 0; i < count2; i++)
             {
                 MemInfo info = new MemInfo();
-                info.Name = message.readString();
                 info.Guid = message.readUInt64();
+                info.Name = message.readString();
+                info.ClubId = message.readUInt32(); //俱乐部id
                 info.HeadId = message.readString();
                 GameData.CurrentClubInfo.InviteList.Add(info);
             }
         }
+        if (DzPanelMessage.Instance != null)
+        {
+            DzPanelMessage.Instance.CreatData();
+        }
         UIManager.Instance.ShowUiPanel(UIPaths.PanelMessage, OpenPanelType.MinToMax);
+
     }
 
 
