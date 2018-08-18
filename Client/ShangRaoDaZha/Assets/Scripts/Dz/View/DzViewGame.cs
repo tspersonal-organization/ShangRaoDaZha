@@ -302,7 +302,7 @@ public class DzViewGame : UIBase<DzViewGame>
     {
         string[] strs = content.Split('@');
         PlayerInfo info = GameDataFunc.GetPlayerInfo(ulong.Parse(strs[1]));
-        GameObject preObj = Resources.Load<GameObject>("Common/Face/Face" + strs[2]);
+        GameObject preObj = Resources.Load<GameObject>("Prefabs/Common/Face/Face" + strs[2]);
         GameObject face = Instantiate<GameObject>(preObj);
         face.transform.parent = IdAndPlayerDic[info.pos].transform.Find("HeadSprite");
         face.transform.localScale = Vector3.one;
@@ -441,21 +441,16 @@ public class DzViewGame : UIBase<DzViewGame>
             {
                 for (int i = 1; i < IdAndPlayerDic.Count + 1; i++)
                 {
-                    if (i == GameData.m_TableInfo.ZhuangPos || i == pos) continue;
-                    else
+                    if (GameData.m_TableInfo.configPlayerIndex == 4)
                     {
-                        if (GameData.m_TableInfo.configPlayerIndex == 4)
-                            IdAndPlayerDic[i].transform.Find("OtherPanel").Find("HelperSprite").gameObject
-                                .SetActive(true);
+                        if (GameData.m_TableInfo.ZhuangPos == i || GameData.m_TableInfo.FriendPos == i) continue;
+                        //LandSprite
+                        IdAndPlayerDic[i].transform.Find("OtherPanel").Find("HelperSprite").gameObject
+                            .SetActive(true);
                     }
                 }
-
             }
-
-            // IdAndPlayerDic[pos].transform.FindChild("FriendCard").gameObject.SetActive(true);
-            // IdAndPlayerDic[pos].transform.FindChild("FriendCard").GetComponent<Card>().SetValue(CardValue);
         }
-        //  if(SelfPos==)
         IdAndPlayerDic[SelfPos].transform.Find("OtherPanel").Find("HelperSprite").gameObject.SetActive(false);
 
     }
