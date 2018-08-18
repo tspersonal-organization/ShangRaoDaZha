@@ -2597,7 +2597,7 @@ public class DzViewGame : UIBase<DzViewGame>
         {
             if (item.Key == GameData.m_TableInfo.ZhuangPos)//显示地主图标
             {
-                item.Value.transform.Find("OtherPanel").Find("LandSprite").gameObject.SetActive(true);
+                //item.Value.transform.Find("OtherPanel").Find("LandSprite").gameObject.SetActive(true);
             }
         }
         //  ShowOperatePanle(GameData.m_TableInfo.ZhuangPos, PuKeOperateType.ChuPai);
