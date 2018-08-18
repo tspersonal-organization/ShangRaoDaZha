@@ -1405,6 +1405,7 @@ public class RoomInfoHandler
         GameData.m_TableInfo.makerPos = ZhuangPos;
         PartGameOverControl.instance.ZhuangPos = (int)ZhuangPos;
         GameData.m_TableInfo.ZhuangPos = ZhuangPos;
+        GameData.m_TableInfo.FriendPos = FriendPos;
         #endregion
         if (GameData.GlobleRoomType == RoomType.PK)
         {
